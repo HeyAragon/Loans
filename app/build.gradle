@@ -1,0 +1,148 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'walle'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    defaultConfig {
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        buildConfigField "boolean", "IS_DEBUG", "false"
+
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+    signingConfigs {
+        release {
+            try {
+                storeFile file("E:/wnqk/wnqk.jks")
+                storePassword "hackhome+wnqk"
+                keyAlias "wnqk"
+                keyPassword "hackhome+wnqk"
+            } catch (ex) {
+                throw new InvalidUserDataException(ex.toString())
+            }
+        }
+
+        debug {
+//            storeFile file("E:/wnqk/wnqk.jks")
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+        }
+        debug{
+//            debuggable true
+//            minifyEnabled false
+//            signingConfig signingConfigs.release
+        }
+    }
+
+    sourceSets {
+
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/layouts/home',
+                            'src/main/res/layouts/loan',
+                            'src/main/res/layouts/mine',
+                            'src/main/res/layouts/common',
+                            'src/main/res',
+
+
+                    ]
+        }
+    }
+}
+
+walle {
+    // 指定渠道包的输出路径
+    apkOutputFolder = new File("${project.buildDir}/outputs/channels");
+    // 定制渠道包的APK的文件名称
+    apkFileNameFormat = '${appName}-${packageName}-${channel}-${buildType}-v${versionName}-${versionCode}-${buildTime}.apk';
+    // 渠道配置文件
+    channelFile = new File("${project.getProjectDir()}/channel.txt")
+    println("${project.getProjectDir()}/channel.txt")
+
+}
+greendao {
+    schemaVersion 100
+    daoPackage 'com.hackhome.loans.greendao'
+    targetGenDir 'src/main/java'
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    //support
+    compile rootProject.ext.dependencies["appcompat-v7"]
+    compile rootProject.ext.dependencies["design"]
+    compile rootProject.ext.dependencies["support-v4"]
+    compile rootProject.ext.dependencies["cardview"]
+//    compile "com.android.support:multidex:1.0.1"
+    //retrofit
+    compile rootProject.ext.dependencies["retrofit"]
+    compile rootProject.ext.dependencies["converter-gson"]
+    compile rootProject.ext.dependencies["adapter-rxjava2"]
+    //okHttp
+    compile rootProject.ext.dependencies["okhttp"]
+    //rxJava
+    compile rootProject.ext.dependencies["rxjava"]
+    compile rootProject.ext.dependencies["rxandroid"]
+    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
+    //dagger
+    compile rootProject.ext.dependencies["dagger"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+    //butterKnife
+    compile rootProject.ext.dependencies["butterknife"]
+    compile rootProject.ext.dependencies["butterknife-compiler"]
+    //glide
+    compile rootProject.ext.dependencies["glide"]
+    compile rootProject.ext.dependencies["okhttp3-integration"]
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+    compile rootProject.ext.dependencies["glide_transformations"]
+    //log
+    compile rootProject.ext.dependencies["klog"]
+    //greendao
+    compile rootProject.ext.dependencies["greendao"]
+    //EventBus
+    compile rootProject.ext.dependencies["EventBus"]
+    //Luban
+    compile rootProject.ext.dependencies["LuBan"]
+    //Umeng
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.meituan.android.walle:library:1.1.5'
+
+    compile 'com.android.support:multidex:1.0.1'
+
+    //ui
+    compile rootProject.ext.dependencies["banner"]
+    compile rootProject.ext.dependencies["constraint-layout"]
+    compile rootProject.ext.dependencies["stateview"]
+    compile rootProject.ext.dependencies["BRVAH"]
+    compile rootProject.ext.dependencies["SmartRefreshLayout"]
+    compile rootProject.ext.dependencies["material_dialogs"]
+    compile rootProject.ext.dependencies["material_editText"]
+    compile 'com.airbnb.android:lottie:2.1.0'
+
+
+    //other
+    compile project(':mzbanner')
+    compile project(':library')
+
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+}

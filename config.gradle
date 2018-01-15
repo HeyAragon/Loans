@@ -1,0 +1,100 @@
+
+ext {
+
+    android = [
+
+            compileSdkVersion       : 26,
+            buildToolsVersion       : "26.0.3",
+            applicationId           : "com.hackhome.loans",
+            minSdkVersion           : 16,
+            targetSdkVersion        : 25,
+            versionCode             : 1,
+            versionName             : "1.0",
+
+            androidSupportVersion   : "26.0.0-alpha1",
+
+            retrofitVertion         : "2.3.0",
+            okhttpVertion           : "3.9.0",
+            butterknifeVertion      : "8.8.1",
+            rxJavaVertion           : "2.1.3",
+            rxAndroidVertion        : "2.0.1",
+            daggerVertion           : "2.6",
+            klog                    : "1.6.0",
+            glide                   : "4.2.0",
+            glide_transformations   : "3.0.1",
+            greendao                : "3.2.2",
+            EventBus                : "3.1.1",
+            LuBan                   : "1.1.3",
+
+            bannerVersion           : "1.4.10",
+            constraint_layout       : "1.0.2",
+            stateview               : "1.3.2",
+            BRVAH                   : "2.9.34",
+            SmartRefreshLayout      : "1.0.3",
+            material_dialogs        : "0.9.6.0",
+            material_editText       : "2.1.4",
+
+
+
+
+    ]
+
+    dependencies = [
+
+            //android-support
+            "appcompat-v7"         : "com.android.support:appcompat-v7:${android.androidSupportVersion}",
+            "design"               : "com.android.support:design:${android.androidSupportVersion}",
+            "support-v4"           : "com.android.support:support-v4:${android.androidSupportVersion}",
+            "annotations"          : "com.android.support:support-annotations:${android.androidSupportVersion}",
+            "cardview"             : "com.android.support:cardview-v7:${android.androidSupportVersion}",
+
+            //retrofit
+            "retrofit"             : "com.squareup.retrofit2:retrofit:${android.retrofitVertion}",
+            "converter-gson"       : "com.squareup.retrofit2:converter-gson:${android.retrofitVertion}",
+            "adapter-rxjava2"      : "com.squareup.retrofit2:adapter-rxjava2:${android.retrofitVertion}",
+
+            //okHttp
+            "okhttp"               : "com.squareup.okhttp3:okhttp:${android.okhttpVertion}",
+
+            //rxJava
+            "rxjava"               : "io.reactivex.rxjava2:rxjava:${android.rxJavaVertion}",
+            "rxandroid"            : "io.reactivex.rxjava2:rxandroid:${android.rxAndroidVertion}",
+
+            //dager
+            "dagger"               : "com.google.dagger:dagger:${android.daggerVertion}",
+            "dagger-compiler"      : "com.google.dagger:dagger-compiler:${android.daggerVertion}",
+
+            //butterKnife
+            "butterknife"          : "com.jakewharton:butterknife:${android.butterknifeVertion}",
+            "butterknife-compiler" : "com.jakewharton:butterknife-compiler:${android.butterknifeVertion}",
+
+            //log
+            "klog"                 : "com.github.zhaokaiqiang.klog:library:${android.klog}",
+
+            //greenDao
+            "greendao"             : "org.greenrobot:greendao:${android.greendao}",
+
+            //glide
+            "glide"                : "com.github.bumptech.glide:glide:${android.glide}",
+            "glide-compiler"       : "com.github.bumptech.glide:compiler:${android.glide}",
+            "okhttp3-integration"  : "com.github.bumptech.glide:okhttp3-integration:${android.glide}",
+            "glide_transformations": "jp.wasabeef:glide-transformations:${android.glide_transformations}",
+
+            //EventBus
+            "EventBus"             : "org.greenrobot:eventbus:${android.EventBus}",
+
+            //
+            "LuBan"                : "top.zibin:Luban:${android.LuBan}",
+
+            //ui
+            "constraint-layout"    : "com.android.support.constraint:constraint-layout:${android.constraint_layout}",
+            "banner"               : "com.youth.banner:banner:${android.bannerVersion}",
+            "stateview"            : "com.github.nukc.stateview:library:${android.stateview}",
+            "BRVAH"                : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${android.BRVAH}",
+            "SmartRefreshLayout"   : "com.scwang.smartrefresh:SmartRefreshLayout:${android.SmartRefreshLayout}",
+            "material_dialogs"     : "com.afollestad.material-dialogs:core:${android.material_dialogs}",
+            "material_editText"    : "com.rengwuxian.materialedittext:library:${android.material_editText}"
+    ]
+
+
+}

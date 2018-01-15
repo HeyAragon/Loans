@@ -1,0 +1,130 @@
+<resources>
+
+    <string name="tab_home_str">首页</string>
+    <string name="tab_loan_str">贷款</string>
+    <string name="tab_mine_str">我的</string>
+
+    <string name="loan_interest_str">贷款利率</string>
+    <string name="loan_value_str">贷款金额</string>
+    <string name="app_intro_str">产品说明</string>
+    <string name="loading">正在为您提款...</string>
+    <string name="loading_fail">╭(╯^╰)╮加载失败，点击重试</string>
+    <string name="loading_end">($_$)到底啦小主借到钱了吗</string>
+    <string name="apply">立即申请</string>
+    <string name="record">申请记录</string>
+    <string name="user_info">个人信息</string>
+    <string name="my_collected">我的收藏</string>
+    <string name="my_read">浏览记录</string>
+    <string name="about_us">关于我们</string>
+    <string name="setting">设置中心</string>
+    <string name="check_update">检查更新</string>
+    <string name="find_new_version">检测到新版本！</string>
+    <string name="not_found_new_version">当前应用为最新版本</string>
+    <string name="current_version">(当前版本:%s)</string>
+    <string name="update">更新</string>
+    <string name="paused">已暂停</string>
+    <string name="pause">暂停</string>
+    <string name="waiting">等待</string>
+    <string name="delete">删除</string>
+    <string name="continue_">继续</string>
+    <string name="cancel">取消</string>
+    <string name="my_downloaded">我的下载</string>
+    <string name="download">下载</string>
+    <string name="install">安装</string>
+    <string name="uninstall">卸载</string>
+    <string name="open">打开</string>
+    <string name="login">登录</string>
+    <string name="next">下一步</string>
+    <string name="confirm">确认</string>
+    <string name="login_now">立即登录</string>
+    <string name="login_out">退出登录</string>
+    <string name="register">注册</string>
+    <string name="register_now">立即注册</string>
+    <string name="forget_password">忘记密码?</string>
+    <string name="read_record">浏览记录</string>
+    <string name="password">密码</string>
+    <string name="account">手机号码或ID</string>
+    <string name="phone_number">手机号码</string>
+    <string name="password_hint">建议使用字母 · 字符 · 数字混合密码</string>
+    <string name="input_auth_code_hints">输入验证码,10分钟内有效</string>
+    <string name="have_already_sent_auth_code">验证码已发送请注意查收</string>
+    <string name="require_auth_code">请获取验证码</string>
+    <string name="auth_code_send_error">验证码发送失败</string>
+    <string name="phone_have_already_registered">手机号已注册</string>
+    <string name="require_for_code_too_quick">操作频繁</string>
+    <string name="register_argument_error">参数错误</string>
+    <string name="register_success">注册成功</string>
+    <string name="login_error">登录失败,请重试</string>
+    <string name="login_success">登录成功</string>
+    <string name="find_password_success">找回密码成功</string>
+    <string name="auto_login_success">自动登录成功</string>
+    <string name="password_not_null">密码不能为空</string>
+    <string name="verification_code_not_complete">验证码不完整</string>
+    <string name="get_auth_code">获取验证码</string>
+    <string name="input_error">请输入完整信息</string>
+    <string name="last_login_time">最后一次登录时间：</string>
+    <string name="input_phone_num">请输入注册手机号码</string>
+    <string name="input_find_phone_num">请输入手机号码</string>
+    <string name="input_num_error">输入的手机号码不完整</string>
+    <string name="input_password_empty">请输入密码</string>
+    <string name="input_password_error">密码长度小于6位</string>
+    <string name="input_password_not_equal">密码不一致</string>
+    <string name="input_password_old">原密码</string>
+    <string name="input_password_new">新密码</string>
+    <string name="input_password_repeat">请确认新密码</string>
+    <string name="input_auth_code">输入验证码</string>
+    <string name="change_nick">修改昵称</string>
+    <string name="nick_hint">设置一个性昵称~！</string>
+    <string name="choice_gender">请选择您的性别</string>
+    <string name="user_gender">性别</string>
+    <string name="user_nick">昵称</string>
+    <string name="user_id">ID</string>
+    <string name="user_icon">头像</string>
+    <string name="default_nick">小钱咖</string>
+    <string name="default_gender">男</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+
+    <string-array name="gender">
+        <item name="male" >男</item>
+        <item name="female" >女</item>
+    </string-array>
+    <string name="phone_bind">手机号码</string>
+    <string name="change_pass_word">修改密码</string>
+    <string name="pic">相册</string>
+    <string name="take_photo">拍照</string>
+
+    <string name="pic_crop_error">裁剪失败</string>
+    <string name="crop_cancel">取消裁剪</string>
+
+
+
+
+
+    <string name="app_name">万能钱咖</string>
+    <string name="new_version">发现新版本</string>
+    <string name="error_txt">点击重新加载</string>
+    <string name="empty_txt">暂无数据</string>
+    <string name="empty_no_download">暂无下载任务</string>
+    <string name="empty_no_read_record">暂无浏览记录</string>
+    <string name="loading_txt">正在加载</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+
+    <string name="error_unkown">未知错误</string>
+    <string name="error_http">网络连接错误</string>
+    <string name="error_system">服务器出错</string>
+    <string name="error_account_freeze">账户被冻结，请联系管理员</string>
+    <string name="error_api_no_perission">调用了无权限的API接口</string>
+    <string name="error_login">用户名或者密码错误</string>
+    <string name="error_http_400">bad request</string>
+    <string name="error_http_404">服务器链接异常</string>
+    <string name="error_http_500">服务器错误</string>
+    <string name="error_socket_timeout">网络超时</string>
+    <string name="error_socket_unreachable">网络不可用</string>
+    <string name="error_token">登录失效，请重新登录</string>
+    <string name="error_page_beyond_range">超出页数范围</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

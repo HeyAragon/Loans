@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_home"
+        android:title="@string/tab_home_str"
+        android:checked="true"
+        android:icon="@mipmap/ic_home_normal"
+        />
+    <item
+        android:id="@+id/tab_loan"
+        android:title="@string/tab_loan_str"
+        android:checked="true"
+        android:icon="@mipmap/ic_loan_normal"
+        />
+    <item
+        android:id="@+id/tab_mine"
+        android:title="@string/tab_mine_str"
+        android:checked="true"
+        android:icon="@mipmap/ic_mine_normal"
+        />
+</menu>
