@@ -3,8 +3,8 @@
     <item
         android:state_checked="true"
         android:state_selected="true"
-        android:drawable="@drawable/ic_loan_selected"
+        android:drawable="@drawable/ic_mine_selected"
         />
     <item
-        android:drawable="@drawable/ic_loan_normal"/>
+        android:drawable="@drawable/ic_mine_normal"/>
 </selector>

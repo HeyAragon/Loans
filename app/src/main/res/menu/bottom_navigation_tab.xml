@@ -9,13 +9,11 @@
     <item
         android:id="@+id/tab_loan"
         android:title="@string/tab_loan_str"
-        android:checked="true"
         android:icon="@mipmap/ic_loan_normal"
         />
     <item
         android:id="@+id/tab_mine"
         android:title="@string/tab_mine_str"
-        android:checked="true"
         android:icon="@mipmap/ic_mine_normal"
         />
 </menu>

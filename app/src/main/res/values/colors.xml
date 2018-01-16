@@ -4,14 +4,19 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="bottom_tab_back">#FFF9F9F9</color>
-    <color name="bottom_tab_selected">#FFFD7133</color>
-    <color name="bottom_tab_normal">#FF666666</color>
+    <color name="bottom_tab_back">#E4CEC4</color>
+    <color name="bottom_tab_selected">#64493C</color>
+    <color name="bottom_tab_normal">#8D6E63</color>
+
+    <color name="base_back">#F2E5DF</color>
+
     <color name="colorTransparent">#00000000</color>
+
 
     <color name="white">#FFFFFF</color>
     <color name="gray">#D3D3D3</color>
     <color name="black">#000000</color>
+
 
 
     <color name="colorTxtTitle">#4a4a4a</color>
