@@ -52,7 +52,7 @@ public class CustomBottomNavigationView extends BottomNavigationView{
     private BottomNavigationItemView[] mButtons;
     // used for setupWithViewPager end
 
-    // detect navigation tab changes when the user clicking on navigation item
+    // detect navigation tab changes when the ic_user_logo clicking on navigation item
     private static boolean isNavigationItemClicking = false;
 
     public CustomBottomNavigationView(Context context) {
@@ -952,7 +952,7 @@ public class CustomBottomNavigationView extends BottomNavigationView{
                 return true;
             }
 //            Log.d("onNavigationItemSelecte", "position:"  + position);
-            // user listener
+            // ic_user_logo listener
             if (null != listener) {
                 boolean bool = listener.onNavigationItemSelected(item);
                 // if the selected is invalid, no need change the view pager

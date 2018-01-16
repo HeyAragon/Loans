@@ -47,6 +47,7 @@
     <string name="phone_number">手机号码</string>
     <string name="password_hint">建议使用字母 · 字符 · 数字混合密码</string>
     <string name="input_auth_code_hints">输入验证码,10分钟内有效</string>
+    <string name="auth_code">验证码</string>
     <string name="have_already_sent_auth_code">验证码已发送请注意查收</string>
     <string name="require_auth_code">请获取验证码</string>
     <string name="auth_code_send_error">验证码发送失败</string>
@@ -57,6 +58,7 @@
     <string name="login_error">登录失败,请重试</string>
     <string name="login_success">登录成功</string>
     <string name="find_password_success">找回密码成功</string>
+    <string name="find_password">找回密码</string>
     <string name="auto_login_success">自动登录成功</string>
     <string name="password_not_null">密码不能为空</string>
     <string name="verification_code_not_complete">验证码不完整</string>

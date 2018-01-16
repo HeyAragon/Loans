@@ -81,7 +81,7 @@ public class DownloadActivity extends BaseActivity {
     public void initView() {
         mToolbar.setVisibility(View.VISIBLE);
         mBack.setVisibility(View.VISIBLE);
-        StatusBarUtil.setColor(this,getResources().getColor(R.color.md_deep_orange_500),0);
+        StatusBarUtil.setColor(this,getResources().getColor(R.color.base_back),0);
         mTitle.setText(getResources().getText(R.string.my_downloaded));
         mDownloadAdapter = new DownloadAdapter();
         mDownloadRecyclerView.setLayoutManager(new LinearLayoutManager(this));

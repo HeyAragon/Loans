@@ -26,6 +26,7 @@ import com.hackhome.loans.dagger.module.LoginModule;
 import com.hackhome.loans.presenter.LoginPresenter;
 import com.hackhome.loans.presenter.contract.ILoginContract;
 import com.hackhome.loans.ui.base.BaseActivity;
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.socks.library.KLog;
 
 import butterknife.BindView;
@@ -49,29 +50,23 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     @BindView(R.id.simple_toolbar)
     Toolbar mSimpleToolbar;
     @BindView(R.id.edt_account)
-    EditText mEdtAccount;
+    MaterialEditText mEdtAccount;
     @BindView(R.id.iv_del_account)
     ImageView mIvDelAccount;
     @BindView(R.id.ll_account)
     LinearLayout mLlAccount;
-    @BindView(R.id.mid_line)
-    View mMidLine;
     @BindView(R.id.edt_password)
-    EditText mEdtPassword;
+    MaterialEditText mEdtPassword;
     @BindView(R.id.iv_del_password)
     ImageView mIvDelPassword;
     @BindView(R.id.ll_password)
     LinearLayout mLlPassword;
-    @BindView(R.id.bottom_line)
-    View mBottomLine;
     @BindView(R.id.btn_login)
     Button mBtnLogin;
     @BindView(R.id.tv_create_account)
     TextView mTvCreateAccount;
     @BindView(R.id.tv_forget_password)
     TextView mTvForgetPassword;
-    @BindView(R.id.ll_function)
-    LinearLayout mLlFunction;
 
     @Override
     public int getLayoutContentRes() {
@@ -86,8 +81,9 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     @Override
     public void initView() {
         mSimpleToolbar.setVisibility(View.VISIBLE);
+        mToolBarTitleTxt.setVisibility(View.GONE);
         mToolBarBackImg.setVisibility(View.VISIBLE);
-        StatusBarUtil.setColor(this,getResources().getColor(R.color.md_deep_orange_500),0);
+        StatusBarUtil.setColor(this,getResources().getColor(R.color.base_back),0);
     }
 
 

@@ -136,8 +136,9 @@ public class UserInfoActivity extends BaseActivity<UserInfoPresenter> implements
     @Override
     public void initView() {
         mSimpleToolbar.setVisibility(View.VISIBLE);
+        mToolBarTitleTxt.setVisibility(View.GONE);
         mToolBarBackImg.setVisibility(View.VISIBLE);
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.md_deep_orange_500), 0);
+        StatusBarUtil.setColor(this,getResources().getColor(R.color.base_back),0);
 
         GlideApp.with(this)
                 .load(UserUtil.getUserIcon())

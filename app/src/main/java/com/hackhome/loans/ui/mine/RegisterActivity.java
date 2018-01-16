@@ -89,7 +89,8 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
         mSimpleToolbar.setVisibility(View.VISIBLE);
         mToolBarBackImg.setVisibility(View.VISIBLE);
-        StatusBarUtil.setColor(this,getResources().getColor(R.color.md_deep_orange_500),0);
+        mToolBarTitleTxt.setVisibility(View.GONE);
+        StatusBarUtil.setColor(this,getResources().getColor(R.color.base_back),0);
 
         initListener();
     }

@@ -2,11 +2,11 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="RtlHardcoded"
-    android:background="@color/md_grey_100"
+    android:background="@color/base_back"
+    android:orientation="vertical"
+    tools:ignore="RtlSymmetry"
     >
 
     <FrameLayout
@@ -16,7 +16,25 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:background="@mipmap/mine_back"
+            android:background="@mipmap/ic_mine_back"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:background="@mipmap/ic_mine_back_wave"
+            />
+
+        <TextView
+            android:id="@+id/mine_login_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:text="@string/login_now"
+            android:textColor="@color/bottom_tab_normal"
+            android:textSize="18sp"
             />
 
         <ImageView
@@ -25,19 +43,10 @@
             android:layout_height="54dp"
             android:layout_gravity="center"
             android:layout_marginTop="-10dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_user_default"
-            />
+            android:background="@drawable/user_logo_background"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_user_logo"
 
-        <TextView
-            android:id="@+id/mine_login_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="45dp"
-            android:text="@string/login_now"
-            android:textColor="@color/white"
-            android:textSize="18sp"
             />
     </FrameLayout>
 
@@ -47,34 +56,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp"
-        android:background="@color/md_white_1000"
+        android:paddingTop="16dp"
+        android:paddingLeft="8dp"
+        android:paddingBottom="16dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         >
 
         <TextView
             android:id="@+id/mine_info_txt"
             style="@style/text_big_normal"
             android:layout_centerVertical="true"
-            android:drawableLeft="@mipmap/ic_record"
+            android:drawableLeft="@mipmap/ic_user_info"
             android:drawablePadding="6dp"
             android:text="@string/user_info"
-            />
-
-        <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="right"
-            android:background="@mipmap/ic_arrow_right"
-            android:scaleType="centerInside"
+            android:textColor="@color/bottom_tab_selected"
             />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/md_grey_100"
+        android:background="@color/md_brown_200"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         />
 
     <RelativeLayout
@@ -82,121 +86,113 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp"
-        android:background="@color/md_white_1000"
+        android:paddingTop="16dp"
+        android:paddingLeft="8dp"
+        android:paddingBottom="16dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         >
 
         <TextView
             android:id="@+id/mine_read_txt"
             style="@style/text_big_normal"
             android:layout_centerVertical="true"
-            android:drawableLeft="@mipmap/ic_collected"
+            android:drawableLeft="@mipmap/ic_read_record"
             android:drawablePadding="6dp"
             android:text="@string/my_read"
+            android:textColor="@color/bottom_tab_selected"
             />
 
-        <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="right"
-            android:background="@mipmap/ic_arrow_right"
-            android:scaleType="centerInside"
-            />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/md_grey_100"
+        android:background="@color/md_brown_200"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         />
 
     <RelativeLayout
         android:id="@+id/mine_download_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:background="@color/md_white_1000"
+        android:paddingTop="16dp"
+        android:paddingLeft="8dp"
+        android:paddingBottom="16dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         >
+
         <TextView
             android:id="@+id/mine_downloaded_txt"
             style="@style/text_big_normal"
-            android:text="@string/my_downloaded"
-            android:drawableLeft="@mipmap/ic_download"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@mipmap/ic_downloaded"
             android:drawablePadding="6dp"
-            android:layout_centerVertical="true"
-            />
-        <ImageView
-
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_gravity="right"
-            android:scaleType="centerInside"
-            android:background="@mipmap/ic_arrow_right"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
+            android:text="@string/my_downloaded"
+            android:textColor="@color/bottom_tab_selected"
             />
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/md_grey_100"
+        android:background="@color/md_brown_200"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         />
 
     <RelativeLayout
-       android:id="@+id/mine_setting_container"
+        android:id="@+id/mine_setting_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:background="@color/md_white_1000"
+        android:paddingTop="16dp"
+        android:paddingLeft="8dp"
+        android:paddingBottom="16dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         >
+
         <TextView
             android:id="@+id/mine_setting_txt"
             style="@style/text_big_normal"
-            android:text="@string/check_update"
-            android:drawableLeft="@mipmap/update"
-            android:drawablePadding="6dp"
             android:layout_centerVertical="true"
+            android:drawableLeft="@mipmap/ic_check_update"
+            android:drawablePadding="6dp"
+            android:text="@string/check_update"
+            android:textColor="@color/bottom_tab_selected"
             />
+
         <TextView
             android:id="@+id/current_version"
             style="@style/text_small_gray"
-            android:text="@string/current_version"
-            android:drawablePadding="6dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/mine_setting_txt"
+            android:drawablePadding="6dp"
             android:paddingTop="3dp"
+            android:text="@string/current_version"
+            android:textColor="@color/bottom_tab_normal"
             />
 
-        <ImageView
-
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_gravity="right"
-            android:scaleType="centerInside"
-            android:background="@mipmap/ic_arrow_right"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            />
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/md_grey_200"
+        android:background="@color/md_brown_200"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         />
 
     <TextView
         android:id="@+id/mine_login_out_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:gravity="center"
-        android:text="@string/login_out"
         android:layout_centerVertical="true"
-        android:background="@color/md_white_1000"
         android:layout_marginTop="20dp"
-        android:textColor="@color/md_deep_orange_500"
+        android:background="@color/md_white_1000"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="@string/login_out"
+        android:textColor="@color/bottom_tab_selected"
         android:visibility="gone"
         />
 

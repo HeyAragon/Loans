@@ -97,10 +97,10 @@ public class ForgetPasswordActivity extends BaseActivity<ForgetPassPresenter> im
 
     @Override
     public void initView() {
-        mToolBarTitleTxt.setText(getString(R.string.forget_password));
+        mToolBarTitleTxt.setText(getString(R.string.find_password));
         mSimpleToolbar.setVisibility(View.VISIBLE);
         mToolBarBackImg.setVisibility(View.VISIBLE);
-        StatusBarUtil.setColor(this,getResources().getColor(R.color.md_deep_orange_500),0);
+        StatusBarUtil.setColor(this,getResources().getColor(R.color.base_back),0);
         initListener();
     }
 

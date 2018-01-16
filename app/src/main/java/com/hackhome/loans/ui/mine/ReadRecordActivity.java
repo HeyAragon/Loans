@@ -75,7 +75,7 @@ public class ReadRecordActivity extends BaseActivity {
         mToolBarTitleTxt.setText(getString(R.string.read_record));
         mSimpleToolbar.setVisibility(View.VISIBLE);
         mToolBarBackImg.setVisibility(View.VISIBLE);
-        StatusBarUtil.setColor(this,getResources().getColor(R.color.md_deep_orange_500),0);
+        StatusBarUtil.setColor(this,getResources().getColor(R.color.base_back),0);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new CardViewItemDecoration(false));

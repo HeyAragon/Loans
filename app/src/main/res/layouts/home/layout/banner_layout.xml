@@ -6,24 +6,24 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     tools:ignore="RtlHardcoded"
+    android:background="@color/base_back"
     >
 
     <com.zhouwei.mzbanner.MZBannerView
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="224dp"
+        android:layout_height="236dp"
         app:canLoop="true"
         app:indicatorAlign="center"
         app:middle_page_cover="false"
-        app:open_mz_mode="true"
+        app:open_mz_mode="false"
         />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         >
 
         <TextView
@@ -32,29 +32,26 @@
             android:layout_height="wrap_content"
             android:text="热门推荐"
             android:textSize="17sp"
-            android:gravity="center_horizontal"
-            android:layout_centerInParent="true"
+            android:textColor="@color/bottom_tab_selected"
+            android:layout_centerHorizontal="true"
             />
 
-        <View
+        <ImageView
             android:id="@+id/left_line"
             android:layout_width="wrap_content"
-            android:layout_height="3dp"
-            android:background="@color/black"
+            android:layout_height="wrap_content"
+            android:src="@drawable/mony_left"
             android:layout_toLeftOf="@id/prompt"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="8dp"
+
             />
-        <View
+        <ImageView
             android:id="@+id/right_line"
             android:layout_width="wrap_content"
-            android:layout_height="3dp"
-            android:background="@color/black"
+            android:layout_height="wrap_content"
+            android:src="@drawable/mony_right"
             android:layout_toRightOf="@id/prompt"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="15dp"
             />
     </RelativeLayout>
 

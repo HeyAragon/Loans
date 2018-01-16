@@ -144,9 +144,9 @@ public class LoanFragment extends BaseRefreshFragment<HomePresenter> implements 
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        Drawable drawableDown = getResources().getDrawable(R.mipmap.ic_arrow_down);
-        Drawable drawableUp = getResources().getDrawable(R.mipmap.ic_arrow_up);
-        Drawable drawableDefault = getResources().getDrawable(R.mipmap.ic_arrow_default);
+        Drawable drawableDown = getResources().getDrawable(R.drawable.ic_arrow_down);
+        Drawable drawableUp = getResources().getDrawable(R.drawable.ic_arrow_up);
+        Drawable drawableDefault = getResources().getDrawable(R.drawable.ic_arrow_default);
         drawableDown.setBounds(0, 0, drawableDown.getMinimumWidth(), drawableDown.getMinimumHeight());
         drawableUp.setBounds(0, 0, drawableUp.getMinimumWidth(), drawableUp.getMinimumHeight());
         drawableDefault.setBounds(0, 0, drawableDefault.getMinimumWidth(), drawableDefault.getMinimumHeight());
@@ -168,10 +168,10 @@ public class LoanFragment extends BaseRefreshFragment<HomePresenter> implements 
                     mCurrentOb = 1;
                 }
                 mLoanInterestTxt.setCompoundDrawables(null, null, drawableDefault, null);
-                mLoanValueTxt.setTextColor(getResources().getColor(R.color.md_blue_500));
-                mLoanInterestTxt.setTextColor(getResources().getColor(R.color.black));
-                mLoanLine.setVisibility(View.VISIBLE);
-                mInterestLine.setVisibility(View.GONE);
+                mLoanValueTxt.setTextColor(getResources().getColor(R.color.bottom_tab_selected));
+                mLoanInterestTxt.setTextColor(getResources().getColor(R.color.bottom_tab_normal));
+//                mLoanLine.setVisibility(View.VISIBLE);
+//                mInterestLine.setVisibility(View.GONE);
 
                 break;
             case R.id.loan_interest_sort_txt:
@@ -187,10 +187,10 @@ public class LoanFragment extends BaseRefreshFragment<HomePresenter> implements 
                     mCurrentOb = 1;
                 }
                 mLoanValueTxt.setCompoundDrawables(null, null, drawableDefault, null);
-                mLoanInterestTxt.setTextColor(getResources().getColor(R.color.md_blue_500));
-                mLoanValueTxt.setTextColor(getResources().getColor(R.color.black));
-                mInterestLine.setVisibility(View.VISIBLE);
-                mLoanLine.setVisibility(View.GONE);
+                mLoanInterestTxt.setTextColor(getResources().getColor(R.color.bottom_tab_selected));
+                mLoanValueTxt.setTextColor(getResources().getColor(R.color.bottom_tab_normal));
+//                mInterestLine.setVisibility(View.VISIBLE);
+//                mLoanLine.setVisibility(View.GONE);
                 break;
 
         }

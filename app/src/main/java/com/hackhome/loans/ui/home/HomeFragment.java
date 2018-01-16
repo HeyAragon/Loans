@@ -127,18 +127,18 @@ public class HomeFragment extends BaseRefreshFragment<HomePresenter> implements 
         mLeftLine = mBannerView.findViewById(R.id.left_line);
         mRightLine = mBannerView.findViewById(R.id.right_line);
 
-        setDrawable(mLeftLine, GradientDrawable.Orientation.LEFT_RIGHT, true);
-        setDrawable(mRightLine, GradientDrawable.Orientation.RIGHT_LEFT, true);
+//        setDrawable(mLeftLine, GradientDrawable.Orientation.LEFT_RIGHT, true);
+//        setDrawable(mRightLine, GradientDrawable.Orientation.RIGHT_LEFT, true);
 
         mBanner = mBannerView.findViewById(R.id.banner);
 
         ViewGroup.LayoutParams layoutParams = mBanner.getLayoutParams();
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             layoutParams.width = layoutParams.MATCH_PARENT;
-            layoutParams.height = DensityUtil.dip2px(getContext(), 224);
+            layoutParams.height = DensityUtil.dip2px(getContext(), 236);
         } else {
             layoutParams.width = layoutParams.MATCH_PARENT;
-            layoutParams.height = DensityUtil.dip2px(getContext(), 168);
+            layoutParams.height = DensityUtil.dip2px(getContext(), 183);
         }
         mBanner.setLayoutParams(layoutParams);
         mBanner.setIndicatorVisible(true);

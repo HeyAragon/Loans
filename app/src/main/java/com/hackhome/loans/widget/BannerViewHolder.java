@@ -27,33 +27,34 @@ public class BannerViewHolder implements MZViewHolder<DataBean.BannersBean> {
 
     @Override
     public View createView(Context context) {
-        View view = LayoutInflater.from(context).inflate(R.layout.banner_item, null);
-        mImageView = (ImageView) view.findViewById(R.id.banner_item_img);
-        return view;
+//        View view = LayoutInflater.from(context).inflate(R.layout.banner_item, null);
+//        mImageView = (ImageView) view.findViewById(R.id.banner_item_img);
+         mImageView = new ImageView(context);
+        return mImageView;
     }
 
     @Override
     public void onBind(Context context, int position, DataBean.BannersBean data) {
         GlideRequest<Drawable> load = GlideApp.with(context)
                 .load(data.getImages());
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            ViewGroup.LayoutParams layoutParams = mImageView.getLayoutParams();
-            layoutParams.width = layoutParams.MATCH_PARENT;
-            layoutParams.height = DensityUtil.dip2px(context,224);
-            mImageView.setLayoutParams(layoutParams);
-            ViewGroup.MarginLayoutParams layoutParams1 = (ViewGroup.MarginLayoutParams) mImageView.getLayoutParams();
-            layoutParams1.setMargins(
-                    DensityUtil.dip2px(context,4),
-                    DensityUtil.dip2px(context,18),
-                    DensityUtil.dip2px(context,4),
-                    DensityUtil.dip2px(context,18)
-
-                    );
-            load.centerCrop().into(mImageView);
-        } else {
-            load.centerInside().into(mImageView);
-        }
-
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+//            ViewGroup.LayoutParams layoutParams = mImageView.getLayoutParams();
+//            layoutParams.width = layoutParams.MATCH_PARENT;
+//            layoutParams.height = DensityUtil.dip2px(context,224);
+//            mImageView.setLayoutParams(layoutParams);
+//            ViewGroup.MarginLayoutParams layoutParams1 = (ViewGroup.MarginLayoutParams) mImageView.getLayoutParams();
+//            layoutParams1.setMargins(
+//                    DensityUtil.dip2px(context,4),
+//                    DensityUtil.dip2px(context,18),
+//                    DensityUtil.dip2px(context,4),
+//                    DensityUtil.dip2px(context,18)
+//
+//                    );
+//            load.centerCrop().into(mImageView);
+//        } else {
+//            load.centerCrop().into(mImageView);
+//        }
+        GlideApp.with(context).load(data.getImages()).centerCrop().into(mImageView);
     }
 
 }

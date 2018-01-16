@@ -91,10 +91,10 @@ public class MainActivity extends BaseActivity{
                 switch (itemId) {
                     case R.id.tab_home:
                         switchFragment(mHomeFragment);
-                        if (!item.isChecked()) {
-                            mToolbar.setVisibility(View.VISIBLE);
-                        }
-                        StatusBarUtil.setColor(MainActivity.this,getResources().getColor(R.color.md_deep_orange_500),0);
+//                        if (!item.isChecked()) {
+                            mToolbar.setVisibility(View.GONE);
+//                        }
+                        StatusBarUtil.setTranslucentForImageView(MainActivity.this,0,mToolbar);
                         item.setChecked(true);
                         break;
                     case R.id.tab_loan:
@@ -102,15 +102,15 @@ public class MainActivity extends BaseActivity{
                         if (!item.isChecked()) {
                             mToolbar.setVisibility(View.VISIBLE);
                         }
-                        StatusBarUtil.setColor(MainActivity.this,getResources().getColor(R.color.md_deep_orange_500),0);
+                        StatusBarUtil.setColor(MainActivity.this,getResources().getColor(R.color.base_back),0);
                         item.setChecked(true);
                         break;
                     case R.id.tab_mine:
                         switchFragment(mMineFragment);
                         if (!item.isChecked()) {
                             mToolbar.setVisibility(View.GONE);
-                            StatusBarUtil.setColor(MainActivity.this,getResources().getColor(R.color.md_deep_orange_60),0);
-
+//                            StatusBarUtil.setColor(MainActivity.this,getResources().getColor(R.color.mine_status_bar_back),0);
+                            StatusBarUtil.setTranslucentForImageView(MainActivity.this,0,mToolbar);
                         }
                         item.setChecked(true);
                         break;

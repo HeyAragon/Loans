@@ -9,6 +9,14 @@
     <color name="bottom_tab_normal">#8D6E63</color>
 
     <color name="base_back">#F2E5DF</color>
+    <color name="mine_status_bar_back">#EDD6B8</color>
+    <color name="user_logo_back">#EDD9C0</color>
+    <color name="user_logo_stroke">#A08560</color>
+
+    <color name="login_register_hint">#442F26</color>
+    <color name="login_register_sub_hint">#A75C38</color>
+
+    <color name="brown_line">#886C5D</color>
 
     <color name="colorTransparent">#00000000</color>
 

@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bottom_tab_back"
+    android:padding="4dp"
     >
     <LinearLayout
 
@@ -26,8 +28,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/loan_value_str"
                 android:gravity="center"
-                android:drawableRight="@mipmap/ic_arrow_down"
+                android:drawableRight="@drawable/ic_arrow_down"
                 android:checked="true"
+                android:textColor="@color/bottom_tab_selected"
                 android:drawablePadding="2dp"
                 />
 
@@ -35,11 +38,18 @@
                 android:id="@+id/loan_value_line"
                 android:layout_width="60dp"
                 android:layout_height="2dp"
-                android:background="@color/md_blue_500"
+                android:background="@color/bottom_tab_normal"
                 android:layout_marginTop="4dp"
+                android:visibility="gone"
                 />
         </LinearLayout>
 
+        <View
+            android:layout_width="2dp"
+            android:layout_height="24dp"
+            android:background="@color/md_brown_50"
+            android:layout_gravity="center"
+            />
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -55,25 +65,27 @@
                 android:layout_height="wrap_content"
                 android:text="@string/loan_interest_str"
                 android:gravity="center"
-                android:drawableRight="@mipmap/ic_arrow_default"
+                android:drawableRight="@drawable/ic_arrow_default"
                 android:drawablePadding="2dp"
+                android:textColor="@color/bottom_tab_normal"
                 />
             <View
                 android:id="@+id/loan_interest_line"
                 android:layout_width="60dp"
                 android:layout_height="2dp"
-                android:background="@color/md_blue_500"
+                android:background="@color/bottom_tab_normal"
                 android:layout_marginTop="4dp"
                 android:visibility="gone"
+
 
                 />
         </LinearLayout>
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/md_grey_200"
-        />
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2dp"-->
+        <!--android:background="@color/md_grey_200"-->
+        <!--/>-->
 </LinearLayout>
