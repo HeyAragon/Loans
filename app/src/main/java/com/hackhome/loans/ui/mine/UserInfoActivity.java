@@ -97,6 +97,12 @@ public class UserInfoActivity extends BaseActivity<UserInfoPresenter> implements
     LinearLayout mLlSelectPic;
     @BindView(R.id.iv_user_icon)
     ImageView mIvUserIcon;
+    @BindView(R.id.ll_user_nick)
+    LinearLayout mLlUserNick;
+    @BindView(R.id.ll_user_gender)
+    LinearLayout mLlUserGender;
+    @BindView(R.id.ll_phone)
+    LinearLayout mLlPhone;
     @BindView(R.id.ll_user_icon)
     LinearLayout mLlUserIcon;
     @BindView(R.id.tv_user_id)
@@ -136,7 +142,8 @@ public class UserInfoActivity extends BaseActivity<UserInfoPresenter> implements
     @Override
     public void initView() {
         mSimpleToolbar.setVisibility(View.VISIBLE);
-        mToolBarTitleTxt.setVisibility(View.GONE);
+        mToolBarTitleTxt.setVisibility(View.VISIBLE);
+        mToolBarTitleTxt.setText("个人信息");
         mToolBarBackImg.setVisibility(View.VISIBLE);
         StatusBarUtil.setColor(this,getResources().getColor(R.color.base_back),0);
 
@@ -181,7 +188,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoPresenter> implements
 
     @OnClick({R.id.tool_bar_back_img, R.id.view_gone, R.id.tv_pic, R.id.tv_take_photo,
             R.id.tv_cancel, R.id.ll_select_pic, R.id.ll_user_icon, R.id.ll_user_nick,
-            R.id.ll_user_gender, R.id.tv_exchange_password})
+            R.id.ll_user_gender, R.id.tv_exchange_password, R.id.btn_user_exit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tool_bar_back_img:
@@ -190,6 +197,9 @@ public class UserInfoActivity extends BaseActivity<UserInfoPresenter> implements
             case R.id.ll_user_icon:
                 getShowAnimatorSet(mLlSelectPic).start();
                 mLlSelectPic.setVisibility(View.VISIBLE);
+                mViewGone.setVisibility(View.VISIBLE);
+                mViewGone.setClickable(true);
+                changeEnabled(false);
                 break;
             case R.id.view_gone:
 
@@ -197,6 +207,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoPresenter> implements
 
                 break;
             case R.id.tv_take_photo:
+                changeEnabled(true);
                 mViewGone.setClickable(false);
                 mLlSelectPic.setVisibility(View.GONE);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
@@ -211,9 +222,9 @@ public class UserInfoActivity extends BaseActivity<UserInfoPresenter> implements
 
                 break;
             case R.id.tv_pic:
-
+                changeEnabled(true);
                 mLlSelectPic.setVisibility(View.GONE);
-
+                mViewGone.setVisibility(View.GONE);
                 mIsFromPic = true;
                 Intent intent = new Intent(Intent.ACTION_PICK, null);
                 intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
@@ -308,7 +319,20 @@ public class UserInfoActivity extends BaseActivity<UserInfoPresenter> implements
                     }
                 });
                 break;
+
+            case R.id.btn_user_exit:
+                UserUtil.exit();
+
+                EB.getInstance().send(EventItem.MINE_FRAGMENT_OBJECT,EventItem.EXIT_SUCCESS);
+                break;
         }
+    }
+
+    private void changeEnabled(boolean clickable) {
+        mLlUserIcon.setClickable(clickable);
+        mTvExchangePassword.setClickable(clickable);
+        mLlUserGender.setClickable(clickable);
+        mLlUserNick.setClickable(clickable);
     }
 
     @Override
@@ -608,7 +632,10 @@ public class UserInfoActivity extends BaseActivity<UserInfoPresenter> implements
             }
             @Override
             public void onAnimationEnd(Animator animation) {
-
+                view.setVisibility(View.GONE);
+                mViewGone.setVisibility(View.GONE);
+                mViewGone.setClickable(false);
+                changeEnabled(true);
             }
             @Override
             public void onAnimationCancel(Animator animation) {
@@ -616,7 +643,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoPresenter> implements
             }
             @Override
             public void onAnimationRepeat(Animator animation) {
-                view.setVisibility(View.GONE);
+
             }
         });
         return set;

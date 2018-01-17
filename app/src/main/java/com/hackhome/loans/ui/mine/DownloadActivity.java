@@ -1,5 +1,6 @@
 package com.hackhome.loans.ui.mine;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hackhome.loans.LoanApplication;
 import com.hackhome.loans.R;
 import com.hackhome.loans.bean.DownloadRecordModel;
+import com.hackhome.loans.bean.ReturnValueBean;
 import com.hackhome.loans.common.download.DownloadHelperT;
 import com.hackhome.loans.common.download.DownloadTaskManager;
 import com.hackhome.loans.common.eventbus.EventItem;
@@ -28,6 +30,7 @@ import com.hackhome.loans.common.utils.FileUtils;
 import com.hackhome.loans.common.utils.StatusBarUtil;
 import com.hackhome.loans.dagger.component.ApplicationComponent;
 import com.hackhome.loans.greendao.DownloadRecordModelDao;
+import com.hackhome.loans.ui.LoanDetailActivity;
 import com.hackhome.loans.ui.MainActivity;
 import com.hackhome.loans.ui.adapter.DownloadAdapter;
 import com.hackhome.loans.ui.base.BaseActivity;
@@ -96,7 +99,7 @@ public class DownloadActivity extends BaseActivity {
             @Override
             public void onItemChildClick(final BaseQuickAdapter adapter, View view, final int position) {
                 int id = view.getId();
-                String tag = (String) view.getTag();
+
                 final DownloadRecordModel recordModel = mDownloadRecordModelList.get(position);
                 switch (id) {
 //                    case R.id.download_item_download_btn:
@@ -119,6 +122,7 @@ public class DownloadActivity extends BaseActivity {
 //                        }
 //                        break;
                     case R.id.download_item_speed:
+                        String tag = (String) view.getTag();
                         if (!TextUtils.isEmpty(tag)) {
                             if (tag.equals("删除")) {
                                 if (FileUtils.isFileExists(recordModel.getPath())) {
@@ -154,7 +158,16 @@ public class DownloadActivity extends BaseActivity {
                             }
                         }
                         break;
-
+                    case R.id.base_download_item_root:
+                        ReturnValueBean bean = (ReturnValueBean) view.getTag();
+                        if (bean != null) {
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("returnValue",bean);
+                            Intent intent = new Intent(DownloadActivity.this, LoanDetailActivity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+                        break;
                 }
             }
         });

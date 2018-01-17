@@ -1,62 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hackhome.loans.ui.LoanDetailActivity"
     android:orientation="vertical"
     tools:ignore="RtlHardcoded"
-    android:background="@color/md_grey_100"
+    android:background="@color/white"
     >
 
     <include layout="@layout/simple_toolbar_layout"/>
 
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/md_grey_200"
-        />
     <ScrollView
         android:id="@+id/loan_detail_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
 
             >
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 >
+
                 <ImageView
                     android:id="@+id/loan_detail_app_icon"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
 
                     />
+
                 <TextView
                     android:id="@+id/loan_detail_app_name"
-                    style="@style/text_big_black"
+                    style="@style/text_big_brown"
                     android:layout_alignTop="@id/loan_detail_app_icon"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="4dp"
                     android:layout_toRightOf="@id/loan_detail_app_icon"
                     android:text="@string/app_name"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginLeft="4dp"
                     />
+
                 <TextView
                     android:id="@+id/loan_app_description"
                     style="@style/text_middle_gray"
                     android:layout_alignBottom="@id/loan_detail_app_icon"
-                    android:layout_toRightOf="@id/loan_detail_app_icon"
                     android:layout_marginBottom="4dp"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/loan_detail_app_icon"
                     android:text="@string/app_name"
                     />
 
@@ -68,85 +66,215 @@
                     android:layout_centerVertical="true"
                     android:gravity="center"
                     android:text="@string/download"
+                    app:progress_btn_background_color="#FFB245"
+                    app:progress_btn_background_second_color="@color/base_back"
                     app:progress_btn_radius="4dp"
-                    app:progress_btn_background_color="@color/md_deep_orange_500"
                     />
 
             </RelativeLayout>
 
             <View
+
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="8dp"
                 android:layout_margin="10dp"
-                android:background="@color/md_grey_200"
+                android:background="@drawable/line_corner_shape"
+
                 />
 
-            <TextView
-                android:id="@+id/loan_detail_money_limit"
-                style="@style/text_normal_default"
-                android:text="可贷额度：1000-5000"
-                />
-            <TextView
-                android:id="@+id/loan_detail_time_limit"
-                style="@style/text_normal_default"
-                android:text="可贷期限：1-12月"
-                />
-            <TextView
-                android:id="@+id/loan_detail_success_rate"
-                style="@style/text_normal_default"
-                android:text="成功率：95%"
-                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
 
-            <TextView
-                android:id="@+id/loan_detail_people_num"
-                style="@style/text_normal_default"
-                android:text="已放款：56000人"
+                <LinearLayout
+                    style="@style/loan_detail_ll"
+                    >
+
+                    <TextView
+                        style="@style/text_middle_brown"
+                        android:text="@string/loan_money_range"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/loan_detail_money_limit"
+                        style="@style/loan_detail_number"
+                        android:text="2000-6000"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="32dp"
+                    android:background="@color/base_item_line"
+                    android:layout_gravity="center"
+                    />
+
+
+                <LinearLayout
+                    style="@style/loan_detail_ll"
+                    >
+
+                    <TextView
+                        style="@style/text_middle_brown"
+                        android:text="@string/loan_time_range"
+                        />
+
+                    <TextView
+                        android:id="@+id/loan_detail_time_limit"
+                        style="@style/loan_detail_number"
+                        android:text="1-30"
+                        />
+                </LinearLayout>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="32dp"
+                    android:background="@color/base_item_line"
+                    android:layout_gravity="center"
+                    />
+
+                <LinearLayout
+                    style="@style/loan_detail_ll"
+                    >
+
+                    <TextView
+                        style="@style/text_middle_brown"
+                        android:text="@string/daily_loan_interest"
+                        />
+
+                    <TextView
+                        android:id="@+id/loan_detail_interest"
+                        style="@style/loan_detail_number"
+                        android:text="0.05%"
+
+                        />
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/base_item_line"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 />
-            <TextView
-                android:id="@+id/loan_detail_interest"
-                style="@style/text_normal_default"
-                android:text="日利率低至：0.05%"
-                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    style="@style/loan_detail_ll"
+
+                    >
+
+                    <TextView
+                        style="@style/text_middle_brown"
+                        android:text="@string/loan_people_num"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/loan_detail_people_num"
+                        style="@style/loan_detail_number"
+                        android:text="5096"
+
+                        />
+
+                </LinearLayout>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="32dp"
+                    android:background="@color/base_item_line"
+                    android:layout_gravity="center"
+                    />
+                <LinearLayout
+                    style="@style/loan_detail_ll"
+                    >
+
+                    <TextView
+                        style="@style/text_middle_brown"
+                        android:text="@string/success_rate"
+                        />
+
+                    <TextView
+                        android:id="@+id/loan_detail_success_rate"
+                        style="@style/loan_detail_number"
+                        android:text="98%"
+
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/loan_detail_ll"
+                    android:visibility="invisible"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/success_rate"
+                        android:textColor="@color/colorTxtTitle"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="98%"
+                        android:textColor="@color/md_deep_orange_500"
+                        android:textSize="12sp"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/md_grey_200"
+                android:layout_height="8dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/line_corner_shape"
                 />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="@string/app_intro_str"
+                android:gravity="left"
                 android:padding="10dp"
-                android:gravity="center"
-                android:textSize="16sp"
+                android:text="@string/app_intro_str"
+                android:textColor="#333333"
+                android:textSize="17sp"
+                android:textStyle="bold"
                 />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/md_grey_200"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                />
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:background="@color/base_item_line"-->
+                <!--/>-->
+
             <TextView
                 android:id="@+id/loan_detail_intro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:lineSpacingExtra="8dp"
                 />
 
             <Button
                 android:id="@+id/loan_detail_apply_for_money"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/apply_for_money_shape_"
                 android:text="@string/apply"
-                android:layout_margin="10dp"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                android:background="@drawable/apply_for_money_shape"
                 />
         </LinearLayout>
     </ScrollView>

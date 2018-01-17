@@ -1,5 +1,6 @@
 package com.hackhome.loans.ui.adapter;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,11 +15,13 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hackhome.loans.R;
 import com.hackhome.loans.bean.DownloadRecordModel;
+import com.hackhome.loans.bean.ReturnValueBean;
 import com.hackhome.loans.common.download.DownloadHelperT;
 import com.hackhome.loans.common.imageloader.GlideApp;
 import com.hackhome.loans.common.utils.AppUtils;
 import com.hackhome.loans.common.utils.DensityUtil;
 import com.hackhome.loans.common.utils.FileUtils;
+import com.hackhome.loans.ui.mine.DownloadActivity;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadList;
 import com.liulishuo.filedownloader.FileDownloader;
@@ -119,24 +122,6 @@ public class DownloadAdapter extends BaseQuickAdapter<DownloadRecordModel, BaseV
 
             @Override
             public void onClick(View v) {
-//                String tag = (String) v.getTag();
-//                if (!TextUtils.isEmpty(tag)) {
-//                    if (tag.equals("打开")) {
-//                        AppUtils.launchApp(item.getPkgName());
-//                    } else if (tag.equals("安装")) {
-//                        AppUtils.installApp(item.getPath(), AppUtils.AUTHORITIES);
-//                    } else if (tag.equals("继续")) {
-//                        DownloadHelperT helperT = DownloadHelperT.getInstance();
-//                        DownloadHelperT.DownloadHelperBuilder builder = helperT.getBuilderById(item.getTaskId());
-//                        helperT.start(builder);
-//                    } else if (tag.equals("暂停")) {
-//                        FileDownloader.getImpl().pause(item.getTaskId());
-////                        helper.setText(R.id.download_item_download_btn, "继续");
-////                        helper.setText(R.id.download_item_speed, "已暂停");
-////                        helper.setTag(R.id.download_item_download_btn, "继续");
-//////                        notifyItemChanged(helper.getLayoutPosition());
-//                    }
-//                }
 
                 String s = button.getText().toString();
                 if (!TextUtils.isEmpty(s)) {
@@ -152,16 +137,21 @@ public class DownloadAdapter extends BaseQuickAdapter<DownloadRecordModel, BaseV
                         FileDownloader.getImpl().pause(item.getTaskId());
                         helper.setText(R.id.download_item_download_btn, "继续");
                         helper.setText(R.id.download_item_speed, "已暂停");
-//                        helper.setTag(R.id.download_item_download_btn, "继续");
-//                        notifyItemChanged(helper.getLayoutPosition());
-
                     }
                 }
             }
         });
+
+
+        helper.addOnClickListener(R.id.base_download_item_root);
+        helper.setTag(R.id.base_download_item_root,initDetailData(item));
+
+
+
+
     }
 
-    public String getSize(long size) {
+    private String getSize(long size) {
         if (size == 0) return "0";
         int sizeToStringLength = String.valueOf(size).length();
         String humanSize = "";
@@ -179,7 +169,7 @@ public class DownloadAdapter extends BaseQuickAdapter<DownloadRecordModel, BaseV
         return humanSize;
     }
 
-    public String getSpeed(long speed) {
+    private String getSpeed(long speed) {
         DecimalFormat formatter = new DecimalFormat("##0.00");
         if (speed > 1024) {
             return formatter.format((double) speed / 1024) + "MB/S";
@@ -187,5 +177,22 @@ public class DownloadAdapter extends BaseQuickAdapter<DownloadRecordModel, BaseV
             return String.valueOf(speed) + "KB/S";
         }
 
+    }
+
+    private ReturnValueBean initDetailData(DownloadRecordModel item) {
+        ReturnValueBean bean = new ReturnValueBean();
+        bean.setProductImg(item.getProductImg());
+        bean.setStartLoanMoney(item.getStartLoanMoney());
+        bean.setEndLoanMoney(item.getEndLoanMoney());
+        bean.setProductIntroduce(item.getProductIntroduce());
+        bean.setProductH5Url(item.getProductH5Url());
+        bean.setProductAndroidUrl(item.getProductAndroidUrl());
+        bean.setInterestRateDay(item.getInterestRateDay());
+        bean.setAdvertiser(item.getAdvertiser());
+        bean.setProductCharacteristic(item.getProductCharacteristic());
+        bean.setPackageName(item.getPackageName());
+        bean.setSecuredLoan(item.getSecuredLoan());
+        bean.setProductName(item.getProductName());
+        return bean;
     }
 }

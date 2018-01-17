@@ -9,9 +9,9 @@
 
             <gradient
                 android:angle="270"
-                android:centerColor="#E3E3E3"
-                android:endColor="#E6E6E6"
-                android:startColor="#C8C8C8" />
+                android:centerColor="@color/base_back"
+                android:endColor="@color/base_back"
+                android:startColor="@color/base_back" />
         </shape>
     </item>
     <item android:id="@android:id/progress">
@@ -19,9 +19,9 @@
             <shape>
 
                 <gradient
-                    android:centerColor="@color/md_deep_orange_300"
-                    android:endColor="@color/md_deep_orange_500"
-                    android:startColor="@color/md_deep_orange_400" />
+                    android:startColor="@color/base_back"
+                    android:endColor="@color/bottom_tab_selected"
+                    android:centerColor="@color/bottom_tab_normal" />
             </shape>
         </clip>
     </item>

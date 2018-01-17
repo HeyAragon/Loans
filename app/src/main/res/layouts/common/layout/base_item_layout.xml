@@ -1,95 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+
+
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/base_item_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:ignore="RtlHardcoded"
-    app:contentPadding="10dp"
-    app:cardCornerRadius="10dp"
-    app:cardBackgroundColor="@color/white"
-    android:id="@+id/base_item_root"
+    android:background="@drawable/base_item_shape"
     android:clickable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
+    tools:ignore="RtlHardcoded"
     >
 
-    <RelativeLayout
+
+    <ImageView
+        android:id="@+id/base_item_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:contentDescription="@null"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <com.hackhome.loans.widget.CenterTextView
+        android:id="@+id/base_item_name"
+        style="@style/text_big_black"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/base_item_icon"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textSize="17sp"
+        />
+
+    <LinearLayout
+        android:id="@+id/limit_interest_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:layout_below="@id/base_item_name"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/base_item_icon"
+        android:orientation="horizontal"
         >
+
         <LinearLayout
-            android:id="@+id/icon_ll"
-            android:layout_width="72dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_weight="1"
             android:gravity="center"
+            android:orientation="vertical"
             >
-            <ImageView
-                android:id="@+id/base_item_icon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:contentDescription="@null"
-                android:layout_marginTop="20dp"
+
+            <TextView
+                style="@style/text_middle_black"
+                android:text="@string/max_loan_limit"
                 />
 
-            <com.hackhome.loans.widget.CenterTextView
-                android:id="@+id/base_item_name"
-                style="@style/text_normal_black"
-                android:text="@string/app_name"
-                android:layout_marginTop="4dp"
+            <TextView
+                android:id="@+id/base_item_loan_limit"
+                style="@style/home_item_number"
+                android:text="6000"
                 />
-
         </LinearLayout>
 
+        <View
+            android:layout_width="1dp"
+            android:layout_height="44dp"
+            android:background="@color/base_item_line"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                style="@style/text_middle_black"
+                android:text="@string/daily_loan_interest"
+                />
+
+            <TextView
+                android:id="@+id/base_item_loan_interest"
+                style="@style/home_item_number"
+                android:text="0.05%"
+                />
+        </LinearLayout>
 
         <View
-            android:id="@+id/base_vertical_line"
             android:layout_width="1dp"
-            android:layout_height="84dp"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/icon_ll"
-            android:background="@color/gray"
-            android:layout_margin="10dp"
+            android:layout_height="44dp"
+            android:background="@color/base_item_line"
             />
 
-        <TextView
-            android:id="@+id/base_item_loan_limit"
-            style="@style/text_big_black"
-            android:text="@string/app_name"
-            android:layout_alignTop="@id/base_vertical_line"
-            android:layout_toRightOf="@id/base_vertical_line"
-            android:layout_toEndOf="@id/base_vertical_line"
-
-            />
-
-        <TextView
-            android:id="@+id/base_item_loan_interest"
-            style="@style/text_middle_black"
-            android:layout_alignLeft="@id/base_item_loan_limit"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/base_vertical_line"
-            android:text="@string/app_name"
-            />
-
-        <TextView
-            android:id="@+id/base_item_loan_description"
-            style="@style/text_middle_gray"
-            android:layout_alignLeft="@id/base_item_loan_limit"
-            android:layout_alignBottom="@id/base_vertical_line"
-            android:text="@string/app_name"
-            />
-
-        <TextView
-            android:id="@+id/base_item_loan_people_num"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            />
-    </RelativeLayout>
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                style="@style/text_middle_black"
+                android:text="@string/loan_people_num"
+                />
+
+            <TextView
+                android:id="@+id/base_item_loan_people_num"
+                style="@style/home_item_number"
+                android:text="6000"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/base_item_horizontal_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignLeft="@id/base_item_name"
+        android:layout_below="@id/limit_interest_ll"
+        android:background="@color/base_item_line"
+        />
+
+    <TextView
+        android:id="@+id/base_item_loan_description"
+        style="@style/text_middle_gray"
+        android:layout_alignLeft="@id/base_item_name"
+        android:layout_below="@id/base_item_horizontal_line"
+        android:layout_marginTop="10dp"
+        android:text="@string/app_name"
+        />
 
 
-</android.support.v7.widget.CardView>
+</RelativeLayout>
+
+

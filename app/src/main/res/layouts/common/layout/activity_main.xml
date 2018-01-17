@@ -20,14 +20,13 @@
     </FrameLayout>
 
     <com.hackhome.loans.widget.CustomBottomNavigationView
-        android:id="@+id/main_bottom_tab"
+        android:id="@+id/main_bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/bottom_tab_back"
         app:itemTextColor="@color/selector_bottom_tab_color"
         app:menu="@menu/bottom_navigation_tab"
-        app:itemIconTint="@color/selector_bottom_tab_color"
         >
 
 

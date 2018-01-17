@@ -56,7 +56,7 @@ public class LoanFragment extends BaseRefreshFragment<HomePresenter> implements 
     }
 
     private void initHeadView() {
-        mViewStub.setLayoutResource(R.layout.loan_head_layout2);
+        mViewStub.setLayoutResource(R.layout.loan_head_layout);
         View view = mViewStub.inflate();
         mLoanValueTxt =  view.findViewById(R.id.loan_value_sort_txt);
         mLoanInterestTxt = view.findViewById(R.id.loan_interest_sort_txt);

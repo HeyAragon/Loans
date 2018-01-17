@@ -5,6 +5,7 @@ import android.util.SparseArray;
 
 import com.hackhome.loans.LoanApplication;
 import com.hackhome.loans.bean.DownloadRecordModel;
+import com.hackhome.loans.bean.ReturnValueBean;
 import com.hackhome.loans.common.utils.ToastUtils;
 import com.hackhome.loans.greendao.DaoMaster;
 import com.hackhome.loans.greendao.DaoSession;
@@ -62,7 +63,7 @@ public class DownloadTaskManager {
 
     }
 
-    public DownloadRecordModel addTask(String url, String path, String fileName, int position, String icon,String pkg) {
+    public DownloadRecordModel addTask(String url, String path, String fileName, int position, String icon, String pkg, ReturnValueBean bean) {
 
         mTaskId = FileDownloadUtils.generateId(url, path);
         DownloadRecordModel model = getModelById(mTaskId);
@@ -77,6 +78,9 @@ public class DownloadTaskManager {
         modelNew.setUrl(url);
         modelNew.setIconUrl(icon);
         modelNew.setPkgName(pkg);
+
+        insertIntoDb(modelNew, bean);
+
         mDownloadRecordModels.add(0,modelNew);
         mDownloadRecordModelDao.insert(modelNew);
         return modelNew;
@@ -93,19 +97,25 @@ public class DownloadTaskManager {
         mSparseArray.put(taskId, task);
     }
 
+    private void insertIntoDb(DownloadRecordModel bean,ReturnValueBean returnValueBean) {
 
-//    public BaseDownloadTask getRecord(int taskId) {
-//
-//        if (mSparseArray.size() == 0) {
-//            return null;
-//        }
-//
-//        BaseDownloadTask task = mSparseArray.get(taskId);
-//
-//        return task == null ? null : task;
-//
-//    }
-
+        bean.setAdvertiser(returnValueBean.getAdvertiser());
+        bean.setCreated(returnValueBean.getCreated());
+        bean.setStartLoanMoney(returnValueBean.getStartLoanMoney());
+        bean.setEndLoanMoney(returnValueBean.getEndLoanMoney());
+        bean.setInterestRateDay(returnValueBean.getInterestRateDay());
+        bean.setPackageName(returnValueBean.getPackageName());
+        bean.setProductAndroidUrl(returnValueBean.getProductAndroidUrl());
+        bean.setProductH5Url(returnValueBean.getProductH5Url());
+        bean.setProductIntroduce(returnValueBean.getProductIntroduce());
+        bean.setProductImg(returnValueBean.getProductImg());
+        bean.setSecuredLoan(returnValueBean.getSecuredLoan());
+        bean.setEndLoanMoney(returnValueBean.getEndLoanMoney());
+        bean.setProductCharacteristic(returnValueBean.getProductCharacteristic());
+        bean.setProductName(returnValueBean.getProductName());
+        bean.setEndLoanTime(returnValueBean.getEndLoanTime());
+        bean.setStartLoanTime(returnValueBean.getStartLoanTime());
+    }
 
     public DownloadRecordModel getModelById(int id) {
         for (DownloadRecordModel model : mDownloadRecordModels) {

@@ -4,6 +4,13 @@
     <string name="tab_loan_str">贷款</string>
     <string name="tab_mine_str">我的</string>
 
+    <string name="max_loan_limit">最高额度(元)</string>
+    <string name="loan_money_range">可贷额度(元)</string>
+    <string name="loan_time_range">可贷期限(天)</string>
+    <string name="daily_loan_interest">日利率低至</string>
+    <string name="loan_people_num">已贷人数(人)</string>
+    <string name="success_rate">成功率</string>
+
     <string name="loan_interest_str">贷款利率</string>
     <string name="loan_value_str">贷款金额</string>
     <string name="app_intro_str">产品说明</string>

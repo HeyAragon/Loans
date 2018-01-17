@@ -4,16 +4,16 @@
         android:id="@+id/tab_home"
         android:title="@string/tab_home_str"
         android:checked="true"
-        android:icon="@mipmap/ic_home_normal"
+        android:icon="@drawable/ic_home_normal"
         />
     <item
         android:id="@+id/tab_loan"
         android:title="@string/tab_loan_str"
-        android:icon="@mipmap/ic_loan_normal"
+        android:icon="@drawable/ic_loan_normal"
         />
     <item
         android:id="@+id/tab_mine"
         android:title="@string/tab_mine_str"
-        android:icon="@mipmap/ic_mine_normal"
+        android:icon="@drawable/ic_mine_normal"
         />
 </menu>

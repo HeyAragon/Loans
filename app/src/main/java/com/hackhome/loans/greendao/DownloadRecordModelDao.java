@@ -36,6 +36,25 @@ public class DownloadRecordModelDao extends AbstractDao<DownloadRecordModel, Lon
         public final static Property IconUrl = new Property(9, String.class, "iconUrl", false, "ICON_URL");
         public final static Property SubContent = new Property(10, String.class, "subContent", false, "SUB_CONTENT");
         public final static Property IsInstalled = new Property(11, boolean.class, "isInstalled", false, "IS_INSTALLED");
+        public final static Property PackageName = new Property(12, String.class, "packageName", false, "PACKAGE_NAME");
+        public final static Property Advertiser = new Property(13, String.class, "advertiser", false, "ADVERTISER");
+        public final static Property ProductName = new Property(14, String.class, "productName", false, "PRODUCT_NAME");
+        public final static Property SortNumber = new Property(15, String.class, "sortNumber", false, "SORT_NUMBER");
+        public final static Property StartLoanMoney = new Property(16, String.class, "startLoanMoney", false, "START_LOAN_MONEY");
+        public final static Property EndLoanMoney = new Property(17, String.class, "endLoanMoney", false, "END_LOAN_MONEY");
+        public final static Property InterestRateDay = new Property(18, String.class, "interestRateDay", false, "INTEREST_RATE_DAY");
+        public final static Property SuccessRate = new Property(19, String.class, "successRate", false, "SUCCESS_RATE");
+        public final static Property SecuredLoan = new Property(20, String.class, "securedLoan", false, "SECURED_LOAN");
+        public final static Property ProductCharacteristic = new Property(21, String.class, "productCharacteristic", false, "PRODUCT_CHARACTERISTIC");
+        public final static Property ProductAndroidUrl = new Property(22, String.class, "productAndroidUrl", false, "PRODUCT_ANDROID_URL");
+        public final static Property ProductIosUrl = new Property(23, String.class, "productIosUrl", false, "PRODUCT_IOS_URL");
+        public final static Property ProductH5Url = new Property(24, String.class, "productH5Url", false, "PRODUCT_H5_URL");
+        public final static Property ProductImg = new Property(25, String.class, "productImg", false, "PRODUCT_IMG");
+        public final static Property ProductIntroduce = new Property(26, String.class, "productIntroduce", false, "PRODUCT_INTRODUCE");
+        public final static Property Created = new Property(27, String.class, "created", false, "CREATED");
+        public final static Property Updated = new Property(28, String.class, "updated", false, "UPDATED");
+        public final static Property EndLoanTime = new Property(29, String.class, "endLoanTime", false, "END_LOAN_TIME");
+        public final static Property StartLoanTime = new Property(30, String.class, "startLoanTime", false, "START_LOAN_TIME");
     }
 
 
@@ -62,7 +81,26 @@ public class DownloadRecordModelDao extends AbstractDao<DownloadRecordModel, Lon
                 "\"PKG_NAME\" TEXT," + // 8: pkgName
                 "\"ICON_URL\" TEXT," + // 9: iconUrl
                 "\"SUB_CONTENT\" TEXT," + // 10: subContent
-                "\"IS_INSTALLED\" INTEGER NOT NULL );"); // 11: isInstalled
+                "\"IS_INSTALLED\" INTEGER NOT NULL ," + // 11: isInstalled
+                "\"PACKAGE_NAME\" TEXT," + // 12: packageName
+                "\"ADVERTISER\" TEXT," + // 13: advertiser
+                "\"PRODUCT_NAME\" TEXT," + // 14: productName
+                "\"SORT_NUMBER\" TEXT," + // 15: sortNumber
+                "\"START_LOAN_MONEY\" TEXT," + // 16: startLoanMoney
+                "\"END_LOAN_MONEY\" TEXT," + // 17: endLoanMoney
+                "\"INTEREST_RATE_DAY\" TEXT," + // 18: interestRateDay
+                "\"SUCCESS_RATE\" TEXT," + // 19: successRate
+                "\"SECURED_LOAN\" TEXT," + // 20: securedLoan
+                "\"PRODUCT_CHARACTERISTIC\" TEXT," + // 21: productCharacteristic
+                "\"PRODUCT_ANDROID_URL\" TEXT," + // 22: productAndroidUrl
+                "\"PRODUCT_IOS_URL\" TEXT," + // 23: productIosUrl
+                "\"PRODUCT_H5_URL\" TEXT," + // 24: productH5Url
+                "\"PRODUCT_IMG\" TEXT," + // 25: productImg
+                "\"PRODUCT_INTRODUCE\" TEXT," + // 26: productIntroduce
+                "\"CREATED\" TEXT," + // 27: created
+                "\"UPDATED\" TEXT," + // 28: updated
+                "\"END_LOAN_TIME\" TEXT," + // 29: endLoanTime
+                "\"START_LOAN_TIME\" TEXT);"); // 30: startLoanTime
     }
 
     /** Drops the underlying database table. */
@@ -114,6 +152,101 @@ public class DownloadRecordModelDao extends AbstractDao<DownloadRecordModel, Lon
             stmt.bindString(11, subContent);
         }
         stmt.bindLong(12, entity.getIsInstalled() ? 1L: 0L);
+ 
+        String packageName = entity.getPackageName();
+        if (packageName != null) {
+            stmt.bindString(13, packageName);
+        }
+ 
+        String advertiser = entity.getAdvertiser();
+        if (advertiser != null) {
+            stmt.bindString(14, advertiser);
+        }
+ 
+        String productName = entity.getProductName();
+        if (productName != null) {
+            stmt.bindString(15, productName);
+        }
+ 
+        String sortNumber = entity.getSortNumber();
+        if (sortNumber != null) {
+            stmt.bindString(16, sortNumber);
+        }
+ 
+        String startLoanMoney = entity.getStartLoanMoney();
+        if (startLoanMoney != null) {
+            stmt.bindString(17, startLoanMoney);
+        }
+ 
+        String endLoanMoney = entity.getEndLoanMoney();
+        if (endLoanMoney != null) {
+            stmt.bindString(18, endLoanMoney);
+        }
+ 
+        String interestRateDay = entity.getInterestRateDay();
+        if (interestRateDay != null) {
+            stmt.bindString(19, interestRateDay);
+        }
+ 
+        String successRate = entity.getSuccessRate();
+        if (successRate != null) {
+            stmt.bindString(20, successRate);
+        }
+ 
+        String securedLoan = entity.getSecuredLoan();
+        if (securedLoan != null) {
+            stmt.bindString(21, securedLoan);
+        }
+ 
+        String productCharacteristic = entity.getProductCharacteristic();
+        if (productCharacteristic != null) {
+            stmt.bindString(22, productCharacteristic);
+        }
+ 
+        String productAndroidUrl = entity.getProductAndroidUrl();
+        if (productAndroidUrl != null) {
+            stmt.bindString(23, productAndroidUrl);
+        }
+ 
+        String productIosUrl = entity.getProductIosUrl();
+        if (productIosUrl != null) {
+            stmt.bindString(24, productIosUrl);
+        }
+ 
+        String productH5Url = entity.getProductH5Url();
+        if (productH5Url != null) {
+            stmt.bindString(25, productH5Url);
+        }
+ 
+        String productImg = entity.getProductImg();
+        if (productImg != null) {
+            stmt.bindString(26, productImg);
+        }
+ 
+        String productIntroduce = entity.getProductIntroduce();
+        if (productIntroduce != null) {
+            stmt.bindString(27, productIntroduce);
+        }
+ 
+        String created = entity.getCreated();
+        if (created != null) {
+            stmt.bindString(28, created);
+        }
+ 
+        String updated = entity.getUpdated();
+        if (updated != null) {
+            stmt.bindString(29, updated);
+        }
+ 
+        String endLoanTime = entity.getEndLoanTime();
+        if (endLoanTime != null) {
+            stmt.bindString(30, endLoanTime);
+        }
+ 
+        String startLoanTime = entity.getStartLoanTime();
+        if (startLoanTime != null) {
+            stmt.bindString(31, startLoanTime);
+        }
     }
 
     @Override
@@ -159,6 +292,101 @@ public class DownloadRecordModelDao extends AbstractDao<DownloadRecordModel, Lon
             stmt.bindString(11, subContent);
         }
         stmt.bindLong(12, entity.getIsInstalled() ? 1L: 0L);
+ 
+        String packageName = entity.getPackageName();
+        if (packageName != null) {
+            stmt.bindString(13, packageName);
+        }
+ 
+        String advertiser = entity.getAdvertiser();
+        if (advertiser != null) {
+            stmt.bindString(14, advertiser);
+        }
+ 
+        String productName = entity.getProductName();
+        if (productName != null) {
+            stmt.bindString(15, productName);
+        }
+ 
+        String sortNumber = entity.getSortNumber();
+        if (sortNumber != null) {
+            stmt.bindString(16, sortNumber);
+        }
+ 
+        String startLoanMoney = entity.getStartLoanMoney();
+        if (startLoanMoney != null) {
+            stmt.bindString(17, startLoanMoney);
+        }
+ 
+        String endLoanMoney = entity.getEndLoanMoney();
+        if (endLoanMoney != null) {
+            stmt.bindString(18, endLoanMoney);
+        }
+ 
+        String interestRateDay = entity.getInterestRateDay();
+        if (interestRateDay != null) {
+            stmt.bindString(19, interestRateDay);
+        }
+ 
+        String successRate = entity.getSuccessRate();
+        if (successRate != null) {
+            stmt.bindString(20, successRate);
+        }
+ 
+        String securedLoan = entity.getSecuredLoan();
+        if (securedLoan != null) {
+            stmt.bindString(21, securedLoan);
+        }
+ 
+        String productCharacteristic = entity.getProductCharacteristic();
+        if (productCharacteristic != null) {
+            stmt.bindString(22, productCharacteristic);
+        }
+ 
+        String productAndroidUrl = entity.getProductAndroidUrl();
+        if (productAndroidUrl != null) {
+            stmt.bindString(23, productAndroidUrl);
+        }
+ 
+        String productIosUrl = entity.getProductIosUrl();
+        if (productIosUrl != null) {
+            stmt.bindString(24, productIosUrl);
+        }
+ 
+        String productH5Url = entity.getProductH5Url();
+        if (productH5Url != null) {
+            stmt.bindString(25, productH5Url);
+        }
+ 
+        String productImg = entity.getProductImg();
+        if (productImg != null) {
+            stmt.bindString(26, productImg);
+        }
+ 
+        String productIntroduce = entity.getProductIntroduce();
+        if (productIntroduce != null) {
+            stmt.bindString(27, productIntroduce);
+        }
+ 
+        String created = entity.getCreated();
+        if (created != null) {
+            stmt.bindString(28, created);
+        }
+ 
+        String updated = entity.getUpdated();
+        if (updated != null) {
+            stmt.bindString(29, updated);
+        }
+ 
+        String endLoanTime = entity.getEndLoanTime();
+        if (endLoanTime != null) {
+            stmt.bindString(30, endLoanTime);
+        }
+ 
+        String startLoanTime = entity.getStartLoanTime();
+        if (startLoanTime != null) {
+            stmt.bindString(31, startLoanTime);
+        }
     }
 
     @Override
@@ -180,7 +408,26 @@ public class DownloadRecordModelDao extends AbstractDao<DownloadRecordModel, Lon
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // pkgName
             cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // iconUrl
             cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // subContent
-            cursor.getShort(offset + 11) != 0 // isInstalled
+            cursor.getShort(offset + 11) != 0, // isInstalled
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // packageName
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // advertiser
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // productName
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // sortNumber
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // startLoanMoney
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // endLoanMoney
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // interestRateDay
+            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // successRate
+            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // securedLoan
+            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // productCharacteristic
+            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // productAndroidUrl
+            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // productIosUrl
+            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // productH5Url
+            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // productImg
+            cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26), // productIntroduce
+            cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27), // created
+            cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28), // updated
+            cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29), // endLoanTime
+            cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30) // startLoanTime
         );
         return entity;
     }
@@ -199,6 +446,25 @@ public class DownloadRecordModelDao extends AbstractDao<DownloadRecordModel, Lon
         entity.setIconUrl(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
         entity.setSubContent(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
         entity.setIsInstalled(cursor.getShort(offset + 11) != 0);
+        entity.setPackageName(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setAdvertiser(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setProductName(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setSortNumber(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setStartLoanMoney(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setEndLoanMoney(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setInterestRateDay(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
+        entity.setSuccessRate(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
+        entity.setSecuredLoan(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
+        entity.setProductCharacteristic(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
+        entity.setProductAndroidUrl(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
+        entity.setProductIosUrl(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
+        entity.setProductH5Url(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
+        entity.setProductImg(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
+        entity.setProductIntroduce(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
+        entity.setCreated(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
+        entity.setUpdated(cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28));
+        entity.setEndLoanTime(cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29));
+        entity.setStartLoanTime(cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30));
      }
     
     @Override

@@ -118,7 +118,7 @@ public class DownloadHelper {
         mDownloadProgressButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final DownloadRecordModel model = DownloadTaskManager.getInstance().addTask(mDownloadUrl, mDownloadPath, mFileName, position,mIconUrl,mPkg);
+                final DownloadRecordModel model = DownloadTaskManager.getInstance().addTask(mDownloadUrl, mDownloadPath, mFileName, position,mIconUrl,mPkg,null);
                 final int state = mDownloadProgressButton.getState();
                 PermissionUtil.requestPermissions((Activity) mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         .subscribe(new Consumer<Permission>() {

@@ -46,8 +46,6 @@ public class MineFragment extends BaseFragment {
     TextView mMineDownloaded;
     @BindView(R.id.mine_login_txt)
     TextView mMineLoginTxt;
-    @BindView(R.id.mine_login_out_txt)
-    TextView mMineLoginOutTxt;
     @BindView(R.id.mine_setting_txt)
     TextView mMineSetting;
     @BindView(R.id.current_version)
@@ -74,7 +72,6 @@ public class MineFragment extends BaseFragment {
                     .into(mUserLogo);
 
             mMineLoginTxt.setText(UserUtil.getPhoneNum());
-            mMineLoginOutTxt.setVisibility(View.VISIBLE);
 
         }
         mCurrentVersion.setText(
@@ -94,7 +91,7 @@ public class MineFragment extends BaseFragment {
         KLog.e("aragon","Mine");
     }
 
-    @OnClick({R.id.mine_default_user_logo, R.id.mine_login_txt, R.id.mine_login_out_txt,
+    @OnClick({R.id.mine_default_user_logo, R.id.mine_login_txt,
             R.id.mine_info_container, R.id.mine_read_container,
             R.id.mine_download_container, R.id.mine_setting_container})
     public void onViewClicked(View view) {
@@ -145,17 +142,6 @@ public class MineFragment extends BaseFragment {
                     ToastUtils.showToast(getString(R.string.not_found_new_version));
                 }
                 break;
-
-            case R.id.mine_login_out_txt:
-                UserUtil.exit();
-                GlideApp.with(mContext)
-                        .load(R.mipmap.ic_user_default)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .transform(new CircleCrop())
-                        .into(mUserLogo);
-                mMineLoginTxt.setText(getString(R.string.login_now));
-                mMineLoginOutTxt.setVisibility(View.GONE);
-                break;
         }
     }
 
@@ -184,17 +170,15 @@ public class MineFragment extends BaseFragment {
                                 .transform(new CircleCrop())
                                 .into(mUserLogo);
                         mMineLoginTxt.setText(UserUtil.getPhoneNum());
-                        mMineLoginOutTxt.setVisibility(View.VISIBLE);
                     }
                     break;
                 case EventItem.EXIT_SUCCESS:
                     mMineLoginTxt.setText(getString(R.string.login_now));
                     GlideApp.with(mContext)
-                            .load(R.mipmap.ic_user_default)
+                            .load(R.mipmap.ic_user_logo)
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .transform(new CircleCrop())
                             .into(mUserLogo);
-                    mMineLoginOutTxt.setVisibility(View.GONE);
                     break;
             }
         }

@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.hackhome.loans.LoanApplication;
 import com.hackhome.loans.bean.DownloadRecordModel;
+import com.hackhome.loans.bean.ReturnValueBean;
 import com.hackhome.loans.common.eventbus.EB;
 import com.hackhome.loans.common.eventbus.EventItem;
 import com.hackhome.loans.common.utils.AppUtils;
@@ -68,9 +69,6 @@ public class DownloadHelperT {
 
     }
 
-//    public static DownloadHelperBuilder builder() {
-//        return new DownloadHelperBuilder();
-//    }
 
     public static DownloadHelperT getInstance() {
         return HelperHolder.instance;
@@ -123,7 +121,7 @@ public class DownloadHelperT {
                 final DownloadRecordModel model = DownloadTaskManager
                         .getInstance()
                         .addTask(builder.mDownloadUrl, builder.mDownloadPath,
-                                builder.mFileName,0,builder.mIconUrl,builder.mPkg);
+                                builder.mFileName,0,builder.mIconUrl,builder.mPkg,builder.mReturnValueBean);
                 final int state = button.getState();
                 PermissionUtil.requestPermissions((Activity) builder.mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         .subscribe(new Consumer<Permission>() {
@@ -275,6 +273,7 @@ public class DownloadHelperT {
         private String mDownloadUrl;
         private String mDownloadPath;
         private String mIconUrl;
+        private ReturnValueBean mReturnValueBean;
 
         public DownloadHelperBuilder bindBtn(DownloadProgressButton btn) {
             this.mDownloadProgressButton = btn;
@@ -305,6 +304,11 @@ public class DownloadHelperT {
 
         public DownloadHelperBuilder pkg(String pkg) {
             this.mPkg = pkg;
+            return this;
+        }
+
+        public DownloadHelperBuilder bean(ReturnValueBean bean) {
+            this.mReturnValueBean = bean;
             return this;
         }
 

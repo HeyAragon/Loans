@@ -49,20 +49,20 @@ public class CommonAdapter extends BaseQuickAdapter<ReturnValueBean,BaseViewHold
         GlideApp.with(mContext)
                 .load(item.getProductImg())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .transform(new RoundedCorners(DensityUtil.dip2px(mContext, 8)))
+                .transform(new RoundedCorners(DensityUtil.dip2px(mContext,6)))
                 .into(icon);
 
-        SpannableStringBuilder maxLoanBuilder = new SpannableStringBuilder();
+//        SpannableStringBuilder maxLoanBuilder = new SpannableStringBuilder();
 
-        String maxLoan = FormatUtils.format(FormatUtils.MAX_LIMIT, item.getEndLoanMoney());
-        maxLoanBuilder
-                .append(maxLoan)
-                .setSpan(new ForegroundColorSpan(Color.BLUE),4,maxLoan.length()-1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+//        String maxLoan = FormatUtils.format(FormatUtils.MAX_LIMIT, item.getEndLoanMoney());
+//        maxLoanBuilder
+//                .append(maxLoan)
+//                .setSpan(new ForegroundColorSpan(Color.BLUE),4,maxLoan.length()-1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         helper.setText(R.id.base_item_name, item.getProductName());
-        helper.setText(R.id.base_item_loan_limit, maxLoanBuilder);
-        helper.setText(R.id.base_item_loan_interest, FormatUtils.format(FormatUtils.DAY_INTEREST,item.getInterestRateDay()));
+        helper.setText(R.id.base_item_loan_limit, item.getEndLoanMoney());
+        helper.setText(R.id.base_item_loan_interest, item.getInterestRateDay()+"%");
         helper.setText(R.id.base_item_loan_description, item.getProductCharacteristic());
-        helper.setText(R.id.base_item_loan_people_num, FormatUtils.format(FormatUtils.LOAN_PEOPLE_NUM, item.getSecuredLoan()));
+        helper.setText(R.id.base_item_loan_people_num, item.getSecuredLoan());
         helper.addOnClickListener(R.id.base_item_root);
         helper.setTag(R.id.base_item_root,item);
 

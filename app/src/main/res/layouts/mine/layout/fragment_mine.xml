@@ -53,13 +53,7 @@
 
     <RelativeLayout
         android:id="@+id/mine_info_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="16dp"
-        android:paddingLeft="8dp"
-        android:paddingBottom="16dp"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
+        style="@style/mine_rl_container"
         >
 
         <TextView
@@ -76,20 +70,14 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/md_brown_200"
+        android:background="@color/brown_line"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         />
 
     <RelativeLayout
         android:id="@+id/mine_read_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="16dp"
-        android:paddingLeft="8dp"
-        android:paddingBottom="16dp"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
+        style="@style/mine_rl_container"
         >
 
         <TextView
@@ -107,19 +95,16 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/md_brown_200"
+        android:background="@color/brown_line"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         />
 
+
+
     <RelativeLayout
         android:id="@+id/mine_download_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:paddingLeft="8dp"
-        android:paddingBottom="16dp"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
+        style="@style/mine_rl_container"
         >
 
         <TextView
@@ -132,23 +117,17 @@
             android:textColor="@color/bottom_tab_selected"
             />
     </RelativeLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/md_brown_200"
+        android:background="@color/brown_line"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         />
 
     <RelativeLayout
         android:id="@+id/mine_setting_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:paddingLeft="8dp"
-        android:paddingBottom="16dp"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
+        style="@style/mine_rl_container"
         >
 
         <TextView
@@ -177,23 +156,24 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/md_brown_200"
+        android:background="@color/brown_line"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         />
 
-    <TextView
-        android:id="@+id/mine_login_out_txt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="20dp"
-        android:background="@color/md_white_1000"
-        android:gravity="center"
-        android:padding="16dp"
-        android:text="@string/login_out"
-        android:textColor="@color/bottom_tab_selected"
-        android:visibility="gone"
-        />
+    <!--<TextView-->
+        <!--android:id="@+id/mine_login_out_txt"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginTop="40dp"-->
+        <!--android:background="@color/mine_status_bar_back"-->
+        <!--android:gravity="center"-->
+        <!--android:padding="16dp"-->
+        <!--android:text="@string/login_out"-->
+        <!--android:textColor="@color/bottom_tab_selected"-->
+        <!--android:visibility="gone"-->
+        <!--android:foreground="?attr/selectableItemBackgroundBorderless"-->
+        <!--/>-->
 
 </LinearLayout>

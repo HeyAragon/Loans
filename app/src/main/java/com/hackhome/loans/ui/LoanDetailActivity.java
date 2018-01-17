@@ -13,18 +13,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.hackhome.loans.R;
 import com.hackhome.loans.bean.ReturnValueBean;
-import com.hackhome.loans.common.download.DownloadHelper;
 import com.hackhome.loans.common.download.DownloadHelperT;
-import com.hackhome.loans.common.download.DownloadTaskManager;
 import com.hackhome.loans.common.imageloader.GlideApp;
 import com.hackhome.loans.common.utils.DensityUtil;
-import com.hackhome.loans.common.utils.FormatUtils;
 import com.hackhome.loans.common.utils.ShareUtil;
 import com.hackhome.loans.common.utils.StatusBarUtil;
 import com.hackhome.loans.dagger.component.ApplicationComponent;
@@ -33,15 +28,12 @@ import com.hackhome.loans.widget.DownloadProgressButton;
 import com.socks.library.KLog;
 
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.lang.ref.WeakReference;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class LoanDetailActivity extends BaseActivity {
 
@@ -88,18 +80,14 @@ public class LoanDetailActivity extends BaseActivity {
         Bundle bundle = getIntent().getExtras();
         mData = (ReturnValueBean) bundle.getSerializable("returnValue");
         if (mData != null) {
-//            DownloadHelper.builder().with(this).icon(mData.getProductImg()).bindBtn(mDownloadProgressButton)
-//                    .setFileName(mData.getProductName())
-//                    .setUrl(mData.getProductAndroidUrl())
-//                    .pkg(mData.getPackageName())
-//                    .build().addClickEvent(0);
             DownloadHelperT.DownloadHelperBuilder builder = new DownloadHelperT.DownloadHelperBuilder();
             builder.with(this)
                     .icon(mData.getProductImg())
                     .bindBtn(mDownloadProgressButton)
                     .setFileName(mData.getProductName())
                     .setUrl(mData.getProductAndroidUrl())
-                    .pkg(mData.getPackageName());
+                    .pkg(mData.getPackageName())
+                    .bean(mData);
             DownloadHelperT.getInstance().prePareDownload(builder);
         }
     }
@@ -109,7 +97,7 @@ public class LoanDetailActivity extends BaseActivity {
         mToolbar.setVisibility(View.VISIBLE);
         mBack.setVisibility(View.VISIBLE);
         mShare.setVisibility(View.VISIBLE);
-        StatusBarUtil.setColor(this,getResources().getColor(R.color.md_deep_orange_500),0);
+        StatusBarUtil.setColor(this,getResources().getColor(R.color.base_back),0);
         if (mData != null) {
             mTitle.setText(mData.getProductName());
 
@@ -122,20 +110,15 @@ public class LoanDetailActivity extends BaseActivity {
             mAppName.setText(mData.getProductName());
             mAppDesc.setText(mData.getProductCharacteristic());
 
-            String loanRangeMoneyStr = FormatUtils.format(FormatUtils.LOAN_RANGE, mData.getStartLoanMoney(), mData.getEndLoanMoney());
-            mLoanLimit.setText(getSpan(loanRangeMoneyStr, 5, loanRangeMoneyStr.length() - 1));
+            mLoanLimit.setText(mData.getStartLoanMoney()+"-"+ mData.getEndLoanMoney());
 
-            String loanRangeTimeStr = FormatUtils.format(FormatUtils.TIME_RANGE, mData.getStartLoanTime(), mData.getEndLoanTime());
-            mLoanTimeLimit.setText(getSpan(loanRangeTimeStr, 5, 9));
+            mLoanTimeLimit.setText(mData.getStartLoanTime()+"-"+ mData.getEndLoanTime());
 
-            String successRateStr = FormatUtils.format(FormatUtils.SUCCESS_RATE, mData.getSuccessRate());
-            mSuccessRate.setText(getSpan(successRateStr, 4, successRateStr.length() - 1));
+            mSuccessRate.setText(mData.getSuccessRate()+"%");
 
-            String loanPeopleNumStr = FormatUtils.format(FormatUtils.LOAN_PEOPLE_COUNT, mData.getSecuredLoan());
-            mLoanPeopleNum.setText(getSpan(loanPeopleNumStr, 4, loanPeopleNumStr.length() - 1));
+            mLoanPeopleNum.setText(mData.getSecuredLoan());
 
-            String loanDayInterest = FormatUtils.format(FormatUtils.DAY_INTEREST, mData.getInterestRateDay());
-            mLoanInterest.setText(getSpan(loanDayInterest, 6, loanDayInterest.length() - 1));
+            mLoanInterest.setText(mData.getInterestRateDay()+"%");
 
             mAppIntro.setText(mData.getProductIntroduce());
 

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.hackhome.loans.ui.mine.DownloadActivity"
     android:orientation="vertical"
+    android:background="@color/base_back"
     >
     <include layout="@layout/simple_toolbar_layout"/>
 

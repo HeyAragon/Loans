@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity{
     protected Toolbar mToolbar;
     @BindView(R.id.main_container)
     FrameLayout mContainer;
-    @BindView(R.id.main_bottom_tab)
+    @BindView(R.id.main_bottom_bar)
     CustomBottomNavigationView mBottomNavigationView;
     private long exitAppLastClickTime;
 //    @BindView(R.id.main_toolbar)
@@ -82,7 +82,6 @@ public class MainActivity extends BaseActivity{
     }
 
     public void initListener() {
-
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -94,6 +93,7 @@ public class MainActivity extends BaseActivity{
 //                        if (!item.isChecked()) {
                             mToolbar.setVisibility(View.GONE);
 //                        }
+//                        mBottomNavigationView.getBottomNavigationItemView(0).setIcon(getResources().getDrawable(R.drawable.ic_home_selected));
                         StatusBarUtil.setTranslucentForImageView(MainActivity.this,0,mToolbar);
                         item.setChecked(true);
                         break;
@@ -102,6 +102,7 @@ public class MainActivity extends BaseActivity{
                         if (!item.isChecked()) {
                             mToolbar.setVisibility(View.VISIBLE);
                         }
+//                        mBottomNavigationView.getBottomNavigationItemView(0).setIcon(getResources().getDrawable(R.drawable.ic_home_selected));
                         StatusBarUtil.setColor(MainActivity.this,getResources().getColor(R.color.base_back),0);
                         item.setChecked(true);
                         break;
@@ -112,6 +113,7 @@ public class MainActivity extends BaseActivity{
 //                            StatusBarUtil.setColor(MainActivity.this,getResources().getColor(R.color.mine_status_bar_back),0);
                             StatusBarUtil.setTranslucentForImageView(MainActivity.this,0,mToolbar);
                         }
+//                        mBottomNavigationView.getBottomNavigationItemView(0).setIcon(getResources().getDrawable(R.drawable.ic_home_selected));
                         item.setChecked(true);
                         break;
                     default:

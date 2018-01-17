@@ -40,17 +40,16 @@ public class CardViewItemDecoration extends RecyclerView.ItemDecoration {
         if (mSkipPos0) {
             if (parent.getLayoutManager().getPosition(view) != 0) {
                 if (layoutOrientation == LinearLayoutManager.VERTICAL) {
-                    outRect.top = 10;
+                    outRect.top = 28;
                     outRect.left = 15;
                     outRect.right = 15;
-                    outRect.bottom = 10;
                 } else if (layoutOrientation == LinearLayoutManager.HORIZONTAL) {
                     outRect.left = 5;
                 }
             }
         } else {
             if (layoutOrientation == LinearLayoutManager.VERTICAL) {
-                outRect.top = 20;
+                outRect.top = 28;
                 outRect.left = 15;
                 outRect.right = 15;
             } else if (layoutOrientation == LinearLayoutManager.HORIZONTAL) {

@@ -23,14 +23,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="18dp"
         >
 
         <TextView
             android:id="@+id/prompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="热门推荐"
+            android:text="万能钱咖榜"
             android:textSize="17sp"
             android:textColor="@color/bottom_tab_selected"
             android:layout_centerHorizontal="true"
@@ -43,7 +43,7 @@
             android:src="@drawable/mony_left"
             android:layout_toLeftOf="@id/prompt"
             android:layout_centerVertical="true"
-
+            android:layout_marginRight="2dp"
             />
         <ImageView
             android:id="@+id/right_line"
@@ -52,6 +52,7 @@
             android:src="@drawable/mony_right"
             android:layout_toRightOf="@id/prompt"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
             />
     </RelativeLayout>
 
