@@ -28,13 +28,14 @@
     <string name="find_new_version">检测到新版本！</string>
     <string name="not_found_new_version">当前应用为最新版本</string>
     <string name="current_version">(当前版本:%s)</string>
-    <string name="update">更新</string>
     <string name="paused">已暂停</string>
     <string name="pause">暂停</string>
     <string name="waiting">等待</string>
     <string name="delete">删除</string>
     <string name="continue_">继续</string>
     <string name="cancel">取消</string>
+    <string name="update_confirm">确认更新</string>
+    <string name="update_cancel">暂不更新</string>
     <string name="my_downloaded">我的下载</string>
     <string name="download">下载</string>
     <string name="install">安装</string>
@@ -111,7 +112,7 @@
 
 
     <string name="app_name">万能钱咖</string>
-    <string name="new_version">发现新版本</string>
+    <string name="new_version">哇、安全升级啦</string>
     <string name="error_txt">点击重新加载</string>
     <string name="empty_txt">暂无数据</string>
     <string name="empty_no_download">暂无下载任务</string>

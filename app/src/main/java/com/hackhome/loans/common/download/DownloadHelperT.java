@@ -6,13 +6,18 @@ import android.content.Context;
 import android.util.SparseArray;
 import android.view.View;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.hackhome.loans.LoanApplication;
+import com.hackhome.loans.R;
 import com.hackhome.loans.bean.DownloadRecordModel;
 import com.hackhome.loans.bean.ReturnValueBean;
 import com.hackhome.loans.common.eventbus.EB;
 import com.hackhome.loans.common.eventbus.EventItem;
 import com.hackhome.loans.common.utils.AppUtils;
+import com.hackhome.loans.common.utils.NetworkUtils;
 import com.hackhome.loans.common.utils.PermissionUtil;
+import com.hackhome.loans.common.utils.ToastUtils;
 import com.hackhome.loans.greendao.DaoSession;
 import com.hackhome.loans.widget.DownloadProgressButton;
 import com.liulishuo.filedownloader.BaseDownloadTask;
@@ -27,6 +32,10 @@ import com.tbruyelle.rxpermissions2.Permission;
 import java.io.File;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -37,7 +46,7 @@ import io.reactivex.functions.Consumer;
 public class DownloadHelperT {
     //进度刷新间隔
     public static final int PROGRESS_REFRESH_TIME = 500;
-    private static final String DOWNLOAD_ROOT_PATH = FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "wnqk" + File.separator+"download"+File.separator;
+    private static final String DOWNLOAD_ROOT_PATH = FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "wnqk" + File.separator + "download" + File.separator;
     private final DaoSession mDaoSession;
     private final List<DownloadRecordModel> mDownloadRecordModelList;
 
@@ -63,7 +72,7 @@ public class DownloadHelperT {
                         .setFileName(model.getName())
                         .setUrl(model.getUrl())
                         .pkg(model.getPkgName());
-                mBuilderMap.put(model.getTaskId(),builder);
+                mBuilderMap.put(model.getTaskId(), builder);
             }
         }
 
@@ -76,9 +85,9 @@ public class DownloadHelperT {
 
     public void prePareDownload(DownloadHelperBuilder builder) {
         int taskId = FileDownloadUtils.generateId(builder.mDownloadUrl, builder.mDownloadPath);
-        mBuilderMap.put(taskId,builder);
+        mBuilderMap.put(taskId, builder);
         if (builder.mDownloadProgressButton != null) {
-            initButton(builder.mDownloadProgressButton,taskId,builder);
+            initButton(builder.mDownloadProgressButton, taskId, builder);
         }
     }
 
@@ -90,13 +99,14 @@ public class DownloadHelperT {
                     status == FileDownloadStatus.connected) {
                 button.setState(DownloadProgressButton.STATE_DOWNLOADING);
                 button.setCurrentText("waiting");
-            } else if (!new File( builder.mDownloadPath).exists() &&
-                    !new File(FileDownloadUtils.getTempPath( builder.mDownloadPath)).exists()) {
+            } else if (!new File(builder.mDownloadPath).exists()
+                    /* &&!new File(FileDownloadUtils.getTempPath( builder.mDownloadPath)).exists()*/
+                    ) {
                 button.setState(DownloadProgressButton.STATE_NORMAL);
                 button.setCurrentText("下载");
             } else if (status == FileDownloadStatus.completed) {
                 button.setState(DownloadProgressButton.STATE_FINISH);
-                if (!AppUtils.isInstallApp( builder.mPkg)) {
+                if (!AppUtils.isInstallApp(builder.mPkg)) {
                     button.setCurrentText("安装");
                 } else {
                     button.setCurrentText("打开");
@@ -115,43 +125,52 @@ public class DownloadHelperT {
             }
         }
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final DownloadRecordModel model = DownloadTaskManager
-                        .getInstance()
-                        .addTask(builder.mDownloadUrl, builder.mDownloadPath,
-                                builder.mFileName,0,builder.mIconUrl,builder.mPkg,builder.mReturnValueBean);
-                final int state = button.getState();
-                PermissionUtil.requestPermissions((Activity) builder.mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        .subscribe(new Consumer<Permission>() {
-                            @Override
-                            public void accept(Permission permission) throws Exception {
-                                if (permission.granted) {
-                                    switch (state) {
-                                        case DownloadProgressButton.STATE_NORMAL:
-                                            button.updateButtonId(model.getTaskId());
-                                            start(builder);
-                                            break;
-                                        case DownloadProgressButton.STATE_DOWNLOADING:
-                                            FileDownloader.getImpl().pause(model.getTaskId());
-                                            break;
-                                        case DownloadProgressButton.STATE_PAUSE:
-                                            start(builder);
-                                            break;
 
-                                        case DownloadProgressButton.STATE_FINISH:
-                                            AppUtils.installApp(builder.mDownloadPath, AppUtils.AUTHORITIES);
-                                            break;
-                                        case DownloadProgressButton.STATE_INSTALLED:
-                                            AppUtils.launchApp(builder.mPkg);
-                                            break;
+        button.setOnClickListener(v -> {
+
+            final DownloadRecordModel model = DownloadTaskManager
+                    .getInstance()
+                    .addTask(builder.mDownloadUrl, builder.mDownloadPath,
+                            builder.mFileName, 0, builder.mIconUrl, builder.mPkg, builder.mReturnValueBean);
+            final int state = button.getState();
+            PermissionUtil.requestPermissions((Activity) builder.mContext,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .subscribe(permission -> {
+                        if (permission.granted) {
+                            switch (state) {
+                                case DownloadProgressButton.STATE_NORMAL:
+                                    button.updateButtonId(model.getTaskId());
+                                    if (NetworkUtils.isWifiConnected()) {
+                                        start(builder);
+                                    } else if (NetworkUtils.getDataEnabled()) {
+                                        new MaterialDialog.Builder(builder.mContext)
+                                                .content("当前未连接wifi,是否使用移动网络下载？")
+                                                .backgroundColor(builder.mContext.getResources().getColor(R.color.base_back))
+                                                .negativeText("取消").negativeColor(builder.mContext.getResources().getColor(R.color.bottom_tab_normal))
+                                                .positiveText("下载").positiveColor(builder.mContext.getResources().getColor(R.color.bottom_tab_selected))
+                                                .onPositive((dialog, which) -> start(builder)).build().show();
+
+                                    } else {
+                                       ToastUtils.showToast("当前未连接网络！");
                                     }
-                                }
-                            }
-                        });
+                                    break;
+                                case DownloadProgressButton.STATE_DOWNLOADING:
+                                    FileDownloader.getImpl().pause(model.getTaskId());
+                                    break;
+                                case DownloadProgressButton.STATE_PAUSE:
+                                    start(builder);
+                                    break;
 
-            }
+                                case DownloadProgressButton.STATE_FINISH:
+                                    AppUtils.installApp(builder.mDownloadPath, AppUtils.AUTHORITIES);
+                                    break;
+                                case DownloadProgressButton.STATE_INSTALLED:
+                                    AppUtils.launchApp(builder.mPkg);
+                                    break;
+                            }
+                        }
+                    });
+
         });
     }
 
@@ -162,11 +181,11 @@ public class DownloadHelperT {
                 .setTag(builder.mDownloadProgressButton)
                 .setListener(mSampleFileDownloadListener);
         baseDownloadTask.start();
-        mTaskMap.put(baseDownloadTask.getId(),baseDownloadTask);
+        mTaskMap.put(baseDownloadTask.getId(), baseDownloadTask);
         return baseDownloadTask;
     }
 
-    private FileDownloadListener mSampleFileDownloadListener = new  FileDownloadSampleListener() {
+    private FileDownloadListener mSampleFileDownloadListener = new FileDownloadSampleListener() {
 
         public DownloadProgressButton checkCurrentBtn(BaseDownloadTask task) {
 //            DownloadProgressButton downloadProgressButton = (DownloadProgressButton) task.getTag();
@@ -177,11 +196,11 @@ public class DownloadHelperT {
             DownloadProgressButton downloadProgressButton = mBuilderMap.get(task.getId()).mDownloadProgressButton;
             long currentTime = System.currentTimeMillis();
             if (currentTime - lastRefreshTime > 1000) {
-                KLog.e("aragon","status:"+task.getStatus()+"------"+ mBuilderMap.get(task.getId()).mFileName);
-                EB.getInstance().send(EventItem.DOWNLOAD_OBJECT,0);
+                KLog.e("aragon", "status:" + task.getStatus() + "------" + mBuilderMap.get(task.getId()).mFileName);
+                EB.getInstance().send(EventItem.DOWNLOAD_OBJECT, 0);
                 lastRefreshTime = currentTime;
             } else if (task.getStatus() == FileDownloadStatus.completed) {
-                EB.getInstance().send(EventItem.DOWNLOAD_OBJECT,0,"status:"+task.getStatus());
+                EB.getInstance().send(EventItem.DOWNLOAD_OBJECT, 0, "status:" + task.getStatus());
             }
 
             if (downloadProgressButton == null) {
@@ -208,7 +227,7 @@ public class DownloadHelperT {
                 return;
             }
             downloadProgressButton.setState(DownloadProgressButton.STATE_DOWNLOADING);
-            float percent = soFarBytes /(float) totalBytes;
+            float percent = soFarBytes / (float) totalBytes;
             downloadProgressButton.setProgressText("", percent);
         }
 
@@ -255,17 +274,20 @@ public class DownloadHelperT {
     public SparseArray<BaseDownloadTask> getTasks() {
         return mTaskMap;
     }
-    public BaseDownloadTask getTaskById(int id ) {
+
+    public BaseDownloadTask getTaskById(int id) {
         return mTaskMap.get(id);
     }
+
     public SparseArray<DownloadHelperBuilder> getBuilders() {
         return mBuilderMap;
     }
-    public DownloadHelperBuilder getBuilderById(int id ) {
+
+    public DownloadHelperBuilder getBuilderById(int id) {
         return mBuilderMap.get(id);
     }
 
-    public static class DownloadHelperBuilder{
+    public static class DownloadHelperBuilder {
         private DownloadProgressButton mDownloadProgressButton;
         private Context mContext;
         private String mPkg;

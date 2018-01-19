@@ -29,34 +29,16 @@ public class UserInfoPresenter extends BasePresenter<IUserInfoContract.IUserInfo
     public void changeNickOrGenderOrPassword(Map<String, String> map,String apiType ,final int responseType) {
         mModel.changeSexOrNick(apiType, map)
                 .compose(RxSchedulers.<ResponseBean>applySchedulers())
-                .subscribe(new Consumer<ResponseBean>() {
-                    @Override
-                    public void accept(ResponseBean responseBean) throws Exception {
-                        mView.showResponse(responseBean, responseType);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        mView.showResponse(throwable.getMessage(),responseType);
-                    }
-                });
+                .subscribe(responseBean -> mView.showResponse(responseBean, responseType), throwable -> mView.showResponse(throwable.getMessage(),responseType));
 
     }
 
     public void uploadPic(String apiType,Map<String, String> map, MultipartBody.Part filePart,
                           final int responseType) {
         mModel.uploadPic(apiType, map, filePart)
-                .compose(RxSchedulers.<ResponseBean>applySchedulers())
-                .subscribe(new Consumer<ResponseBean>() {
-                    @Override
-                    public void accept(ResponseBean responseBean) throws Exception {
-                        mView.showResponse(responseBean,responseType);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
+                .compose(RxSchedulers.applySchedulers())
+                .subscribe(responseBean -> mView.showResponse(responseBean,responseType), throwable -> {
 
-                    }
                 });
 
     }

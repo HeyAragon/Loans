@@ -162,12 +162,33 @@
     <style name="mine_rl_container">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingRight">12dp</item>
-        <item name="android:paddingLeft">12dp</item>
-        <item name="android:paddingBottom">16dp</item>
-        <item name="android:paddingTop">16dp</item>
         <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:layout_marginRight">12dp</item>
+        <item name="android:layout_marginLeft">12dp</item>
     </style>
 
+    <style name="mine_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorTxtTitle</item>
+        <item name="android:textSize">16sp</item>
 
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingTop">18dp</item>
+        <item name="android:drawablePadding">6dp</item>
+
+    </style>
+
+    <style name="bottom_bar_tab">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="textColorNormal">@color/bottom_tab_normal</item>
+        <item name="textColorSelected">@color/bottom_tab_selected</item>
+        <item name="itemTextSize">12sp</item>
+        <item name="itemMarginTop">4dp</item>
+        <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
+        <!--<item name="openTouchBg">true</item>-->
+        <!--<item name="touchDrawable">@drawable/selector_bottom_tab_color</item>-->
+    </style>
 </resources>

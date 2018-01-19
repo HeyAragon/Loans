@@ -142,15 +142,12 @@ public class HomeFragment extends BaseRefreshFragment<HomePresenter> implements 
         }
         mBanner.setLayoutParams(layoutParams);
         mBanner.setIndicatorVisible(true);
-        mBanner.setBannerPageClickListener(new MZBannerView.BannerPageClickListener() {
-            @Override
-            public void onPageClick(View view, int position) {
-                Intent intent = new Intent(mContext, WebActivity.class);
-                intent.putExtra("url", banners.get(position).getLinkeUrl());
-                intent.putExtra("name", banners.get(position).getBannerName());
-                startActivity(intent);
+        mBanner.setBannerPageClickListener((view, position) -> {
+            Intent intent = new Intent(mContext, WebActivity.class);
+            intent.putExtra("url", banners.get(position).getLinkeUrl());
+            intent.putExtra("name", banners.get(position).getBannerName());
+            startActivity(intent);
 
-            }
         });
         mBanner.setPages(banners, new MZHolderCreator<BannerViewHolder>() {
             @Override

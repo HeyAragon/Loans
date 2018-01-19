@@ -115,6 +115,7 @@ public class DownloadTaskManager {
         bean.setProductName(returnValueBean.getProductName());
         bean.setEndLoanTime(returnValueBean.getEndLoanTime());
         bean.setStartLoanTime(returnValueBean.getStartLoanTime());
+        bean.setSuccessRate(returnValueBean.getSuccessRate());
     }
 
     public DownloadRecordModel getModelById(int id) {

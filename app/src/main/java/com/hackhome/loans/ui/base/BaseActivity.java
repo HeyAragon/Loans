@@ -1,5 +1,6 @@
 package com.hackhome.loans.ui.base;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import com.hackhome.loans.LoanApplication;
 import com.hackhome.loans.R;
 import com.hackhome.loans.common.download.DownloadTaskManager;
 import com.hackhome.loans.common.eventbus.EventItem;
+import com.hackhome.loans.common.utils.DensityUtil;
 import com.hackhome.loans.common.utils.ToastUtils;
 import com.hackhome.loans.ui.mine.DownloadActivity;
 import com.socks.library.KLog;
@@ -108,12 +110,7 @@ public  abstract class BaseActivity<T extends BasePresenter> extends AppCompatAc
     @Override
     public void showError(String error) {
         mStateView.showRetry();
-        mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
-            @Override
-            public void onRetryClick() {
-                onRetry();
-            }
-        });
+        mStateView.setOnRetryClickListener(() -> onRetry());
     }
 
     public void showEmpty(int type) {
@@ -135,6 +132,11 @@ public  abstract class BaseActivity<T extends BasePresenter> extends AppCompatAc
 
     private void initStateView() {
         mStateView = StateView.inject(this,true);
+        if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.KITKAT&&
+                Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) mStateView.getLayoutParams();
+            layoutParams.topMargin = mStateView.getActionBarHeight()+DensityUtil.getStatusBarHeight(this);
+        }
         mStateView.setLoadingResource(R.layout.loading_layout);
         mStateView.setRetryResource(R.layout.error_layout);
         mStateView.setEmptyResource(R.layout.empty_layout);

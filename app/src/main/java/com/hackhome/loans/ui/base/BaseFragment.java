@@ -122,12 +122,7 @@ public abstract class BaseFragment extends LazyLoadFragment implements IBase,IBa
     public void showError(String error) {
         mStateView.showContent();
         mStateView.showRetry();
-        mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
-            @Override
-            public void onRetryClick() {
-                onRetry();
-            }
-        });
+        mStateView.setOnRetryClickListener(() -> onRetry());
     }
 
     public View getRootView() {

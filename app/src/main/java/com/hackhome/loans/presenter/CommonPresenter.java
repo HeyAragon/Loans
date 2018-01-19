@@ -36,38 +36,22 @@ public class CommonPresenter {
         mView = view;
     }
 
-    public void getAuthCode(String apiType,String name) {
+    public void getAuthCode(String apiType, String name) {
         mModel.getAuthCodeRelated(ApiConstants.TYPE_REGISTER_GET_AUTH_CODE, name)
-                .compose(RxSchedulers.<ResponseBean>applySchedulers())
-                .subscribe(new Consumer<ResponseBean>() {
-                    @Override
-                    public void accept(ResponseBean responseBean) throws Exception {
-                        mView.showResponse(responseBean, Constants.ResponseType.TYPE_GET_AUTH_CODE);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
+                .compose(RxSchedulers.applySchedulers())
+                .subscribe(responseBean ->
+                        mView.showResponse(responseBean, Constants.ResponseType.TYPE_GET_AUTH_CODE), throwable -> {
 
-                    }
                 });
     }
 
     public void findPassword(String name, String code, String pass1, String pass2, final int responseType) {
-        mModel.findPassword(ApiConstants.TYPE_FIND_USER_PASSWORD,name,code,pass1,pass2 )
-                .compose(RxSchedulers.<ResponseBean>applySchedulers())
-                .subscribe(new Consumer<ResponseBean>() {
-                    @Override
-                    public void accept(ResponseBean responseBean) throws Exception {
-                        mView.showResponse(responseBean,responseType);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
+        mModel.findPassword(ApiConstants.TYPE_FIND_USER_PASSWORD, name, code, pass1, pass2)
+                .compose(RxSchedulers.applySchedulers())
+                .subscribe(responseBean -> mView.showResponse(responseBean, responseType), throwable -> {
 
-                    }
                 });
     }
-
 
 
 }

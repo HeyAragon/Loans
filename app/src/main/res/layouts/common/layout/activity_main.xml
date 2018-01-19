@@ -10,25 +10,67 @@
         android:id="@+id/simple_toolbar"
         layout="@layout/simple_toolbar_layout"/>
 
-    <FrameLayout
-        android:id="@+id/main_container"
+    <com.hackhome.loans.widget.NoScrollViewPager
+        android:id="@+id/vp_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/simple_toolbar"
-        android:layout_above="@+id/main_bottom_tab"
-        >
-    </FrameLayout>
-
-    <com.hackhome.loans.widget.CustomBottomNavigationView
-        android:id="@+id/main_bottom_bar"
+       />
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0.2dp"
+        android:background="#CBAB9A"
+        android:layout_above="@+id/main_bottom_bar"
+        />
+    <com.hackhome.loans.widget.bottombar.CustomBottomBarLayout
+        android:id="@id/main_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/bottom_tab_back"
-        app:itemTextColor="@color/selector_bottom_tab_color"
-        app:menu="@menu/bottom_navigation_tab"
+        android:layout_gravity="center"
+        android:background="@color/base_back"
+        android:orientation="horizontal"
         >
 
+        <com.hackhome.loans.widget.bottombar.BottomBarItem
+            android:id="@+id/main_bottom_tab_home"
+            style="@style/bottom_bar_tab"
+            app:iconNormal="@drawable/ic_home_normal"
+            app:iconSelected="@drawable/ic_home_selected"
+            app:itemText="@string/tab_home_str"
 
-    </com.hackhome.loans.widget.CustomBottomNavigationView>
+            />
+
+        <com.hackhome.loans.widget.bottombar.BottomBarItem
+            android:id="@+id/main_bottom_tab_loan"
+            style="@style/bottom_bar_tab"
+            app:iconNormal="@drawable/ic_loan_normal"
+            app:iconSelected="@drawable/ic_loan_selected"
+            app:itemText="@string/tab_loan_str"
+
+            />
+
+        <com.hackhome.loans.widget.bottombar.BottomBarItem
+            android:id="@+id/main_bottom_tab_mine"
+            style="@style/bottom_bar_tab"
+            app:iconNormal="@drawable/ic_mine_normal"
+            app:iconSelected="@drawable/ic_mine_selected"
+            app:itemText="@string/tab_mine_str"
+
+            />
+
+    </com.hackhome.loans.widget.bottombar.CustomBottomBarLayout>
+    <!--<com.hackhome.loans.widget.CustomBottomNavigationView-->
+    <!--android:id="@+id/main_bottom_bar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:background="@color/bottom_tab_back"-->
+    <!--app:itemTextColor="@color/selector_bottom_tab_color"-->
+    <!--app:menu="@menu/bottom_navigation_tab"-->
+    <!--&gt;-->
+
+
+    <!--</com.hackhome.loans.widget.CustomBottomNavigationView>-->
+
 </RelativeLayout>

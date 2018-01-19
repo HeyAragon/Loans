@@ -68,7 +68,7 @@ public class WebActivity extends BaseActivity {
 
         mToolbar.setVisibility(View.VISIBLE);
         mBack.setVisibility(View.VISIBLE);
-        StatusBarUtil.setColor(this,getResources().getColor(R.color.md_deep_orange_500),1);
+        StatusBarUtil.setColor(this,getResources().getColor(R.color.base_back),0);
         getSetting(mWebView);
         mWebView.setWebChromeClient(new WebChromeClient(){
             @Override

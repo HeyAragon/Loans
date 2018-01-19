@@ -145,8 +145,7 @@ public class BottomBarItem extends LinearLayout {
 
         mTextView.setTextColor(mTextColorNormal);//设置底部文字字体颜色
         mTextView.setText(mText);//设置标签文字
-
-        FrameLayout.LayoutParams textLayoutParams = (FrameLayout.LayoutParams) mTextView.getLayoutParams();
+        LayoutParams textLayoutParams = (LayoutParams) mTextView.getLayoutParams();
         textLayoutParams.topMargin = mMarginTop;
         mTextView.setLayoutParams(textLayoutParams);
 

@@ -5,7 +5,9 @@
     <item android:id="@android:id/background">
         <shape>
             <corners
-                android:radius="2dp" />
+                android:radius="2dp"
+
+                />
 
             <gradient
                 android:angle="270"
@@ -14,13 +16,14 @@
                 android:startColor="@color/base_back" />
         </shape>
     </item>
+
     <item android:id="@android:id/progress">
         <clip>
             <shape>
-
+                <corners android:radius="2dp"/>
                 <gradient
                     android:startColor="@color/base_back"
-                    android:endColor="@color/bottom_tab_selected"
+                    android:endColor="@color/bottom_tab_normal"
                     android:centerColor="@color/bottom_tab_normal" />
             </shape>
         </clip>

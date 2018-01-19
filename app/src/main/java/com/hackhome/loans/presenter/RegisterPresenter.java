@@ -29,13 +29,8 @@ public class RegisterPresenter extends BasePresenter<IRegisterContract.IRegister
      */
     public void getAuthCode(String name) {
         mModel.getAuthCodeRelated(ApiConstants.TYPE_REGISTER_GET_AUTH_CODE, name)
-                .compose(RxSchedulers.<ResponseBean>applySchedulers())
-                .subscribe(new Consumer<ResponseBean>() {
-                    @Override
-                    public void accept(ResponseBean responseBean) throws Exception {
-                        mView.showResponse(responseBean,ApiConstants.TYPE_REGISTER_GET_AUTH_CODE);
-                    }
-                }, new Consumer<Throwable>() {
+                .compose(RxSchedulers.applySchedulers())
+                .subscribe(responseBean -> mView.showResponse(responseBean,ApiConstants.TYPE_REGISTER_GET_AUTH_CODE), new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
 
@@ -48,17 +43,9 @@ public class RegisterPresenter extends BasePresenter<IRegisterContract.IRegister
      */
     public void register(String name, String code, String pass1, String pass2) {
         mModel.register(ApiConstants.TYPE_REGISTER,name,code,pass1,pass2 )
-                .compose(RxSchedulers.<ResponseBean>applySchedulers())
-                .subscribe(new Consumer<ResponseBean>() {
-                    @Override
-                    public void accept(ResponseBean responseBean) throws Exception {
-                        mView.showResponse(responseBean,ApiConstants.TYPE_REGISTER);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
+                .compose(RxSchedulers.applySchedulers())
+                .subscribe(responseBean -> mView.showResponse(responseBean,ApiConstants.TYPE_REGISTER), throwable -> {
 
-                    }
                 });
     }
 }

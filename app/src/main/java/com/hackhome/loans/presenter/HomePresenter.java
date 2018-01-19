@@ -31,7 +31,7 @@ public class HomePresenter extends BasePresenter<IHomeContract.IHomeModel,IHomeC
     public void getHomeData(String type, int sort, final int page,int ob,int loadType) {
 
         mModel.getHomeData(type,sort,page,ob)
-                .compose(RxSchedulers.<DataBean>applySchedulers())
+                .compose(RxSchedulers.applySchedulers())
 
                 .subscribe(new ProgressSubscriber<DataBean>(mContext,mView,loadType) {
                     @Override

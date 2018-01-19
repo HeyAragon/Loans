@@ -237,9 +237,9 @@ public class UserInfoActivity extends BaseActivity<UserInfoPresenter> implements
             case R.id.ll_user_nick:
                 new MaterialDialog.Builder(this)
                         .title(getString(R.string.change_nick))
-                        .widgetColor(getResources().getColor(R.color.md_deep_orange_500))
-                        .positiveText(getString(R.string.confirm)).positiveColor(getResources().getColor(R.color.black))
-                        .negativeText(getString(R.string.cancel)).negativeColor(getResources().getColor(R.color.md_blue_grey_200))
+                        .widgetColor(getResources().getColor(R.color.login_register_sub_hint))
+                        .positiveText(getString(R.string.confirm)).positiveColor(getResources().getColor(R.color.bottom_tab_selected))
+                        .negativeText(getString(R.string.cancel)).negativeColor(getResources().getColor(R.color.bottom_tab_normal))
                         .input(getString(R.string.nick_hint), getString(R.string.default_nick), false, new MaterialDialog.InputCallback() {
                             @Override
                             public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
@@ -255,10 +255,10 @@ public class UserInfoActivity extends BaseActivity<UserInfoPresenter> implements
                 new MaterialDialog.Builder(this)
                         .title(getString(R.string.choice_gender))
                         .items((CharSequence[]) genders)
-                        .widgetColor(getResources().getColor(R.color.md_deep_orange_500))
+                        .widgetColor(getResources().getColor(R.color.login_register_sub_hint))
                         .itemsColor(getResources().getColor(R.color.colorTxtTitle))
-                        .negativeText("取消").negativeColor(getResources().getColor(R.color.md_blue_grey_200))
-                        .positiveText("确定").positiveColor(getResources().getColor(R.color.colorTxtTitle))
+                        .negativeText("取消").negativeColor(getResources().getColor(R.color.bottom_tab_normal))
+                        .positiveText("确定").positiveColor(getResources().getColor(R.color.bottom_tab_selected))
                         .itemsCallbackSingleChoice(0, new MaterialDialog.ListCallbackSingleChoice() {
                             @Override
                             public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {

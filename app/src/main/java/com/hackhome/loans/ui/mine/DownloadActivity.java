@@ -95,13 +95,11 @@ public class DownloadActivity extends BaseActivity {
     }
 
     private void initListener() {
-        mDownloadAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(final BaseQuickAdapter adapter, View view, final int position) {
-                int id = view.getId();
+        mDownloadAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            int id = view.getId();
 
-                final DownloadRecordModel recordModel = mDownloadRecordModelList.get(position);
-                switch (id) {
+            final DownloadRecordModel recordModel = mDownloadRecordModelList.get(position);
+            switch (id) {
 //                    case R.id.download_item_download_btn:
 //                        if (!TextUtils.isEmpty(tag)) {
 //                            if (tag.equals("打开")) {
@@ -121,54 +119,45 @@ public class DownloadActivity extends BaseActivity {
 //                            }
 //                        }
 //                        break;
-                    case R.id.download_item_speed:
-                        String tag = (String) view.getTag();
-                        if (!TextUtils.isEmpty(tag)) {
-                            if (tag.equals("删除")) {
-                                if (FileUtils.isFileExists(recordModel.getPath())) {
-                                    MaterialDialog.Builder builder = new MaterialDialog.Builder(DownloadActivity.this);
-                                    builder.title("确认删除该安装包？")
-                                            .positiveText("删除").positiveColor(getResources().getColor(R.color.md_deep_orange_500))
-                                            .negativeText("取消").negativeColor(getResources().getColor(R.color.md_blue_grey_200))
-                                            .onNegative(new MaterialDialog.SingleButtonCallback() {
-                                                @Override
-                                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                                    dialog.dismiss();
-                                                }
-                                            })
-                                            .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                                @Override
-                                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                                    FileUtils.deleteFile(recordModel.getPath());
-                                                    mDownloadRecordModelDao.delete(recordModel);
-                                                    mDownloadRecordModelList.remove(position);
-                                                    adapter.notifyItemRemoved(position);
-                                                    if (mDownloadRecordModelList.size() == 0) {
-                                                        showEmpty(1);
-                                                    }
-                                                    dialog.dismiss();
-                                                }
-                                            }).build().show();
-                                }
-                            } else if (tag.equals("卸载")) {
-                                AppUtils.uninstallApp(recordModel.getPkgName());
-                                mDownloadRecordModelDao.delete(recordModel);
-                                mDownloadRecordModelList.remove(position);
-                                adapter.notifyItemRemoved(position);
+                case R.id.download_item_speed:
+                    String tag = (String) view.getTag();
+                    if (!TextUtils.isEmpty(tag)) {
+                        if (tag.equals("删除")) {
+                            if (FileUtils.isFileExists(recordModel.getPath())) {
+                                MaterialDialog.Builder builder = new MaterialDialog.Builder(DownloadActivity.this);
+                                builder.title("确认删除该安装包？")
+                                        .positiveText("删除").positiveColor(getResources().getColor(R.color.md_deep_orange_500))
+                                        .negativeText("取消").negativeColor(getResources().getColor(R.color.md_blue_grey_200))
+                                        .onNegative((dialog, which) -> dialog.dismiss())
+                                        .onPositive((dialog, which) -> {
+                                            FileUtils.deleteFile(recordModel.getPath());
+                                            mDownloadRecordModelDao.delete(recordModel);
+                                            mDownloadRecordModelList.remove(position);
+                                            adapter.notifyItemRemoved(position);
+                                            if (mDownloadRecordModelList.size() == 0) {
+                                                showEmpty(1);
+                                            }
+                                            dialog.dismiss();
+                                        }).build().show();
                             }
+                        } else if (tag.equals("卸载")) {
+                            AppUtils.uninstallApp(recordModel.getPkgName());
+                            mDownloadRecordModelDao.delete(recordModel);
+                            mDownloadRecordModelList.remove(position);
+                            adapter.notifyItemRemoved(position);
                         }
-                        break;
-                    case R.id.base_download_item_root:
-                        ReturnValueBean bean = (ReturnValueBean) view.getTag();
-                        if (bean != null) {
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("returnValue",bean);
-                            Intent intent = new Intent(DownloadActivity.this, LoanDetailActivity.class);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
-                        }
-                        break;
-                }
+                    }
+                    break;
+                case R.id.base_download_item_root:
+                    ReturnValueBean bean = (ReturnValueBean) view.getTag();
+                    if (bean != null) {
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("returnValue",bean);
+                        Intent intent = new Intent(DownloadActivity.this, LoanDetailActivity.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                    break;
             }
         });
     }

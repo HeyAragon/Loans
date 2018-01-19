@@ -60,7 +60,7 @@
 
                 <com.hackhome.loans.widget.DownloadProgressButton
                     android:id="@+id/download_btn"
-                    android:layout_width="72dp"
+                    android:layout_width="64dp"
                     android:layout_height="30dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
@@ -76,7 +76,7 @@
             <View
 
                 android:layout_width="match_parent"
-                android:layout_height="8dp"
+                android:layout_height="5dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/line_corner_shape"
 
@@ -234,7 +234,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="8dp"
+                android:layout_height="5dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/line_corner_shape"
                 />
@@ -247,7 +247,6 @@
                 android:text="@string/app_intro_str"
                 android:textColor="#333333"
                 android:textSize="17sp"
-                android:textStyle="bold"
                 />
 
             <!--<View-->

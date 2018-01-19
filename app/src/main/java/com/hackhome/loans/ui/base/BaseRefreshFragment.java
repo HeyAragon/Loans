@@ -77,26 +77,15 @@ public abstract class BaseRefreshFragment<T extends BasePresenter> extends BaseF
     }
 
     protected void initListener() {
-        mBaseRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                onRefreshDada();
-            }
-        });
+        mBaseRefreshLayout.setOnRefreshListener(refreshlayout -> onRefreshDada());
 
         if (mBaseQuickAdapter != null && mEnableLoadMore) {
-            mBaseQuickAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-                @Override
-                public void onLoadMoreRequested() {
-                    onLoadMoreData();
-                }
-            }, mBaseRecyclerView);
+            mBaseQuickAdapter.setOnLoadMoreListener(this::onLoadMoreData, mBaseRecyclerView);
         }
 
 
-        mBaseQuickAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        if (mBaseQuickAdapter != null) {
+            mBaseQuickAdapter.setOnItemChildClickListener((adapter, view, position) -> {
                 ReturnValueBean bean = (ReturnValueBean) view.getTag();
 
                 if (bean != null) {
@@ -107,8 +96,8 @@ public abstract class BaseRefreshFragment<T extends BasePresenter> extends BaseF
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
-            }
-        });
+            });
+        }
     }
 
     public SmartRefreshLayout getBaseRefreshLayout() {
@@ -143,6 +132,7 @@ public abstract class BaseRefreshFragment<T extends BasePresenter> extends BaseF
         readRecord.setProductName(bean.getProductName());
         readRecord.setEndLoanTime(bean.getEndLoanTime());
         readRecord.setStartLoanTime(bean.getStartLoanTime());
+        readRecord.setSuccessRate(bean.getSuccessRate());
         ReadRecord unique = readRecordDao.queryBuilder().where(ReadRecordDao.Properties.ID.eq(readRecord.getID())).build().unique();
         if (unique!=null) {
             return;

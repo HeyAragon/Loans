@@ -175,17 +175,14 @@ public class ForgetPasswordActivity extends BaseActivity<ForgetPassPresenter> im
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        --mReTime;
-                        mTvGetAuthCode.setText(FormatUtils.format(FormatUtils.SECOND,mReTime));
-                        if (mReTime < 0) {
-                            mTimer.cancel();
-                            mTvGetAuthCode.setClickable(true);
-                            mTvGetAuthCode.setText(getString(R.string.get_auth_code));
-                            mReTime = 60;
-                        }
+                runOnUiThread(() -> {
+                    --mReTime;
+                    mTvGetAuthCode.setText(FormatUtils.format(FormatUtils.SECOND,mReTime));
+                    if (mReTime < 0) {
+                        mTimer.cancel();
+                        mTvGetAuthCode.setClickable(true);
+                        mTvGetAuthCode.setText(getString(R.string.get_auth_code));
+                        mReTime = 60;
                     }
                 });
             }

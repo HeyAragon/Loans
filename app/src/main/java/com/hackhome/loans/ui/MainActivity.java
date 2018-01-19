@@ -27,38 +27,42 @@ import com.hackhome.loans.common.utils.StatusBarUtil;
 import com.hackhome.loans.common.utils.ToastUtils;
 import com.hackhome.loans.dagger.component.ApplicationComponent;
 import com.hackhome.loans.net.ApiService;
+import com.hackhome.loans.ui.adapter.MainTabAdapter;
 import com.hackhome.loans.ui.base.BaseActivity;
+import com.hackhome.loans.ui.base.BaseFragment;
 import com.hackhome.loans.ui.home.HomeFragment;
 import com.hackhome.loans.ui.loan.LoanFragment;
 import com.hackhome.loans.ui.mine.MineFragment;
 import com.hackhome.loans.widget.CustomBottomNavigationView;
+import com.hackhome.loans.widget.NoScrollViewPager;
 import com.hackhome.loans.widget.UpdateDialog;
+import com.hackhome.loans.widget.bottombar.BottomBarItem;
+import com.hackhome.loans.widget.bottombar.CustomBottomBarLayout;
 import com.tbruyelle.rxpermissions2.Permission;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends BaseActivity{
+public class MainActivity extends BaseActivity {
 
     ApiService mApiService;
     @BindView(R.id.simple_toolbar)
-    protected Toolbar mToolbar;
-    @BindView(R.id.main_container)
-    FrameLayout mContainer;
+    Toolbar mToolbar;
     @BindView(R.id.main_bottom_bar)
-    CustomBottomNavigationView mBottomNavigationView;
-    private long exitAppLastClickTime;
-//    @BindView(R.id.main_toolbar)
-//    Toolbar mToolbar;
-
-
-    private Fragment mCurrentFragment;
-    private FragmentManager mFragmentManager;
+    CustomBottomBarLayout mBottomBarLayout;
+    @BindView(R.id.vp_content)
+    NoScrollViewPager mViewPager;
     private HomeFragment mHomeFragment;
+
     private LoanFragment mLoanFragment;
     private MineFragment mMineFragment;
+    private ArrayList<BaseFragment> mFragments;
+    private MainTabAdapter mTabAdapter;
+    private long exitAppLastClickTime;
 
     @Override
     public int getLayoutContentRes() {
@@ -67,7 +71,8 @@ public class MainActivity extends BaseActivity{
 
     @Override
     public void initView() {
-        mToolbar.setVisibility(View.VISIBLE);
+        mToolbar.setVisibility(View.GONE);
+        StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, 0, mToolbar);
         initFragment();
         initListener();
 
@@ -75,55 +80,42 @@ public class MainActivity extends BaseActivity{
     }
 
     private void initFragment() {
-        mFragmentManager = getSupportFragmentManager();
         mHomeFragment = HomeFragment.getInstance();
         mLoanFragment = LoanFragment.getInstance();
         mMineFragment = MineFragment.getInstance();
+        mFragments = new ArrayList<>();
+        mFragments.add(mHomeFragment);
+        mFragments.add(mLoanFragment);
+        mFragments.add(mMineFragment);
     }
 
     public void initListener() {
-        mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        mTabAdapter = new MainTabAdapter(mFragments, getSupportFragmentManager());
+        mViewPager.setAdapter(mTabAdapter);
+        mViewPager.setOffscreenPageLimit(mFragments.size());
+        mBottomBarLayout.setViewPager(mViewPager);
+        mBottomBarLayout.setOnItemSelectedListener(new CustomBottomBarLayout.OnItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemId = item.getItemId();
+            public void onItemSelected(BottomBarItem bottomBarItem, int position) {
+                switch (position) {
+                    case 0:
+                        mToolbar.setVisibility(View.GONE);
+                        StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, 0, mToolbar);
+                        break;
+                    case 1:
+                        mToolbar.setVisibility(View.VISIBLE);
+                        StatusBarUtil.setLoanColor(MainActivity.this, getResources().getColor(R.color.base_back), 0);
+                        break;
+                    case 2:
+                        mToolbar.setVisibility(View.GONE);
+                        StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, 0, mToolbar);
 
-                switch (itemId) {
-                    case R.id.tab_home:
-                        switchFragment(mHomeFragment);
-//                        if (!item.isChecked()) {
-                            mToolbar.setVisibility(View.GONE);
-//                        }
-//                        mBottomNavigationView.getBottomNavigationItemView(0).setIcon(getResources().getDrawable(R.drawable.ic_home_selected));
-                        StatusBarUtil.setTranslucentForImageView(MainActivity.this,0,mToolbar);
-                        item.setChecked(true);
                         break;
-                    case R.id.tab_loan:
-                        switchFragment(mLoanFragment);
-                        if (!item.isChecked()) {
-                            mToolbar.setVisibility(View.VISIBLE);
-                        }
-//                        mBottomNavigationView.getBottomNavigationItemView(0).setIcon(getResources().getDrawable(R.drawable.ic_home_selected));
-                        StatusBarUtil.setColor(MainActivity.this,getResources().getColor(R.color.base_back),0);
-                        item.setChecked(true);
-                        break;
-                    case R.id.tab_mine:
-                        switchFragment(mMineFragment);
-                        if (!item.isChecked()) {
-                            mToolbar.setVisibility(View.GONE);
-//                            StatusBarUtil.setColor(MainActivity.this,getResources().getColor(R.color.mine_status_bar_back),0);
-                            StatusBarUtil.setTranslucentForImageView(MainActivity.this,0,mToolbar);
-                        }
-//                        mBottomNavigationView.getBottomNavigationItemView(0).setIcon(getResources().getDrawable(R.drawable.ic_home_selected));
-                        item.setChecked(true);
-                        break;
-                    default:
-                        //do nothing
-                        break;
+
                 }
-                return false;
             }
         });
-        mBottomNavigationView.setSelectedItemId(R.id.tab_home);
+
     }
 
     @Override
@@ -132,7 +124,7 @@ public class MainActivity extends BaseActivity{
     }
 
     @Override
-    public <K>void showResponse(K t, int responseType) {
+    public <K> void showResponse(K t, int responseType) {
 
     }
 
@@ -168,7 +160,7 @@ public class MainActivity extends BaseActivity{
                                 ) {
 
                             UpdateDialog
-                                    .newInstance(updateBean.getUrl(),updateBean.getMsg())
+                                    .newInstance(updateBean.getUrl(), updateBean.getMsg())
                                     .show(getSupportFragmentManager(), "update_dialog");
                             AppConfig.getInstance().setNewVersion(updateBean.getVer());
                             AppConfig.getInstance().setNewVersionCode(Integer.parseInt(updateBean.getVcode()));
@@ -185,21 +177,6 @@ public class MainActivity extends BaseActivity{
                 });
     }
 
-    public void switchFragment(Fragment fragment) {
-
-        FragmentTransaction transaction = mFragmentManager.beginTransaction();
-        if (mCurrentFragment != null) {
-            transaction.hide(mCurrentFragment);
-        }
-        if (!fragment.isAdded()) {
-            transaction.add(R.id.main_container, fragment);
-        } else {
-            transaction.show(fragment);
-        }
-        transaction.commit();
-        mCurrentFragment = fragment;
-
-    }
     @Override
     public void onBackPressed() {
         long currentTime = System.currentTimeMillis();

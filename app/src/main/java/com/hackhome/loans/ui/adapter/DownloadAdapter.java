@@ -118,26 +118,22 @@ public class DownloadAdapter extends BaseQuickAdapter<DownloadRecordModel, BaseV
         }
 
         final Button button = helper.getView(R.id.download_item_download_btn);
-        helper.setOnClickListener(R.id.download_item_download_btn, new View.OnClickListener(){
+        helper.setOnClickListener(R.id.download_item_download_btn, v -> {
 
-            @Override
-            public void onClick(View v) {
-
-                String s = button.getText().toString();
-                if (!TextUtils.isEmpty(s)) {
-                    if (s.equals("打开")) {
-                        AppUtils.launchApp(item.getPkgName());
-                    } else if (s.equals("安装")) {
-                        AppUtils.installApp(item.getPath(), AppUtils.AUTHORITIES);
-                    } else if (s.equals("继续")) {
-                        DownloadHelperT helperT = DownloadHelperT.getInstance();
-                        DownloadHelperT.DownloadHelperBuilder builder = helperT.getBuilderById(item.getTaskId());
-                        helperT.start(builder);
-                    } else if (s.equals("暂停")) {
-                        FileDownloader.getImpl().pause(item.getTaskId());
-                        helper.setText(R.id.download_item_download_btn, "继续");
-                        helper.setText(R.id.download_item_speed, "已暂停");
-                    }
+            String s = button.getText().toString();
+            if (!TextUtils.isEmpty(s)) {
+                if (s.equals("打开")) {
+                    AppUtils.launchApp(item.getPkgName());
+                } else if (s.equals("安装")) {
+                    AppUtils.installApp(item.getPath(), AppUtils.AUTHORITIES);
+                } else if (s.equals("继续")) {
+                    DownloadHelperT helperT = DownloadHelperT.getInstance();
+                    DownloadHelperT.DownloadHelperBuilder builder = helperT.getBuilderById(item.getTaskId());
+                    helperT.start(builder);
+                } else if (s.equals("暂停")) {
+                    FileDownloader.getImpl().pause(item.getTaskId());
+                    helper.setText(R.id.download_item_download_btn, "继续");
+                    helper.setText(R.id.download_item_speed, "已暂停");
                 }
             }
         });
@@ -193,6 +189,9 @@ public class DownloadAdapter extends BaseQuickAdapter<DownloadRecordModel, BaseV
         bean.setPackageName(item.getPackageName());
         bean.setSecuredLoan(item.getSecuredLoan());
         bean.setProductName(item.getProductName());
+        bean.setStartLoanTime(item.getStartLoanTime());
+        bean.setEndLoanTime(item.getEndLoanTime());
+        bean.setSuccessRate(item.getSuccessRate());
         return bean;
     }
 }

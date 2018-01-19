@@ -36,40 +36,26 @@ public class LoginPresenter extends BasePresenter<ILoginContract.ILoginModel,ILo
     public void login(String name, String pass) {
         mModel.login(ApiConstants.TYPE_LOGIN, name, pass)
                 .compose(RxSchedulers.<Response<ResponseBean>>applySchedulers())
-                .subscribe(new Consumer<Response<ResponseBean>>() {
-                    @Override
-                    public void accept(Response<ResponseBean> responseBeanResponse) throws Exception {
-                        ResponseBean responseBean = responseBeanResponse.body();
-                        if (responseBean == null) {
-                            responseBean = new ResponseBean();
-                            responseBean.setStatus("");
-                        }
-                        UserUtil.saveCookies(AppConfig.getInstance().getCurrentHttpUrl(), responseBeanResponse.headers());
-                        mView.showResponse(responseBean,0);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        ResponseBean responseBean = new ResponseBean();
+                .subscribe(responseBeanResponse -> {
+                    ResponseBean responseBean = responseBeanResponse.body();
+                    if (responseBean == null) {
+                        responseBean = new ResponseBean();
                         responseBean.setStatus("");
-                        mView.showResponse(responseBean,0);
                     }
+                    UserUtil.saveCookies(AppConfig.getInstance().getCurrentHttpUrl(), responseBeanResponse.headers());
+                    mView.showResponse(responseBean,0);
+                }, throwable -> {
+                    ResponseBean responseBean = new ResponseBean();
+                    responseBean.setStatus("");
+                    mView.showResponse(responseBean,0);
                 });
     }
 
     public void getUserInfo(Map<String,String> map) {
         mModel.getUserInfo(ApiConstants.TYPE_USER_INFO,map)
-                .compose(RxSchedulers.<UserInfo>applySchedulers())
-                .subscribe(new Consumer<UserInfo>() {
-                    @Override
-                    public void accept(UserInfo userInfo) throws Exception {
-                        mView.showResponse(userInfo,1);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
+                .compose(RxSchedulers.applySchedulers())
+                .subscribe(userInfo -> mView.showResponse(userInfo,1), throwable -> {
 
-                    }
                 });
     }
 }

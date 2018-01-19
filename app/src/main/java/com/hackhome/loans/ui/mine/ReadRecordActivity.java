@@ -99,6 +99,9 @@ public class ReadRecordActivity extends BaseActivity {
                 bean.setPackageName(record.getPackageName());
                 bean.setSecuredLoan(record.getSecuredLoan());
                 bean.setProductName(record.getProductName());
+                bean.setStartLoanTime(record.getStartLoanTime());
+                bean.setEndLoanTime(record.getEndLoanTime());
+                bean.setSuccessRate(record.getSuccessRate());
                 mReturnValueBeans.add(bean);
             }
             mRecyclerView.setAdapter(mAdapter);
@@ -108,50 +111,36 @@ public class ReadRecordActivity extends BaseActivity {
         }
     }
     private void initListener() {
-        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                ReturnValueBean bean = (ReturnValueBean) view.getTag();
+        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            ReturnValueBean bean = (ReturnValueBean) view.getTag();
 
-                if (bean != null) {
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("returnValue",bean);
-                    Intent intent = new Intent(ReadRecordActivity.this, LoanDetailActivity.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
+            if (bean != null) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("returnValue",bean);
+                Intent intent = new Intent(ReadRecordActivity.this, LoanDetailActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
-        mAdapter.setOnItemChildLongClickListener(new BaseQuickAdapter.OnItemChildLongClickListener() {
-            @Override
-            public boolean onItemChildLongClick(BaseQuickAdapter adapter, View view, final int position) {
-                new MaterialDialog.Builder(ReadRecordActivity.this)
-                        .title("确认删除此浏览记录？")
-                        .positiveText("删除").positiveColor(getResources().getColor(R.color.md_deep_orange_500))
-                        .negativeText("取消").negativeColor(getResources().getColor(R.color.md_blue_grey_200))
-                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                mReadRecordDao.delete(mList.get(position));
-                                mList.remove(position);
-                                mReturnValueBeans.remove(position);
-                                mAdapter.notifyItemRemoved(position);
-                                if (mList.size() == 0) {
-                                    showEmpty(2);
-                                }
-                                dialog.dismiss();
+        mAdapter.setOnItemChildLongClickListener((adapter, view, position) -> {
+            new MaterialDialog.Builder(ReadRecordActivity.this)
+                    .title("确认删除此浏览记录？")
+                    .positiveText("删除").positiveColor(getResources().getColor(R.color.md_deep_orange_500))
+                    .negativeText("取消").negativeColor(getResources().getColor(R.color.md_blue_grey_200))
+                    .onPositive((dialog, which) -> {
+                        mReadRecordDao.delete(mList.get(position));
+                        mList.remove(position);
+                        mReturnValueBeans.remove(position);
+                        mAdapter.notifyItemRemoved(position);
+                        if (mList.size() == 0) {
+                            showEmpty(2);
+                        }
+                        dialog.dismiss();
 
-                            }
-                        })
-                        .onNegative(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                dialog.dismiss();
-                            }
-                        }).build().show();
-                return false;
-            }
+                    })
+                    .onNegative((dialog, which) -> dialog.dismiss()).build().show();
+            return false;
         });
     }
 
