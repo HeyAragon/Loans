@@ -38,6 +38,16 @@ public class AppConfig {
 
     private boolean useMobileNetDownload = false;
 
+    private String currentPatchVersion="";
+
+    public String getCurrentPatchVersion() {
+        return currentPatchVersion;
+    }
+
+    public void setCurrentPatchVersion(String currentPatchVersion) {
+        this.currentPatchVersion = currentPatchVersion;
+    }
+
     public boolean isUseMobileNetDownload() {
         return useMobileNetDownload;
     }

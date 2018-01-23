@@ -322,8 +322,8 @@ public class UserInfoActivity extends BaseActivity<UserInfoPresenter> implements
 
             case R.id.btn_user_exit:
                 UserUtil.exit();
-
                 EB.getInstance().send(EventItem.MINE_FRAGMENT_OBJECT,EventItem.EXIT_SUCCESS);
+                finish();
                 break;
         }
     }

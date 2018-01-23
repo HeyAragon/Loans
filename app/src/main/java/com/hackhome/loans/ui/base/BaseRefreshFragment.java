@@ -58,6 +58,7 @@ public abstract class BaseRefreshFragment<T extends BasePresenter> extends BaseF
         mBaseQuickAdapter = buildAdapter();
         if (mBaseQuickAdapter != null) {
             mBaseQuickAdapter.setLoadMoreView(new MyLoadMoreView());
+//            mBaseQuickAdapter.openLoadAnimation();
             initRecyclerView(mIsSkipPos0);
             initListener();
         }

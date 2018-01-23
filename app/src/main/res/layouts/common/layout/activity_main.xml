@@ -37,7 +37,7 @@
             style="@style/bottom_bar_tab"
             app:iconNormal="@drawable/ic_home_normal"
             app:iconSelected="@drawable/ic_home_selected"
-            app:itemText="fuck_you"
+            app:itemText="@string/tab_home_str"
 
             />
 

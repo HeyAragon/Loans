@@ -20,6 +20,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
+import com.hackhome.loans.common.utils.AppConfig;
 import com.tencent.tinker.lib.service.DefaultTinkerResultService;
 import com.tencent.tinker.lib.service.PatchResult;
 import com.tencent.tinker.lib.util.TinkerLog;
@@ -51,6 +52,7 @@ public class TinkerResultService extends DefaultTinkerResultService {
         // for old patch, you can't delete the patch file
         if (result.isSuccess) {
 //            Toast.makeText(getApplicationContext(), "patch fail, please check reason", Toast.LENGTH_LONG).show();
+            TinkerSharePreferenceUtils.getInstance().addPatch(AppConfig.getInstance().getCurrentPatchVersion());
             TinkerLog.i(TAG, "onPatchResult: "+result.rawPatchFilePath);
             File rawFile = new File(result.rawPatchFilePath);
             deleteRawPatchFile(rawFile);

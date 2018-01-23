@@ -41,7 +41,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity<MainPresenter> implements IMainContract.IMainView {
 
-    ApiService mApiService;
     @BindView(R.id.simple_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.main_bottom_bar)

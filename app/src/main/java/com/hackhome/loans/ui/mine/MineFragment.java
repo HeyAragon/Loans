@@ -177,8 +177,9 @@ public class MineFragment extends BaseFragment {
                     GlideApp.with(mContext)
                             .load(R.mipmap.ic_user_logo)
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .transform(new CircleCrop())
+                            .centerInside()
                             .into(mUserLogo);
+
                     break;
             }
         }

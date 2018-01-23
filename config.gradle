@@ -8,8 +8,8 @@ ext {
             applicationId           : "com.hackhome.loans",
             minSdkVersion           : 16,
             targetSdkVersion        : 25,
-            versionCode             : 110,
-            versionName             : "1.0",
+            versionCode             : 100,
+            versionName             : "1.0.0",
 
             androidSupportVersion   : "26.0.0-alpha1",
 

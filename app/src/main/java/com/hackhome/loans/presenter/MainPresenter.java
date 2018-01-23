@@ -73,10 +73,10 @@ public class MainPresenter extends BasePresenter<IMainContract.IMainModel, IMain
                                         .setListener(new FileDownloadListener())
                                         .setPath(mContext.getCacheDir() + "/patch/" + patchBean.getPatchName())
                                         .start();
+                                mInstance.setCurrentPatchVersion(patchBean.getPatchVersion());
                             }
-                        }, throwable -> {
-
-                        });
+                        },
+                        throwable -> checkPatch());
     }
 
     private class FileDownloadListener extends FileDownloadSampleListener {
