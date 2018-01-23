@@ -66,7 +66,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainCo
         StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, 0, mToolbar);
         initFragment();
         initListener();
-
+        //test_new_style
 //        setSupportActionBar(mToolbar);
     }
 
