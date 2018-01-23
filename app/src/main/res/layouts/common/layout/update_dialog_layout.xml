@@ -10,6 +10,7 @@
     app:cardCornerRadius="8dp"
     app:cardPreventCornerOverlap = "false"
     app:cardBackgroundColor="@color/base_back"
+
     >
 
     <RelativeLayout
@@ -42,7 +43,7 @@
         <View
             android:id="@+id/update_line_1"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1.2dp"
             android:background="#CBAB9A"
             android:layout_below="@id/update_title_ll"
             android:layout_marginLeft="18dp"
@@ -91,39 +92,46 @@
             android:background="#CBAB9A"
             />
 
-
-        <TextView
-            android:id="@+id/update_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
             android:layout_below="@id/update_line_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:layout_marginLeft="54dp"
-            android:text="@string/update_cancel"
-            android:textColor="#CBAB9A"
-            android:textSize="16sp"
-            />
+            >
+            <TextView
+                android:id="@+id/update_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
 
-        <View
-            android:layout_width="0.4dp"
-            android:layout_height="32dp"
-            android:layout_below="@id/update_line_2"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="-6dp"
-            android:background="#CBAB9A"
-            />
+                android:text="@string/update_cancel"
+                android:textColor="#CBAB9A"
+                android:textSize="16sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                />
 
-        <TextView
-            android:id="@+id/update_confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/update_line_2"
-            android:layout_marginRight="54dp"
-            android:text="@string/update_confirm"
-            android:textColor="@color/colorTxtTitle"
-            android:textSize="16sp"
-            />
+            <View
+                android:layout_width="0.4dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="-6dp"
+                android:background="#CBAB9A"
+                />
+
+            <TextView
+                android:id="@+id/update_confirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/update_confirm"
+                android:textColor="@color/colorTxtTitle"
+                android:textSize="16sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                />
+
+
+        </LinearLayout>
 
 
     </RelativeLayout>

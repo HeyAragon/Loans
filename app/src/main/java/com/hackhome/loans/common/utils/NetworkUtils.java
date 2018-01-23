@@ -9,7 +9,7 @@ import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import com.hackhome.loans.LoanApplication;
+import com.hackhome.loans.common.tinker.TinkerLoanApplication;
 
 import java.lang.reflect.Method;
 import java.net.InetAddress;
@@ -42,7 +42,7 @@ public final class NetworkUtils {
      * 打开网络设置界面
      */
     public static void openWirelessSettings() {
-        LoanApplication.getInstance().startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        TinkerLoanApplication.getLoanApplication().startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     /**
@@ -52,7 +52,7 @@ public final class NetworkUtils {
      * @return NetworkInfo
      */
     private static NetworkInfo getActiveNetworkInfo() {
-        return ((ConnectivityManager) LoanApplication.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+        return ((ConnectivityManager) TinkerLoanApplication.getLoanApplication().getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
     }
 
     /**
@@ -108,7 +108,7 @@ public final class NetworkUtils {
      */
     public static boolean getDataEnabled() {
         try {
-            TelephonyManager tm = (TelephonyManager) LoanApplication.getInstance().getSystemService(Context.TELEPHONY_SERVICE);
+            TelephonyManager tm = (TelephonyManager) TinkerLoanApplication.getLoanApplication().getSystemService(Context.TELEPHONY_SERVICE);
             Method getMobileDataEnabledMethod = tm.getClass().getDeclaredMethod("getDataEnabled");
             if (null != getMobileDataEnabledMethod) {
                 return (boolean) getMobileDataEnabledMethod.invoke(tm);
@@ -127,7 +127,7 @@ public final class NetworkUtils {
      */
     public static void setDataEnabled(final boolean enabled) {
         try {
-            TelephonyManager tm = (TelephonyManager) LoanApplication.getInstance().getSystemService(Context.TELEPHONY_SERVICE);
+            TelephonyManager tm = (TelephonyManager) TinkerLoanApplication.getLoanApplication().getSystemService(Context.TELEPHONY_SERVICE);
             Method setMobileDataEnabledMethod = tm.getClass().getDeclaredMethod("setDataEnabled", boolean.class);
             if (null != setMobileDataEnabledMethod) {
                 setMobileDataEnabledMethod.invoke(tm, enabled);
@@ -156,7 +156,7 @@ public final class NetworkUtils {
      */
     public static boolean getWifiEnabled() {
         @SuppressLint("WifiManagerLeak")
-        WifiManager wifiManager = (WifiManager) LoanApplication.getInstance().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) TinkerLoanApplication.getLoanApplication().getSystemService(Context.WIFI_SERVICE);
         return wifiManager.isWifiEnabled();
     }
 
@@ -168,7 +168,7 @@ public final class NetworkUtils {
      */
     public static void setWifiEnabled(final boolean enabled) {
         @SuppressLint("WifiManagerLeak")
-        WifiManager wifiManager = (WifiManager) LoanApplication.getInstance().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) TinkerLoanApplication.getLoanApplication().getSystemService(Context.WIFI_SERVICE);
         if (enabled) {
             if (!wifiManager.isWifiEnabled()) {
                 wifiManager.setWifiEnabled(true);
@@ -187,7 +187,7 @@ public final class NetworkUtils {
      * @return {@code true}: 连接<br>{@code false}: 未连接
      */
     public static boolean isWifiConnected() {
-        ConnectivityManager cm = (ConnectivityManager) LoanApplication.getInstance()
+        ConnectivityManager cm = (ConnectivityManager) TinkerLoanApplication.getLoanApplication()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm != null && cm.getActiveNetworkInfo() != null
                 && cm.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI;
@@ -211,7 +211,7 @@ public final class NetworkUtils {
      * @return 运营商名称
      */
     public static String getNetworkOperatorName() {
-        TelephonyManager tm = (TelephonyManager) LoanApplication.getInstance().getSystemService(Context.TELEPHONY_SERVICE);
+        TelephonyManager tm = (TelephonyManager) TinkerLoanApplication.getLoanApplication().getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null ? tm.getNetworkOperatorName() : null;
     }
 

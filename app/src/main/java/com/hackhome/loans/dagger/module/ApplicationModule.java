@@ -1,8 +1,7 @@
 package com.hackhome.loans.dagger.module;
 
+import android.app.Application;
 import android.content.Context;
-
-import com.hackhome.loans.LoanApplication;
 
 import javax.inject.Singleton;
 
@@ -25,8 +24,8 @@ public class ApplicationModule {
 
     @Singleton
     @Provides
-    LoanApplication provideLoanApplication() {
-        return (LoanApplication) mContext.getApplicationContext();
+    Application provideLoanApplication() {
+        return (Application) mContext.getApplicationContext();
     }
 
     @Singleton

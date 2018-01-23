@@ -56,22 +56,20 @@ public class HttpModule {
         return retrofit.create(ApiService.class);
     }
 
-    private Interceptor mInterceptor = new Interceptor() {
-        @Override
-        public Response intercept(Chain chain) throws IOException {
-            Request request = chain.request();
-            AppConfig.getInstance().setCurrentHttpUrl(request.url());
-            long startTime = System.currentTimeMillis();
-            Response response = chain.proceed(request);
-            long endTime = System.currentTimeMillis();
-            long duration = endTime - startTime;
-            okhttp3.MediaType mediaType = response.body().contentType();
+    private Interceptor mInterceptor = chain -> {
+        Request request = chain.request();
+        AppConfig.getInstance().setCurrentHttpUrl(request.url());
+        long startTime = System.currentTimeMillis();
+        Response response = null;
+        response = chain.proceed(request) ;
+        long endTime = System.currentTimeMillis();
+        long duration = endTime - startTime;
+//            okhttp3.MediaType mediaType = response.body().contentType();
 //            String content = response.body().string();
-            KLog.e("----------Request Start----------------");
-            KLog.e("| " + request.toString());
+        KLog.e("----------Request Start----------------");
+        KLog.e("| " + request.toString());
 //            KLog.json("| Response:" + content);
-            KLog.e("----------Request End:" + duration + "毫秒----------");
-            return response;
-        }
+        KLog.e("----------Request End:" + duration + "毫秒----------");
+        return response;
     };
 }

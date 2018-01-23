@@ -33,7 +33,7 @@ public class LoanFragment extends BaseRefreshFragment<HomePresenter> implements 
     public static final int KEY = 1024;
     //    private int mSort = 2;//2：金额    1：利率
 //    private int mOb = 1;//1:升序 2:降序
-    private int mCurrentOb = 2;//升序
+    private int mCurrentOb = 2;//降序
     private int mCurrentSort = 2;
     private int mCurrentPage = 1;
     private CheckedTextView mLoanValueTxt, mLoanInterestTxt;
@@ -58,7 +58,7 @@ public class LoanFragment extends BaseRefreshFragment<HomePresenter> implements 
     private void initHeadView() {
         mViewStub.setLayoutResource(R.layout.loan_head_layout);
         View view = mViewStub.inflate();
-        mLoanValueTxt =  view.findViewById(R.id.loan_value_sort_txt);
+        mLoanValueTxt = view.findViewById(R.id.loan_value_sort_txt);
         mLoanInterestTxt = view.findViewById(R.id.loan_interest_sort_txt);
         mLoanLine = view.findViewById(R.id.loan_value_line);
         mInterestLine = view.findViewById(R.id.loan_interest_line);

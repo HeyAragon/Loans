@@ -3,8 +3,6 @@ package com.hackhome.loans.ui.base;
 
 import android.content.Context;
 
-import com.hackhome.loans.LoanApplication;
-
 import javax.inject.Inject;
 
 /**

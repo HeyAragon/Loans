@@ -2,7 +2,7 @@ package com.hackhome.loans.common.utils;
 
 import android.widget.Toast;
 
-import com.hackhome.loans.LoanApplication;
+import com.hackhome.loans.common.tinker.TinkerLoanApplication;
 
 /**
  * desc: Toast工具类
@@ -18,7 +18,7 @@ public class ToastUtils {
      */
     public static void showToast( CharSequence text) {
         if (mToast == null) {
-            mToast = Toast.makeText(LoanApplication.getInstance(), text, Toast.LENGTH_SHORT);
+            mToast = Toast.makeText(TinkerLoanApplication.getLoanApplication(), text, Toast.LENGTH_SHORT);
         } else {
             mToast.setText(text);
         }

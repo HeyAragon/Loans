@@ -1,11 +1,13 @@
 package com.hackhome.loans.bean;
 
+import java.io.Serializable;
+
 /**
  * desc:
  * author: aragon
  * date: 2017/12/28 0028.
  */
-public class UpdateBean {
+public class UpdateBean implements Serializable{
 
     /**
      * ver : 1.0

@@ -1,6 +1,7 @@
 package com.hackhome.loans.net;
 
 import com.hackhome.loans.bean.DataBean;
+import com.hackhome.loans.bean.PatchBean;
 import com.hackhome.loans.bean.ResponseBean;
 import com.hackhome.loans.bean.UpdateBean;
 import com.hackhome.loans.bean.UserInfo;
@@ -44,6 +45,9 @@ public interface ApiService {
 
     @GET("dk.asp")
     Observable<UpdateBean> checkNewVersion(@Query("a") String type);
+
+    @GET("dk.asp")
+    Observable<PatchBean> checkPatch(@Query("a") String type);
 
     /**
      * 验证码相关
@@ -120,6 +124,8 @@ public interface ApiService {
             @PartMap Map<String, String> map,
             @Part MultipartBody.Part file
     );
+
+
 
 
 }

@@ -9,7 +9,7 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
-import com.hackhome.loans.LoanApplication;
+import com.hackhome.loans.common.tinker.TinkerLoanApplication;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class AppUtils {
     public static boolean isInstallApp(final String action, final String category) {
         Intent intent = new Intent(action);
         intent.addCategory(category);
-        PackageManager pm = LoanApplication.getInstance().getPackageManager();
+        PackageManager pm = TinkerLoanApplication.getLoanApplication().getPackageManager();
         ResolveInfo info = pm.resolveActivity(intent, 0);
         return info != null;
     }
@@ -77,7 +77,7 @@ public class AppUtils {
      */
     public static void installApp(final File file, final String authority) {
         if (!FileUtils.isFileExists(file)) return;
-        LoanApplication.getInstance().startActivity(IntentUtils.getInstallAppIntent(file, authority, true));
+        TinkerLoanApplication.getLoanApplication().startActivity(IntentUtils.getInstallAppIntent(file, authority, true));
     }
 
     /**
@@ -150,7 +150,7 @@ public class AppUtils {
      */
     public static void uninstallApp(final String packageName) {
         if (isSpace(packageName)) return;
-        LoanApplication.getInstance().startActivity(IntentUtils.getUninstallAppIntent(packageName, true));
+        TinkerLoanApplication.getLoanApplication().startActivity(IntentUtils.getUninstallAppIntent(packageName, true));
     }
 
     /**
@@ -217,7 +217,7 @@ public class AppUtils {
      */
     public static void launchApp(final String packageName) {
         if (isSpace(packageName)) return;
-        LoanApplication.getInstance().startActivity(IntentUtils.getLaunchAppIntent(packageName));
+        TinkerLoanApplication.getLoanApplication().startActivity(IntentUtils.getLaunchAppIntent(packageName));
     }
 
     /**
@@ -252,14 +252,14 @@ public class AppUtils {
      * @return App 包名
      */
     public static String getAppPackageName() {
-        return LoanApplication.getInstance().getPackageName();
+        return TinkerLoanApplication.getLoanApplication().getPackageName();
     }
 
     /**
      * 获取 App 具体设置
      */
     public static void getAppDetailsSettings() {
-        getAppDetailsSettings(LoanApplication.getInstance().getPackageName());
+        getAppDetailsSettings(TinkerLoanApplication.getLoanApplication().getPackageName());
     }
 
     /**
@@ -269,7 +269,7 @@ public class AppUtils {
      */
     public static void getAppDetailsSettings(final String packageName) {
         if (isSpace(packageName)) return;
-        LoanApplication.getInstance().startActivity(IntentUtils.getAppDetailsSettingsIntent(packageName));
+        TinkerLoanApplication.getLoanApplication().startActivity(IntentUtils.getAppDetailsSettingsIntent(packageName));
     }
 
     /**
@@ -278,7 +278,7 @@ public class AppUtils {
      * @return App 名称
      */
     public static String getAppName() {
-        return getAppName(LoanApplication.getInstance().getPackageName());
+        return getAppName(TinkerLoanApplication.getLoanApplication().getPackageName());
     }
 
     /**
@@ -290,7 +290,7 @@ public class AppUtils {
     public static String getAppName(final String packageName) {
         if (isSpace(packageName)) return null;
         try {
-            PackageManager pm = LoanApplication.getInstance().getPackageManager();
+            PackageManager pm = TinkerLoanApplication.getLoanApplication().getPackageManager();
             PackageInfo pi = pm.getPackageInfo(packageName, 0);
             return pi == null ? null : pi.applicationInfo.loadLabel(pm).toString();
         } catch (PackageManager.NameNotFoundException e) {
@@ -305,7 +305,7 @@ public class AppUtils {
      * @return App 图标
      */
     public static Drawable getAppIcon() {
-        return getAppIcon(LoanApplication.getInstance().getPackageName());
+        return getAppIcon(TinkerLoanApplication.getLoanApplication().getPackageName());
     }
 
     /**
@@ -317,7 +317,7 @@ public class AppUtils {
     public static Drawable getAppIcon(final String packageName) {
         if (isSpace(packageName)) return null;
         try {
-            PackageManager pm = LoanApplication.getInstance().getPackageManager();
+            PackageManager pm = TinkerLoanApplication.getLoanApplication().getPackageManager();
             PackageInfo pi = pm.getPackageInfo(packageName, 0);
             return pi == null ? null : pi.applicationInfo.loadIcon(pm);
         } catch (PackageManager.NameNotFoundException e) {
@@ -332,7 +332,7 @@ public class AppUtils {
      * @return App 路径
      */
     public static String getAppPath() {
-        return getAppPath(LoanApplication.getInstance().getPackageName());
+        return getAppPath(TinkerLoanApplication.getLoanApplication().getPackageName());
     }
 
     /**
@@ -344,7 +344,7 @@ public class AppUtils {
     public static String getAppPath(final String packageName) {
         if (isSpace(packageName)) return null;
         try {
-            PackageManager pm = LoanApplication.getInstance().getPackageManager();
+            PackageManager pm = TinkerLoanApplication.getLoanApplication().getPackageManager();
             PackageInfo pi = pm.getPackageInfo(packageName, 0);
             return pi == null ? null : pi.applicationInfo.sourceDir;
         } catch (PackageManager.NameNotFoundException e) {
@@ -359,7 +359,7 @@ public class AppUtils {
      * @return App 版本号
      */
     public static String getAppVersionName() {
-        return getAppVersionName(LoanApplication.getInstance().getPackageName());
+        return getAppVersionName(TinkerLoanApplication.getLoanApplication().getPackageName());
     }
 
     /**
@@ -371,7 +371,7 @@ public class AppUtils {
     public static String getAppVersionName(final String packageName) {
         if (isSpace(packageName)) return null;
         try {
-            PackageManager pm = LoanApplication.getInstance().getPackageManager();
+            PackageManager pm = TinkerLoanApplication.getLoanApplication().getPackageManager();
             PackageInfo pi = pm.getPackageInfo(packageName, 0);
             return pi == null ? null : pi.versionName;
         } catch (PackageManager.NameNotFoundException e) {
@@ -386,7 +386,7 @@ public class AppUtils {
      * @return App 版本码
      */
     public static int getAppVersionCode() {
-        return getAppVersionCode(LoanApplication.getInstance().getPackageName());
+        return getAppVersionCode(TinkerLoanApplication.getLoanApplication().getPackageName());
     }
 
     /**
@@ -398,7 +398,7 @@ public class AppUtils {
     public static int getAppVersionCode(final String packageName) {
         if (isSpace(packageName)) return -1;
         try {
-            PackageManager pm = LoanApplication.getInstance().getPackageManager();
+            PackageManager pm = TinkerLoanApplication.getLoanApplication().getPackageManager();
             PackageInfo pi = pm.getPackageInfo(packageName, 0);
             return pi == null ? -1 : pi.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
@@ -413,7 +413,7 @@ public class AppUtils {
      * @return {@code true}: 是<br>{@code false}: 否
      */
     public static boolean isSystemApp() {
-        return isSystemApp(LoanApplication.getInstance().getPackageName());
+        return isSystemApp(TinkerLoanApplication.getLoanApplication().getPackageName());
     }
 
     /**
@@ -425,7 +425,7 @@ public class AppUtils {
     public static boolean isSystemApp(final String packageName) {
         if (isSpace(packageName)) return false;
         try {
-            PackageManager pm = LoanApplication.getInstance().getPackageManager();
+            PackageManager pm = TinkerLoanApplication.getLoanApplication().getPackageManager();
             ApplicationInfo ai = pm.getApplicationInfo(packageName, 0);
             return ai != null && (ai.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
         } catch (PackageManager.NameNotFoundException e) {
@@ -440,7 +440,7 @@ public class AppUtils {
      * @return {@code true}: 是<br>{@code false}: 否
      */
     public static boolean isAppDebug() {
-        return isAppDebug(LoanApplication.getInstance().getPackageName());
+        return isAppDebug(TinkerLoanApplication.getLoanApplication().getPackageName());
     }
 
     /**
@@ -452,7 +452,7 @@ public class AppUtils {
     public static boolean isAppDebug(final String packageName) {
         if (isSpace(packageName)) return false;
         try {
-            PackageManager pm = LoanApplication.getInstance().getPackageManager();
+            PackageManager pm = TinkerLoanApplication.getLoanApplication().getPackageManager();
             ApplicationInfo ai = pm.getApplicationInfo(packageName, 0);
             return ai != null && (ai.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
         } catch (PackageManager.NameNotFoundException e) {
@@ -650,7 +650,7 @@ public class AppUtils {
      * @return 当前应用的 AppInfo
      */
     public static AppInfo getAppInfo() {
-        return getAppInfo(LoanApplication.getInstance().getPackageName());
+        return getAppInfo(TinkerLoanApplication.getLoanApplication().getPackageName());
     }
 
     /**
@@ -662,7 +662,7 @@ public class AppUtils {
      */
     public static AppInfo getAppInfo(final String packageName) {
         try {
-            PackageManager pm = LoanApplication.getInstance().getPackageManager();
+            PackageManager pm = TinkerLoanApplication.getLoanApplication().getPackageManager();
             PackageInfo pi = pm.getPackageInfo(packageName, 0);
             return getBean(pm, pi);
         } catch (PackageManager.NameNotFoundException e) {
@@ -701,7 +701,7 @@ public class AppUtils {
      */
     public static List<AppInfo> getAppsInfo() {
         List<AppInfo> list = new ArrayList<>();
-        PackageManager pm = LoanApplication.getInstance().getPackageManager();
+        PackageManager pm = TinkerLoanApplication.getLoanApplication().getPackageManager();
         // 获取系统中安装的所有软件信息
         List<PackageInfo> installedPackages = pm.getInstalledPackages(0);
         for (PackageInfo pi : installedPackages) {

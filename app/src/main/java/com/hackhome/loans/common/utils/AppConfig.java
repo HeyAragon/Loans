@@ -36,6 +36,16 @@ public class AppConfig {
 
     private int newVersionCode;
 
+    private boolean useMobileNetDownload = false;
+
+    public boolean isUseMobileNetDownload() {
+        return useMobileNetDownload;
+    }
+
+    public void setUseMobileNetDownload(boolean useMobileNetDownload) {
+        this.useMobileNetDownload = useMobileNetDownload;
+    }
+
     public String getUpdateUrl() {
         return updateUrl;
     }
@@ -51,8 +61,6 @@ public class AppConfig {
     public void setUpdateMsg(String updateMsg) {
         this.updateMsg = updateMsg;
     }
-
-
 
     public String getCurrentVersion() {
         return CurrentVersion;

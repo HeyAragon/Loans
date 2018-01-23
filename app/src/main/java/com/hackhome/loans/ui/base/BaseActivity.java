@@ -10,15 +10,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.airbnb.lottie.LottieComposition;
 import com.github.nukc.stateview.StateView;
-import com.hackhome.loans.LoanApplication;
 import com.hackhome.loans.R;
 import com.hackhome.loans.common.download.DownloadTaskManager;
 import com.hackhome.loans.common.eventbus.EventItem;
+import com.hackhome.loans.common.tinker.TinkerLoanApplication;
 import com.hackhome.loans.common.utils.DensityUtil;
-import com.hackhome.loans.common.utils.ToastUtils;
-import com.hackhome.loans.ui.mine.DownloadActivity;
 import com.socks.library.KLog;
 import com.umeng.analytics.MobclickAgent;
 
@@ -55,7 +52,7 @@ public  abstract class BaseActivity<T extends BasePresenter> extends AppCompatAc
         setContentView(mRootView);
         DownloadTaskManager.getInstance().onCreate();
         EventBus.getDefault().register(this);
-        initInjector(LoanApplication.getInstance().getApplicationComponent());
+        initInjector(TinkerLoanApplication.getTinkerApplication().getApplicationComponent());
         initStateView();
         loadData();
         initView();

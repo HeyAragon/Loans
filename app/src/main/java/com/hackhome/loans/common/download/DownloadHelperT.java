@@ -4,17 +4,16 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.util.SparseArray;
-import android.view.View;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.hackhome.loans.LoanApplication;
-import com.hackhome.loans.R;
 import com.hackhome.loans.bean.DownloadRecordModel;
 import com.hackhome.loans.bean.ReturnValueBean;
 import com.hackhome.loans.common.eventbus.EB;
 import com.hackhome.loans.common.eventbus.EventItem;
+import com.hackhome.loans.common.tinker.TinkerLoanApplication;
+import com.hackhome.loans.common.utils.AppConfig;
 import com.hackhome.loans.common.utils.AppUtils;
+import com.hackhome.loans.common.utils.DialogUtils;
 import com.hackhome.loans.common.utils.NetworkUtils;
 import com.hackhome.loans.common.utils.PermissionUtil;
 import com.hackhome.loans.common.utils.ToastUtils;
@@ -27,16 +26,9 @@ import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.model.FileDownloadStatus;
 import com.liulishuo.filedownloader.util.FileDownloadUtils;
 import com.socks.library.KLog;
-import com.tbruyelle.rxpermissions2.Permission;
 
 import java.io.File;
 import java.util.List;
-
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
 
 /**
  * desc:
@@ -46,7 +38,7 @@ import io.reactivex.functions.Consumer;
 public class DownloadHelperT {
     //进度刷新间隔
     public static final int PROGRESS_REFRESH_TIME = 500;
-    private static final String DOWNLOAD_ROOT_PATH = FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "wnqk" + File.separator + "download" + File.separator;
+    public static final String DOWNLOAD_ROOT_PATH = FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "wnqk" + File.separator + "download" + File.separator;
     private final DaoSession mDaoSession;
     private final List<DownloadRecordModel> mDownloadRecordModelList;
 
@@ -63,7 +55,7 @@ public class DownloadHelperT {
         mBuilderMap = new SparseArray<>();
         mTaskMap = new SparseArray<>();
 
-        mDaoSession = LoanApplication.getInstance().getDaoSession();
+        mDaoSession = TinkerLoanApplication.getTinkerApplication().getDaoSession();
         mDownloadRecordModelList = mDaoSession.getDownloadRecordModelDao().queryBuilder().list();
         if (mDownloadRecordModelList.size() > 0) {
             for (DownloadRecordModel model : mDownloadRecordModelList) {
@@ -100,7 +92,7 @@ public class DownloadHelperT {
                 button.setState(DownloadProgressButton.STATE_DOWNLOADING);
                 button.setCurrentText("waiting");
             } else if (!new File(builder.mDownloadPath).exists()
-                    /* &&!new File(FileDownloadUtils.getTempPath( builder.mDownloadPath)).exists()*/
+                     &&!new File(FileDownloadUtils.getTempPath( builder.mDownloadPath)).exists()
                     ) {
                 button.setState(DownloadProgressButton.STATE_NORMAL);
                 button.setCurrentText("下载");
@@ -140,25 +132,29 @@ public class DownloadHelperT {
                             switch (state) {
                                 case DownloadProgressButton.STATE_NORMAL:
                                     button.updateButtonId(model.getTaskId());
-                                    if (NetworkUtils.isWifiConnected()) {
+                                    if (NetworkUtils.isWifiConnected()||AppConfig.getInstance().isUseMobileNetDownload()) {
                                         start(builder);
                                     } else if (NetworkUtils.getDataEnabled()) {
-                                        new MaterialDialog.Builder(builder.mContext)
-                                                .content("当前未连接wifi,是否使用移动网络下载？")
-                                                .backgroundColor(builder.mContext.getResources().getColor(R.color.base_back))
-                                                .negativeText("取消").negativeColor(builder.mContext.getResources().getColor(R.color.bottom_tab_normal))
-                                                .positiveText("下载").positiveColor(builder.mContext.getResources().getColor(R.color.bottom_tab_selected))
-                                                .onPositive((dialog, which) -> start(builder)).build().show();
-
+                                        DialogUtils.isContinueDownload(builder);
                                     } else {
-                                       ToastUtils.showToast("当前未连接网络！");
+                                        ToastUtils.showToast("当前未连接网络！");
                                     }
+
                                     break;
                                 case DownloadProgressButton.STATE_DOWNLOADING:
+
                                     FileDownloader.getImpl().pause(model.getTaskId());
+
                                     break;
                                 case DownloadProgressButton.STATE_PAUSE:
-                                    start(builder);
+
+                                    if (NetworkUtils.isWifiConnected()||AppConfig.getInstance().isUseMobileNetDownload()) {
+                                        start(builder);
+                                    } else if (NetworkUtils.getDataEnabled()) {
+                                        DialogUtils.isContinueDownload(builder);
+                                    } else {
+                                        ToastUtils.showToast("当前未连接网络！");
+                                    }
                                     break;
 
                                 case DownloadProgressButton.STATE_FINISH:
@@ -288,14 +284,14 @@ public class DownloadHelperT {
     }
 
     public static class DownloadHelperBuilder {
-        private DownloadProgressButton mDownloadProgressButton;
-        private Context mContext;
-        private String mPkg;
-        private String mFileName;
-        private String mDownloadUrl;
-        private String mDownloadPath;
-        private String mIconUrl;
-        private ReturnValueBean mReturnValueBean;
+        public DownloadProgressButton mDownloadProgressButton;
+        public Context mContext;
+        public String mPkg;
+        public String mFileName;
+        public String mDownloadUrl;
+        public String mDownloadPath;
+        public String mIconUrl;
+        public ReturnValueBean mReturnValueBean;
 
         public DownloadHelperBuilder bindBtn(DownloadProgressButton btn) {
             this.mDownloadProgressButton = btn;

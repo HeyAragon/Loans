@@ -2,22 +2,18 @@ package com.hackhome.loans.ui.mine;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.hackhome.loans.LoanApplication;
 import com.hackhome.loans.R;
 import com.hackhome.loans.bean.ReadRecord;
 import com.hackhome.loans.bean.ReturnValueBean;
+import com.hackhome.loans.common.tinker.TinkerLoanApplication;
 import com.hackhome.loans.common.utils.StatusBarUtil;
 import com.hackhome.loans.dagger.component.ApplicationComponent;
 import com.hackhome.loans.greendao.ReadRecordDao;
@@ -30,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -64,7 +59,7 @@ public class ReadRecordActivity extends BaseActivity {
 
     @Override
     public void loadData() {
-        mReadRecordDao = LoanApplication.getInstance()
+        mReadRecordDao = TinkerLoanApplication.getTinkerApplication()
                 .getDaoSession()
                 .getReadRecordDao();
         mList = mReadRecordDao.queryBuilder().list();

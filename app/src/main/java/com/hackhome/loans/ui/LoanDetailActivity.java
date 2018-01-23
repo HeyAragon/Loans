@@ -3,7 +3,6 @@ package com.hackhome.loans.ui;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -18,6 +17,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.hackhome.loans.R;
 import com.hackhome.loans.bean.ReturnValueBean;
 import com.hackhome.loans.common.download.DownloadHelperT;
+import com.hackhome.loans.common.eventbus.EventItem;
 import com.hackhome.loans.common.imageloader.GlideApp;
 import com.hackhome.loans.common.utils.DensityUtil;
 import com.hackhome.loans.common.utils.ShareUtil;
@@ -25,7 +25,6 @@ import com.hackhome.loans.common.utils.StatusBarUtil;
 import com.hackhome.loans.dagger.component.ApplicationComponent;
 import com.hackhome.loans.ui.base.BaseActivity;
 import com.hackhome.loans.widget.DownloadProgressButton;
-import com.socks.library.KLog;
 
 
 import org.greenrobot.eventbus.Subscribe;
@@ -34,6 +33,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.hackhome.loans.widget.DownloadProgressButton.STATE_INSTALLED;
 
 public class LoanDetailActivity extends BaseActivity {
 
@@ -155,8 +156,17 @@ public class LoanDetailActivity extends BaseActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void handleEvent(String msg) {
-        KLog.e("aragon", LoanDetailActivity.class.getSimpleName()+":"+msg);
+    public void handleEvent(EventItem eventItem) {
+        if (eventItem.getReceiveObject() == EventItem.LOAN_DETAIL_OBJECT) {
+            switch (eventItem.getMessageType()) {
+                case EventItem.INSTALL_SUCCESS:
+                    mDownloadProgressButton.setState(STATE_INSTALLED);
+                    mDownloadProgressButton.setCurrentText("打开");
+                    break;
+                case EventItem.UNINSTALL_SUCCESS:
+                    break;
+            }
+        }
     }
 
     @Override

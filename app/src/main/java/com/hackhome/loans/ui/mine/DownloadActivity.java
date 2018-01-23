@@ -1,46 +1,33 @@
 package com.hackhome.loans.ui.mine;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SimpleItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.hackhome.loans.LoanApplication;
 import com.hackhome.loans.R;
 import com.hackhome.loans.bean.DownloadRecordModel;
 import com.hackhome.loans.bean.ReturnValueBean;
-import com.hackhome.loans.common.download.DownloadHelperT;
 import com.hackhome.loans.common.download.DownloadTaskManager;
 import com.hackhome.loans.common.eventbus.EventItem;
+import com.hackhome.loans.common.tinker.TinkerLoanApplication;
 import com.hackhome.loans.common.utils.AppUtils;
 import com.hackhome.loans.common.utils.FileUtils;
 import com.hackhome.loans.common.utils.StatusBarUtil;
 import com.hackhome.loans.dagger.component.ApplicationComponent;
 import com.hackhome.loans.greendao.DownloadRecordModelDao;
 import com.hackhome.loans.ui.LoanDetailActivity;
-import com.hackhome.loans.ui.MainActivity;
 import com.hackhome.loans.ui.adapter.DownloadAdapter;
 import com.hackhome.loans.ui.base.BaseActivity;
 import com.hackhome.loans.widget.CardViewItemDecoration;
-import com.liulishuo.filedownloader.FileDownloadSampleListener;
-import com.liulishuo.filedownloader.FileDownloader;
-import com.liulishuo.filedownloader.util.FileDownloadUtils;
 import com.socks.library.KLog;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -73,7 +60,7 @@ public class DownloadActivity extends BaseActivity {
 
     @Override
     public void loadData() {
-        mDownloadRecordModelDao = LoanApplication.getInstance().getDaoSession().getDownloadRecordModelDao();
+        mDownloadRecordModelDao = TinkerLoanApplication.getTinkerApplication().getDaoSession().getDownloadRecordModelDao();
         mDownloadRecordModelList = DownloadTaskManager.getInstance().getDownloadRecordModels();
         if (mDownloadRecordModelList.size() == 0) {
             showEmpty(1);

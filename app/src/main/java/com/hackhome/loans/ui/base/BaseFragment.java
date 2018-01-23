@@ -9,10 +9,9 @@ import android.view.ViewGroup;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.github.nukc.stateview.StateView;
-import com.hackhome.loans.LoanApplication;
 import com.hackhome.loans.R;
 import com.hackhome.loans.common.eventbus.EventItem;
-import com.socks.library.KLog;
+import com.hackhome.loans.common.tinker.TinkerLoanApplication;
 import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -62,7 +61,7 @@ public abstract class BaseFragment extends LazyLoadFragment implements IBase,IBa
                 parent.removeView(mRootView);
             }
         }
-        initInjector(LoanApplication.getInstance().getApplicationComponent());
+        initInjector(TinkerLoanApplication.getTinkerApplication().getApplicationComponent());
         initStateView();
         initView();
         return mRootView;

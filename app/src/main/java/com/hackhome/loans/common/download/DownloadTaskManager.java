@@ -3,22 +3,17 @@ package com.hackhome.loans.common.download;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.hackhome.loans.LoanApplication;
 import com.hackhome.loans.bean.DownloadRecordModel;
 import com.hackhome.loans.bean.ReturnValueBean;
-import com.hackhome.loans.common.utils.ToastUtils;
-import com.hackhome.loans.greendao.DaoMaster;
+import com.hackhome.loans.common.tinker.TinkerLoanApplication;
 import com.hackhome.loans.greendao.DaoSession;
 import com.hackhome.loans.greendao.DownloadRecordModelDao;
-import com.hackhome.loans.ui.LoanDetailActivity;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadConnectListener;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.model.FileDownloadStatus;
 import com.liulishuo.filedownloader.util.FileDownloadUtils;
-import com.socks.library.KLog;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
@@ -50,7 +45,7 @@ public class DownloadTaskManager {
     }
 
     private void initDataBase() {
-        mDaoSession = LoanApplication.getInstance().getDaoSession();
+        mDaoSession = TinkerLoanApplication.getTinkerApplication().getDaoSession();
         mDownloadRecordModelDao = mDaoSession.getDownloadRecordModelDao();
         mDownloadRecordModels = mDownloadRecordModelDao.queryBuilder().list();
         Log.i("aragonh", "initDataBase: size=" + mDownloadRecordModels.size());

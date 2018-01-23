@@ -20,7 +20,6 @@ import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
 import com.hackhome.loans.R;
-import com.hackhome.loans.common.download.DownloadHelper;
 import com.hackhome.loans.common.download.DownloadHelperT;
 import com.hackhome.loans.common.utils.DensityUtil;
 
@@ -38,7 +37,6 @@ public class DownloadProgressButton extends AppCompatTextView {
 
     private int mButtonPosition;
 
-    private DownloadHelper.DownloadBuilder mBuilder;
     private DownloadHelperT.DownloadHelperBuilder mBuilder2;
 
     //背景画笔
@@ -523,13 +521,7 @@ public class DownloadProgressButton extends AppCompatTextView {
         mMaxProgress = maxProgress;
     }
 
-    public DownloadHelper.DownloadBuilder getBuilder() {
-        return mBuilder;
-    }
 
-    public void setBuilder(DownloadHelper.DownloadBuilder builder) {
-        mBuilder = builder;
-    }
 
     public void setBuilder(DownloadHelperT.DownloadHelperBuilder builder) {
         mBuilder2 = builder;

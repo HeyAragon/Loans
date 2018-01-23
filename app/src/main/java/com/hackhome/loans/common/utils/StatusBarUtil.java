@@ -50,12 +50,15 @@ public class StatusBarUtil {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            activity.getWindow().setStatusBarColor(calculateStatusColor(color, statusBarAlpha));
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                activity.getWindow().setStatusBarColor(calculateStatusColor(color, statusBarAlpha));
                 activity.getWindow()
                         .getDecorView()
                         .setSystemUiVisibility(
                                 View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                activity.getWindow().setStatusBarColor(calculateStatusColor(color, 24));
             }
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -65,9 +68,9 @@ public class StatusBarUtil {
                 if (fakeStatusBarView.getVisibility() == View.GONE) {
                     fakeStatusBarView.setVisibility(View.VISIBLE);
                 }
-                fakeStatusBarView.setBackgroundColor(calculateStatusColor(color, statusBarAlpha));
+                fakeStatusBarView.setBackgroundColor(calculateStatusColor(color, 24));
             } else {
-                decorView.addView(createStatusBarView(activity, color, statusBarAlpha));
+                decorView.addView(createStatusBarView(activity, color, 24));
             }
             setRootView(activity);
         }
@@ -83,12 +86,14 @@ public class StatusBarUtil {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            activity.getWindow().setStatusBarColor(calculateStatusColor(color, statusBarAlpha));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                activity.getWindow().setStatusBarColor(calculateStatusColor(color, statusBarAlpha));
                 activity.getWindow()
                         .getDecorView()
                         .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|
                                 View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                activity.getWindow().setStatusBarColor(calculateStatusColor(color, 24));
             }
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -484,7 +489,12 @@ public class StatusBarUtil {
             return;
         }
         setTransparentForWindow(activity);
-        addTranslucentView(activity, statusBarAlpha);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            addTranslucentView(activity, statusBarAlpha);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            addTranslucentView(activity, 24);
+        }
+
         if (needOffsetView != null) {
             Object haveSetOffset = needOffsetView.getTag(TAG_KEY_HAVE_SET_OFFSET);
             if (haveSetOffset != null && (Boolean) haveSetOffset) {

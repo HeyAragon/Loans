@@ -17,6 +17,12 @@ public class ApiConstants {
     //LoanFragment a=list
     public static final String TYPE_LOAN = "list";
 
+    //版本更新
+    public static final String TYPE_UPDATE = "update";
+
+    //热修复补丁更新
+    public static final String TYPE_PATCH = "patch";
+
     //注册相关 参数 s=istel 验证手机是否已注册
     public static final String TYPE_REGISTER_ISREGISTERED = "istel";
 

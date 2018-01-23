@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 
-import com.hackhome.loans.LoanApplication;
+import com.hackhome.loans.common.tinker.TinkerLoanApplication;
 
 import java.io.File;
 
@@ -68,7 +68,7 @@ public final class IntentUtils {
             data = Uri.fromFile(file);
         } else {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            data = FileProvider.getUriForFile(LoanApplication.getInstance(), authority, file);
+            data = FileProvider.getUriForFile(TinkerLoanApplication.getLoanApplication(), authority, file);
         }
         intent.setDataAndType(data, type);
         return getIntent(intent, isNewTask);
@@ -115,7 +115,7 @@ public final class IntentUtils {
      * @return 打开 App 的意图
      */
     public static Intent getLaunchAppIntent(final String packageName, final boolean isNewTask) {
-        Intent intent = LoanApplication.getInstance().getPackageManager().getLaunchIntentForPackage(packageName);
+        Intent intent = TinkerLoanApplication.getLoanApplication().getPackageManager().getLaunchIntentForPackage(packageName);
         if (intent == null) return null;
         return getIntent(intent, isNewTask);
     }

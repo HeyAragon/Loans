@@ -1,14 +1,9 @@
 package com.hackhome.loans.widget;
 
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.hackhome.loans.LoanApplication;
 import com.hackhome.loans.R;
 import com.hackhome.loans.common.Constants;
-import com.hackhome.loans.common.download.DownloadHelper;
+import com.hackhome.loans.common.download.DownloadHelperT;
 import com.hackhome.loans.common.utils.AppUtils;
-import com.hackhome.loans.common.utils.CloseUtils;
+import com.hackhome.loans.common.utils.DensityUtil;
 import com.hackhome.loans.common.utils.SharedPreferencesUtils;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadSampleListener;
@@ -76,6 +70,13 @@ public class UpdateDialog extends DialogFragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        int screenWidth = DensityUtil.getScreenWidth(getContext());
+        getDialog().getWindow().setLayout((int) (screenWidth*0.7),ViewGroup.LayoutParams.WRAP_CONTENT);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -112,13 +113,9 @@ public class UpdateDialog extends DialogFragment {
         if (!TextUtils.isEmpty(mUpdateUrl)) {
             FileDownloader.getImpl()
                     .create(mUpdateUrl)
-                    .setPath(DownloadHelper.DOWNLOAD_ROOT_PATH+"wnqk.apk")
-                    .setListener(new FileDownloadSampleListener() {
-                        @Override
-                        protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-                            super.pending(task, soFarBytes, totalBytes);
+                    .setPath(DownloadHelperT.DOWNLOAD_ROOT_PATH+"wnqk.apk")
 
-                        }
+                    .setListener(new FileDownloadSampleListener() {
 
                         @Override
                         protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
@@ -133,11 +130,6 @@ public class UpdateDialog extends DialogFragment {
                         }
 
                         @Override
-                        protected void blockComplete(BaseDownloadTask task) {
-                            super.blockComplete(task);
-                        }
-
-                        @Override
                         protected void completed(BaseDownloadTask task) {
                             super.completed(task);
                             AppUtils.installApp(task.getPath(), AppUtils.AUTHORITIES);
@@ -145,19 +137,10 @@ public class UpdateDialog extends DialogFragment {
                         }
 
                         @Override
-                        protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-                            super.paused(task, soFarBytes, totalBytes);
-                        }
-
-                        @Override
                         protected void error(BaseDownloadTask task, Throwable e) {
                             super.error(task, e);
                         }
 
-                        @Override
-                        protected void warn(BaseDownloadTask task) {
-                            super.warn(task);
-                        }
                     }).start();
 
         }

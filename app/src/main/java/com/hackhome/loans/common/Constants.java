@@ -52,6 +52,10 @@ public class Constants {
         public static final int TYPE_GET_AUTH_CODE = 0X5;
         public static final int TYPE_FIND_PASSWORD= 0X6;
 
+        public static final int TYPE_CHECK_NEW_VERSION = 0X7;
+        public static final int TYPE_CHECK_NEW_PATCH = 0X8;
+
+
 
     }
 
@@ -63,6 +67,19 @@ public class Constants {
         public static final int FIRST_LOAD = 0x1;
         public static final int REFRESH = 0x2;
         public static final int LOAD_MORE = 0x3;
+
+    }
+
+    /**
+     * 缓存 相关常量
+     */
+    public static final class CacheInfo{
+
+        public static final String CACHE_DIR_NAME = "response";
+
+        public static final String HOME_CACHE = "home_cache";
+
+        public static final String LOAN_CACHE = "loan_cache";
 
     }
 }

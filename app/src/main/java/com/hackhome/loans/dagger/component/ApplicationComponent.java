@@ -1,8 +1,9 @@
 package com.hackhome.loans.dagger.component;
 
+import android.app.Application;
 import android.content.Context;
 
-import com.hackhome.loans.LoanApplication;
+import com.hackhome.loans.common.tinker.TinkerLoanApplication;
 import com.hackhome.loans.dagger.module.ApplicationModule;
 import com.hackhome.loans.dagger.module.HttpModule;
 import com.hackhome.loans.net.ApiService;
@@ -25,8 +26,8 @@ public interface ApplicationComponent {
 
     ApiService getApiService();
 
-    LoanApplication getLoanApplication();
+    Application getLoanApplication();
 
-    void inject(LoanApplication application);
+    void inject(TinkerLoanApplication application);
 
 }

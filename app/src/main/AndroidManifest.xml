@@ -48,6 +48,17 @@
         <activity android:name=".ui.mine.ReadRecordActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.mine.UserInfoActivity" android:screenOrientation="portrait"/>
 
+        <receiver
+            android:name=".common.receiver.LoanBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <action android:name="android.intent.action.PACKAGE_REPLACED"/>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
+
+
     </application>
 
 </manifest>

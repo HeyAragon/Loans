@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.hackhome.loans.common.utils.DensityUtil;
+
 /**
  * desc:
  * author: aragon
@@ -40,18 +42,18 @@ public class CardViewItemDecoration extends RecyclerView.ItemDecoration {
         if (mSkipPos0) {
             if (parent.getLayoutManager().getPosition(view) != 0) {
                 if (layoutOrientation == LinearLayoutManager.VERTICAL) {
-                    outRect.top = 28;
-                    outRect.left = 15;
-                    outRect.right = 15;
+                    outRect.top = DensityUtil.dip2px(parent.getContext(),10);
+                    outRect.left = DensityUtil.dip2px(parent.getContext(),10);
+                    outRect.right = DensityUtil.dip2px(parent.getContext(),10);
                 } else if (layoutOrientation == LinearLayoutManager.HORIZONTAL) {
                     outRect.left = 5;
                 }
             }
         } else {
             if (layoutOrientation == LinearLayoutManager.VERTICAL) {
-                outRect.top = 28;
-                outRect.left = 15;
-                outRect.right = 15;
+                outRect.top = DensityUtil.dip2px(parent.getContext(),10);
+                outRect.left = DensityUtil.dip2px(parent.getContext(),10);
+                outRect.right = DensityUtil.dip2px(parent.getContext(),10);
             } else if (layoutOrientation == LinearLayoutManager.HORIZONTAL) {
                 outRect.left = 5;
             }

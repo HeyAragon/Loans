@@ -4,26 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.ViewStub;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.hackhome.loans.LoanApplication;
 import com.hackhome.loans.R;
 import com.hackhome.loans.bean.ReadRecord;
 import com.hackhome.loans.bean.ReturnValueBean;
+import com.hackhome.loans.common.tinker.TinkerLoanApplication;
 import com.hackhome.loans.greendao.DaoSession;
 import com.hackhome.loans.greendao.ReadRecordDao;
 import com.hackhome.loans.ui.LoanDetailActivity;
 import com.hackhome.loans.widget.CardViewItemDecoration;
 import com.hackhome.loans.widget.MyLoadMoreView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.socks.library.KLog;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -111,7 +104,7 @@ public abstract class BaseRefreshFragment<T extends BasePresenter> extends BaseF
     protected abstract BaseQuickAdapter buildAdapter();
 
     private void insertIntoDb(ReturnValueBean bean) {
-        DaoSession daoSession = LoanApplication.getInstance().getDaoSession();
+        DaoSession daoSession = TinkerLoanApplication.getTinkerApplication().getDaoSession();
         ReadRecordDao readRecordDao = daoSession.getReadRecordDao();
 
         ReadRecord readRecord = new ReadRecord();

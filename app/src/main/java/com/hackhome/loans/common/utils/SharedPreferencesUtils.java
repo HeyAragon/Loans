@@ -4,11 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import com.hackhome.loans.LoanApplication;
 import com.hackhome.loans.common.Constants;
-
-import java.util.HashSet;
-import java.util.Set;
+import com.hackhome.loans.common.tinker.TinkerLoanApplication;
 
 
 public class SharedPreferencesUtils {
@@ -28,7 +25,7 @@ public class SharedPreferencesUtils {
 	
 	private SharedPreferencesUtils(){
 		if (mContext==null) {
-			mContext = LoanApplication.getInstance();
+			mContext = TinkerLoanApplication.getLoanApplication();
 		}
 
 		if(settings == null){
