@@ -129,6 +129,10 @@ dependencies {
     compile rootProject.ext.dependencies["material_editText"]
     compile 'com.airbnb.android:lottie:2.1.0'
 
+    //bugly
+    compile 'com.tencent.bugly:crashreport:latest.release'
+
+
     //------- Tinker Begin -------
     //可选，用于生成application类
     provided("com.tencent.tinker:tinker-android-anno:1.9.1") { changing = true }

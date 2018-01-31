@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.multidex.MultiDex;
 
+import com.hackhome.loans.BuildConfig;
 import com.hackhome.loans.dagger.component.ApplicationComponent;
 import com.hackhome.loans.dagger.component.DaggerApplicationComponent;
 import com.hackhome.loans.dagger.module.ApplicationModule;
@@ -16,6 +17,7 @@ import com.hackhome.loans.greendao.DaoSession;
 import com.hackhome.loans.net.ApiService;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.meituan.android.walle.WalleChannelReader;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.tinker.anno.DefaultLifeCycle;
 import com.tencent.tinker.lib.listener.DefaultPatchListener;
 import com.tencent.tinker.lib.patch.UpgradePatch;
@@ -85,6 +87,9 @@ public class TinkerLoanApplication extends DefaultApplicationLike {
         mDaoSession = DaoMaster.newDevSession(getApplication(), "loan_db");
         String channel = WalleChannelReader.getChannel(getApplication());
         MobclickAgent.startWithConfigure(new MobclickAgent.UMAnalyticsConfig(getApplication(), "5a530495b27b0a6ca600029a", channel, MobclickAgent.EScenarioType.E_UM_NORMAL));
+        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(getLoanApplication());
+        strategy.setAppChannel(channel);
+        CrashReport.initCrashReport(getLoanApplication(), "8175ae6d59", BuildConfig.DEBUG,strategy);
     }
 
     public ApplicationComponent getApplicationComponent() {

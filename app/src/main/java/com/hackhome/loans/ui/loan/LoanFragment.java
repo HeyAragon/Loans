@@ -98,6 +98,7 @@ public class LoanFragment extends BaseRefreshFragment<HomePresenter> implements 
     public void showHomeData(DataBean dataBean, boolean isFromRefresh) {
         int totalPage = dataBean.getPages();
         if (isFromRefresh) {
+            mBaseRecyclerView.setAdapter(mAdapter);
             mAdapter.setNewData(dataBean.getReturnValue());
             mBaseRecyclerView.scrollToPosition(0);
         } else {

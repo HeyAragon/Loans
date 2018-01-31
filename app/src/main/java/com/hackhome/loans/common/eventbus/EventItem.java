@@ -18,8 +18,11 @@ public class EventItem {
 
     public static final int LOGIN_SUCCESS = 0X1000;
     public static final int EXIT_SUCCESS = 0X1001;
+
     public static final int INSTALL_SUCCESS = 0X1002;
     public static final int UNINSTALL_SUCCESS = 0X1003;
+
+    public static final int REFRESH_PROGRESS = 0x1004;
 
 
 

@@ -9,7 +9,7 @@ package com.hackhome.loans.net;
 public class ApiConstants {
 
     //Base Url
-    public static final String BASE_URL = "http://btj.hackhome.com/";
+    public static final String BASE_URL = "http://tj.hackhome.com/";
 
     //HomeFragment a=isRecommend
     public static final String TYPE_HOME = "isRecommend";

@@ -32,6 +32,7 @@ import com.hackhome.loans.ui.mine.MineFragment;
 import com.hackhome.loans.widget.NoScrollViewPager;
 import com.hackhome.loans.widget.UpdateDialog;
 import com.hackhome.loans.widget.bottombar.CustomBottomBarLayout;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
 
@@ -96,10 +97,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainCo
                     StatusBarUtil.setLoanColor(MainActivity.this, getResources().getColor(R.color.base_back), 0);
                     break;
                 case 2:
-                    mToolbar.setVisibility(View.GONE);
-                    StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, 0, mToolbar);
+                mToolbar.setVisibility(View.GONE);
+                StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, 0, mToolbar);
 
-                    break;
+                break;
 
             }
         });
