@@ -170,7 +170,9 @@ public class DownloadActivity extends BaseActivity {
                         mDownloadRecordModelDao.delete(mCurrentDao);
                         mDownloadRecordModelList.remove(mCurrentItemPos);
                         mDownloadAdapter.notifyItemRemoved(mCurrentItemPos);
-                        showEmpty(1);
+                        if (mDownloadRecordModelList.size() == 0) {
+                            showEmpty(1);
+                        }
                     }
                     break;
 
