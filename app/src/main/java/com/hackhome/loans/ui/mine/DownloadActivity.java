@@ -51,7 +51,8 @@ public class DownloadActivity extends BaseActivity {
     private DownloadRecordModelDao mDownloadRecordModelDao;
     private List<DownloadRecordModel> mDownloadRecordModelList;
     private DownloadAdapter mDownloadAdapter;
-    private int count;
+    private DownloadRecordModel mCurrentDao;
+    private int mCurrentItemPos;
 
     @Override
     public int getLayoutContentRes() {
@@ -129,9 +130,8 @@ public class DownloadActivity extends BaseActivity {
                             }
                         } else if (tag.equals("卸载")) {
                             AppUtils.uninstallApp(recordModel.getPkgName());
-                            mDownloadRecordModelDao.delete(recordModel);
-                            mDownloadRecordModelList.remove(position);
-                            adapter.notifyItemRemoved(position);
+                            mCurrentItemPos = position;
+                            mCurrentDao = recordModel;
                         }
                     }
                     break;
@@ -156,13 +156,26 @@ public class DownloadActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void handleEvent(EventItem item) {
-        count++;
-        KLog.i("aragon",DownloadActivity.class.getSimpleName()+count);
+
         if (item.getReceiveObject() == EventItem.DOWNLOAD_OBJECT) {
-            if (mDownloadAdapter!=null) {
-                mDownloadAdapter.notifyDataSetChanged();
-                KLog.e("aragon",item.getOb());
+            switch (item.getMessageType()) {
+                case EventItem.REFRESH_PROGRESS:
+                case EventItem.INSTALL_SUCCESS:
+                    if (mDownloadAdapter != null) {
+                        mDownloadAdapter.notifyDataSetChanged();
+                    }
+                    break;
+                case EventItem.UNINSTALL_SUCCESS:
+                    if (mDownloadAdapter != null) {
+                        mDownloadRecordModelDao.delete(mCurrentDao);
+                        mDownloadRecordModelList.remove(mCurrentItemPos);
+                        mDownloadAdapter.notifyItemRemoved(mCurrentItemPos);
+                        showEmpty(1);
+                    }
+                    break;
+
             }
+
         }
     }
 

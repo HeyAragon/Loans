@@ -21,13 +21,16 @@ public class LoanBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         mPackageManager = context.getPackageManager();
+        String packageName = intent.getData().toString().split(":")[1];
 
         if (TextUtils.equals(intent.getAction(), Intent.ACTION_PACKAGE_ADDED)) {
             EB.getInstance().send(EventItem.LOAN_DETAIL_OBJECT,EventItem.INSTALL_SUCCESS);
+            EB.getInstance().send(EventItem.DOWNLOAD_OBJECT,EventItem.INSTALL_SUCCESS);
         } else if (TextUtils.equals(intent.getAction(), Intent.ACTION_PACKAGE_REPLACED)) {
             EB.getInstance().send(EventItem.LOAN_DETAIL_OBJECT,EventItem.INSTALL_SUCCESS);
         } else if (TextUtils.equals(intent.getAction(), Intent.ACTION_PACKAGE_REMOVED)) {
             EB.getInstance().send(EventItem.LOAN_DETAIL_OBJECT,EventItem.UNINSTALL_SUCCESS);
+            EB.getInstance().send(EventItem.DOWNLOAD_OBJECT,EventItem.UNINSTALL_SUCCESS, packageName);
         }
 
     }
