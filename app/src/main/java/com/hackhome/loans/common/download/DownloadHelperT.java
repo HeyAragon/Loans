@@ -193,10 +193,10 @@ public class DownloadHelperT {
             long currentTime = System.currentTimeMillis();
             if (currentTime - lastRefreshTime > 1000) {
                 KLog.e("aragon", "status:" + task.getStatus() + "------" + mBuilderMap.get(task.getId()).mFileName);
-                EB.getInstance().send(EventItem.DOWNLOAD_OBJECT, 0);
+                EB.getInstance().send(EventItem.DOWNLOAD_OBJECT, EventItem.REFRESH_PROGRESS);
                 lastRefreshTime = currentTime;
             } else if (task.getStatus() == FileDownloadStatus.completed) {
-                EB.getInstance().send(EventItem.DOWNLOAD_OBJECT, 0, "status:" + task.getStatus());
+                EB.getInstance().send(EventItem.DOWNLOAD_OBJECT, EventItem.REFRESH_PROGRESS, "status:" + task.getStatus());
             }
 
             if (downloadProgressButton == null) {
